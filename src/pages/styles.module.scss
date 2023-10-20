@@ -1,0 +1,24 @@
+.home {
+
+    .banner {
+        background: url(../../public/images/banner.svg);
+        width: 100%;
+        min-height: 50vh;
+        background-size: cover;
+
+        button {
+            width: 250px;
+            height: 50px;
+            border: none;
+            background-color: var(--rose-600);
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+            transition: 0.3s;
+
+            &:hover {
+                filter: brightness(0.8);
+            }
+        }
+    }
+}

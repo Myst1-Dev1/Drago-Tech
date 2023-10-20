@@ -1,0 +1,14 @@
+.navBar {
+    // background-color: var(--rose-600);
+    // width: 100%;
+
+    a {
+        color: #000;
+        text-decoration: none;
+        transition: 0.3s;
+
+        &:hover {
+            color: var(--rose-600);
+        }
+    }
+}
