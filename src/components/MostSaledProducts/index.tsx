@@ -2,18 +2,18 @@ import { Products } from '../../types/Products';
 import { ProductBox } from '../ProductBox';
 import styles from './styles.module.scss';
 
-interface NewProductsProps {
-    onProducts:Products[];
+interface MostSaledProductsProps {
+    onProducts: Products[];
 }
 
-export function NewProducts({ onProducts }: NewProductsProps) {
-    const newProductsData = onProducts.slice(0, 6);
+export function MostSaledProducts({ onProducts }: MostSaledProductsProps) {
+    const mostSaledProductsData = onProducts.slice(6, 12);
 
     return (
         <div className={`mb-5 container ${styles.newProducts}`}>
-            <h2 className='fw-bold'>Novos Produtos</h2>
+            <h2 className='fw-bold'>Produtos Mais Vendidos</h2>
             <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
-                {newProductsData.map(product => (
+                {mostSaledProductsData.map(product => (
                     <ProductBox
                         key={product.id}
                         name={product.name}

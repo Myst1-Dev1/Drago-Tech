@@ -42,3 +42,23 @@
         }
     }
 }
+
+@media(max-width:430px) {
+    .header {
+        h3, h6 {
+            display: none;
+        }
+
+        .inputBox {
+            width: 200px;
+
+            input {
+                width: 100px;
+            }
+        }
+
+        .icon {
+            width: 15px;
+        }
+    }
+}

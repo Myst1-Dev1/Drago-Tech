@@ -1,25 +1,14 @@
 import Head from "next/head";
 import { useState, useEffect } from 'react';
 
-import { Header } from "../components/Header";
-
 import styles from './styles.module.scss';
 import { ProductsCollection } from "../components/ProductsCollection";
 import { NewProducts } from "../components/NewProducts";
 import { getProducts } from "../services/graphql";
-
-type Products = {
-    name:string;
-    brand:string;
-    id:string;
-    portion:number;
-    price:number;
-    slug:string;
-    type:string;
-    image: {
-        url:string;
-    }
-}
+import { Products } from "../types/Products";
+import { PrimeDetails } from "../components/PrimeDetails";
+import { Button } from "../components/Button";
+import { MostSaledProducts } from "@/components/MostSaledProducts";
 
 export default function Home() {
     const [products, setProducts] = useState<Products[]>([]);
@@ -34,7 +23,6 @@ export default function Home() {
             <Head>
                 <title>Home</title>
             </Head>
-            <Header />
 
             <div className={styles.home}>
                 <div className={`d-flex wrap text-light justify-content-center align-items-center 
@@ -44,12 +32,14 @@ export default function Home() {
                     </div>
                     <div className="d-flex flex-column gap-3 col-md-6">
                         <h3>Os Melhores Equipamentos <br /> Você Encontra Aqui</h3>
-                        <button>Ver loja</button>
+                        <Button>Ver loja</Button>
                     </div>
                 </div>
             </div>
             <ProductsCollection />
             <NewProducts onProducts = {products} />
+            <PrimeDetails />
+            <MostSaledProducts onProducts = {products} />
         </>
     )
 }

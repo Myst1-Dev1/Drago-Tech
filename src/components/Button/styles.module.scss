@@ -1,0 +1,15 @@
+.button {
+    width: 250px;
+    height: 50px;
+    border: none;
+    background-color: var(--rose-600);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    transition: 0.3s;
+
+    &:hover {
+        filter: brightness(0.8);
+    }
+    
+}

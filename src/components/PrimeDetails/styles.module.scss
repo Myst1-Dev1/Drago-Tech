@@ -1,0 +1,23 @@
+.primeDetails {
+    margin-top: 100px;
+    background: url(../../../public/images/primeBackground.svg);
+    width: 100%;
+    min-height: 70vh;
+    background-size: cover;
+
+    .primeBox {
+        background-color: #242424;
+        padding: 10px;
+        border-radius: 10px;
+        width: 120px;
+        transition: 0.3s;
+        
+        .icon {
+            font-size: 25px;
+        }
+
+        &:hover {
+            background-color: var(--rose-600);
+        }
+    }
+}

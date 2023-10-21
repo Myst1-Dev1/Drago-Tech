@@ -1,0 +1,50 @@
+.footer {
+    margin-top: 100px;
+    background-color: #15161D;
+
+    p {
+        color: var(--gray-400);
+    }
+
+    .icon {
+        color: var(--rose-600);
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    a {
+        color: var(--gray-400);
+        transition: 0.3s;
+
+        &:hover {
+            color: var(--rose-600);
+        }
+    }
+}
+
+.copyright {
+    background-color: #1E1F29;
+
+    p {
+        color: var(--gray-400);
+
+        span {
+            color: var(--rose-600);
+        }
+    }
+}
+
+@media(max-width:430px) {
+    .footer {
+        h2, .icon {
+            font-size: 10px;
+        }
+        a,p {
+            font-size: 6px;
+        }
+    }
+}
