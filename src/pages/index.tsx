@@ -8,7 +8,7 @@ import { getProducts } from "../services/graphql";
 import { Products } from "../types/Products";
 import { PrimeDetails } from "../components/PrimeDetails";
 import { Button } from "../components/Button";
-import { MostSaledProducts } from "@/components/MostSaledProducts";
+import { MostSaledProducts } from "../components/MostSaledProducts";
 
 export default function Home() {
     const [products, setProducts] = useState<Products[]>([]);
@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>Home</title>
+                <title>Início</title>
             </Head>
 
             <div className={styles.home}>
