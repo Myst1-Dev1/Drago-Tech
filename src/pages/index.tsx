@@ -15,7 +15,7 @@ export default function Home() {
 
     useEffect(() => {
         getProducts()
-        .then((products) => setProducts(products.products));
+        .then((products) => setProducts(products));
     }, []);
 
     return (

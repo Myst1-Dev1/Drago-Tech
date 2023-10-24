@@ -1,0 +1,13 @@
+.productDescription {
+    margin-top: 100px;
+    .subTitle {
+        .icon {
+            color: var(--rose-600);
+            font-size: 20px;
+        }
+    }
+
+    h6, p {
+        color: var(--gray-500)
+    }
+}

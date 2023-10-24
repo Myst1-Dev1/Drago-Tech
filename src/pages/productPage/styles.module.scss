@@ -1,0 +1,48 @@
+.productPage {
+
+    .productBox {
+        .avaliationBox {
+            width: 400px;
+            span {
+                color: var(--gray-400);
+            }
+
+            .icon {
+                color: var(--gray-400);
+                font-size: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .imgContainer {
+            width: 400px;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .priceBox {
+        h6 {
+            color: var(--gray-500);
+            font-weight: bold;
+        }
+    }
+}
+
+@media(max-width:430px) {
+    .productPage {
+        .productBox {
+            .avaliationBox{
+                width: 300px;
+            }
+
+            .imgContainer{
+                width: 300px;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}

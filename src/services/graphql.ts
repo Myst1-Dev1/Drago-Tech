@@ -21,7 +21,32 @@ export const getProducts = async () => {
         }
     `
 
-    const results:any = request(graphqlAPI, query);
+    const results:any = await request(graphqlAPI, query);
 
-    return results;
+    return results.products;
+}
+
+export const getProductsDetails = async (slug:any) => {
+    console.log('Slug:', slug); // Verifique o valor do slug
+    const query = gql`
+        query getProductsDetails($slug: String!) {
+            products(where: { slug: $slug }) {
+            description
+            id
+            name
+            price
+            slug
+            type
+            image {
+                url
+            }
+            brand
+            portion
+            }
+        }
+    `
+
+    const results:any = await request(graphqlAPI, query, {slug});
+
+    return results.products;
 }

@@ -1,0 +1,36 @@
+.productAvaliationForm{
+    margin-top: 100px;
+
+    .subTitle {
+        .icon {
+            color: var(--rose-600);
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+
+    .formContainer {
+        max-width: 350px;
+
+        .inputBox, select, textarea {
+            outline: none;
+            border: 1px solid var(--gray-400);
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+        }
+        
+        select {
+            color: var(--gray-500);
+        }
+
+        textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+}
