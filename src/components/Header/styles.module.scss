@@ -1,6 +1,16 @@
 .header {
     background-color: #15161D;
 
+    a {
+        text-decoration: none;
+        color: #fff;
+        transition: 0.3s;
+
+        &:hover {
+            color: var(--rose-600);
+        }
+    }
+
     .rose {
         color: var(--rose-600);
     }

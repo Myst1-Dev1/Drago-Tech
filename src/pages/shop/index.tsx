@@ -1,10 +1,10 @@
+import Head from 'next/head';
 import { Products } from '../../types/Products';
 import { getProducts } from '../../services/graphql';
 import styles from './styles.module.scss';
 import { useState, useEffect } from 'react';
 import { ProductBox } from '../../components/ProductBox';
 import { FaEllipsisV, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import Head from 'next/head';
 
 export default function Shop() {
     const [priceFilter, setPriceFilter] = useState(6000);
@@ -18,7 +18,7 @@ export default function Shop() {
     return (
         <>
             <Head>
-                <title>Loja</title>
+                <title>Loja | Drago Tech</title>
             </Head>
 
             <div className={`px-5 py-5 ${styles.shop}`}>

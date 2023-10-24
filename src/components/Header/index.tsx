@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { NavBar } from '../NavBar';
 import styles from './styles.module.scss';
 import { FaDragon, FaSearch, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
@@ -23,10 +24,10 @@ export function Header() {
                             <FaHeart className={styles.icon} />
                             <h6>Lista de desejos</h6>
                         </div>
-                        <div className='d-flex flex-column gap-3 justify-content-center align-items-center'>
+                        <Link className='d-flex flex-column gap-3 justify-content-center align-items-center' href="/cartPage">
                             <FaShoppingCart className={styles.icon} />
                             <h6>Seu carrinho</h6>
-                        </div>
+                        </Link>
                         <div className='d-flex flex-column gap-3 justify-content-center align-items-center'>
                             <FaUser className={styles.icon} />
                             <h6>Criar conta</h6>

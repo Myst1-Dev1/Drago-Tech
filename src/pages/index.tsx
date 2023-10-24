@@ -21,7 +21,7 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>Início</title>
+                <title>Início | Drago Tech</title>
             </Head>
 
             <div className={styles.home}>
