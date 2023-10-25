@@ -15,11 +15,11 @@ export function MostSaledProducts({ onProducts }: MostSaledProductsProps) {
             <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
                 {mostSaledProductsData.map(product => (
                     <ProductBox
-                        key={product.id}
-                        name={product.name}
-                        url={product.image.url}
-                        price={product.price}
-                        slug={product.slug}
+                        key={product?.node.id}
+                        name={product?.node.name}
+                        url={product?.node.image.url}
+                        price={product?.node.price}
+                        slug={product?.node.slug}
                     />
                 ))}
             </div>

@@ -2,18 +2,17 @@ import Head from 'next/head';
 import { Products } from '../../types/Products';
 import { getProducts } from '../../services/graphql';
 import styles from './styles.module.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ProductBox } from '../../components/ProductBox';
 import { FaEllipsisV, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { GetStaticProps } from 'next';
 
-export default function Shop() {
+interface ShopProps {
+    products: [] | any;
+}
+
+export default function Shop({ products }:ShopProps) {
     const [priceFilter, setPriceFilter] = useState(6000);
-    const [products, setProducts] = useState<Products[]>([]);
-
-    useEffect(() => {
-        getProducts()
-        .then((products) => setProducts(products));
-    }, []);
 
     return (
         <>
@@ -118,13 +117,13 @@ export default function Shop() {
                     </div>
                     <div>
                         <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
-                            {products?.map(product => (
+                            {products?.map((product:any) => (
                                 <ProductBox
-                                    key={product.id}
-                                    name={product.name}
-                                    url={product.image.url}
-                                    price={product.price}
-                                    slug={product.slug}
+                                    key={product.node.id}
+                                    name={product.node.name}
+                                    url={product.node.image.url}
+                                    price={product.node.price}
+                                    slug={product.node.slug}
                                 />
                             ))}
                         </div>
@@ -141,3 +140,13 @@ export default function Shop() {
         </>
     )
 }
+
+export const getStaticProps:GetStaticProps = async () => {
+    const products = (await getProducts()) || [];
+
+    console.log(products);
+    
+    return {
+      props: { products }
+    }
+  }

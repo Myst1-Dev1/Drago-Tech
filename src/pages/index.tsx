@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useState, useEffect } from 'react';
 
 import styles from './styles.module.scss';
 import { ProductsCollection } from "../components/ProductsCollection";
@@ -9,21 +8,18 @@ import { Products } from "../types/Products";
 import { PrimeDetails } from "../components/PrimeDetails";
 import { Button } from "../components/Button";
 import { MostSaledProducts } from "../components/MostSaledProducts";
+import { GetStaticProps } from "next";
 
-export default function Home() {
-    const [products, setProducts] = useState<Products[]>([]);
+interface HomeProps {
+    products: Products[];
+}
 
-    useEffect(() => {
-        getProducts()
-        .then((products) => setProducts(products));
-    }, []);
-
+export default function Home({ products }: HomeProps) {
     return (
         <>
             <Head>
                 <title>Início | Drago Tech</title>
             </Head>
-
             <div className={styles.home}>
                 <div className={`d-flex wrap text-light justify-content-center align-items-center 
                     ${styles.banner}`}>
@@ -43,3 +39,13 @@ export default function Home() {
         </>
     )
 }
+
+export const getStaticProps:GetStaticProps = async () => {
+    const products = (await getProducts()) || [];
+
+    console.log(products);
+    
+    return {
+      props: { products }
+    }
+  }

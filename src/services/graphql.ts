@@ -4,26 +4,30 @@ const graphqlAPI:any = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export const getProducts = async () => {
     const query = gql`
-        query Products {
-            products(first:14) {
-            description
-            id
-            name
-            price
-            slug
-            type
-            image {
+    query Products {
+        productsConnection(first:14) {
+          edges {
+            node {
+              brand
+              description
+              id
+              image {
                 url
+              }
+              name
+              portion
+              price
+              slug
+              type
             }
-            brand
-            portion
-            }
+          }
         }
+      }
     `
 
     const results:any = await request(graphqlAPI, query);
 
-    return results.products;
+    return results.productsConnection.edges;
 }
 
 export const getProductsDetails = async (slug:any) => {
