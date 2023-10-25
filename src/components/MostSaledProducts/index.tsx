@@ -7,13 +7,12 @@ interface MostSaledProductsProps {
 }
 
 export function MostSaledProducts({ onProducts }: MostSaledProductsProps) {
-    const mostSaledProductsData = onProducts.slice(6, 12);
 
     return (
         <div className={`mb-5 container ${styles.newProducts}`}>
             <h2 className='fw-bold'>Produtos Mais Vendidos</h2>
             <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
-                {mostSaledProductsData.map(product => (
+                {onProducts.map(product => (
                     <ProductBox
                         key={product?.node.id}
                         name={product?.node.name}

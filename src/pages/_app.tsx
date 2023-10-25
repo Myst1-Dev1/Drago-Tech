@@ -1,22 +1,18 @@
-import App, { AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import '../styles/global.scss';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { ProductsProvider } from '../services/hooks/useProducts/useProducts';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <ProductsProvider>
       <Header />
       <Component {...pageProps} />
       <Footer />
-    </>
+    </ProductsProvider>
   );
 }
-
-MyApp.getInitialProps = async (appContext: any) => {
-  const appProps = await App.getInitialProps(appContext);
-  return { ...appProps };
-};
 
 export default MyApp;

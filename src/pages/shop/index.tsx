@@ -1,18 +1,14 @@
 import Head from 'next/head';
-import { Products } from '../../types/Products';
-import { getProducts } from '../../services/graphql';
 import styles from './styles.module.scss';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ProductBox } from '../../components/ProductBox';
 import { FaEllipsisV, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { GetStaticProps } from 'next';
+import { ProductsContext } from '../../services/hooks/useProducts/useProducts';
 
-interface ShopProps {
-    products: [] | any;
-}
-
-export default function Shop({ products }:ShopProps) {
+export default function Shop() {
     const [priceFilter, setPriceFilter] = useState(6000);
+
+    const { products } = useContext(ProductsContext);
 
     return (
         <>
@@ -21,7 +17,7 @@ export default function Shop({ products }:ShopProps) {
             </Head>
 
             <div className={`px-5 py-5 ${styles.shop}`}>
-                <div className={`d-flex justify-content-center m-auto ${styles.shopContainer}`}>
+                <div className={`d-flex m-auto ${styles.shopContainer}`}>
                     <div className={`${styles.filter}`}>
                         <div className='d-flex flex-column gap-2'>
                             <h5 className='fw-bold'>Preço</h5>
@@ -140,13 +136,3 @@ export default function Shop({ products }:ShopProps) {
         </>
     )
 }
-
-export const getStaticProps:GetStaticProps = async () => {
-    const products = (await getProducts()) || [];
-
-    console.log(products);
-    
-    return {
-      props: { products }
-    }
-  }

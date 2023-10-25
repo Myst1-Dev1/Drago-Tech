@@ -3,18 +3,15 @@ import Head from "next/head";
 import styles from './styles.module.scss';
 import { ProductsCollection } from "../components/ProductsCollection";
 import { NewProducts } from "../components/NewProducts";
-import { getProducts } from "../services/graphql";
-import { Products } from "../types/Products";
 import { PrimeDetails } from "../components/PrimeDetails";
 import { Button } from "../components/Button";
 import { MostSaledProducts } from "../components/MostSaledProducts";
-import { GetStaticProps } from "next";
+import { useContext } from "react";
+import { ProductsContext } from "../services/hooks/useProducts/useProducts";
 
-interface HomeProps {
-    products: Products[];
-}
+export default function Home() {
+    const { newProducts } = useContext(ProductsContext);
 
-export default function Home({ products }: HomeProps) {
     return (
         <>
             <Head>
@@ -33,19 +30,9 @@ export default function Home({ products }: HomeProps) {
                 </div>
             </div>
             <ProductsCollection />
-            <NewProducts onProducts = {products} />
+            <NewProducts onProducts = {newProducts} />
             <PrimeDetails />
-            <MostSaledProducts onProducts = {products} />
+            <MostSaledProducts onProducts = {newProducts} />
         </>
     )
 }
-
-export const getStaticProps:GetStaticProps = async () => {
-    const products = (await getProducts()) || [];
-
-    console.log(products);
-    
-    return {
-      props: { products }
-    }
-  }

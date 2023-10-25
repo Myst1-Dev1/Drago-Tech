@@ -30,7 +30,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                     </div>
                                     <FaHeart className={styles.icon} />
                                 </div>
-                                <div className={` ${styles.imgContainer}`}>
+                                <div className={`m-auto ${styles.imgContainer}`}>
                                     <img src={product.image.url} alt="product-image" />
                                 </div>
                             </div>
