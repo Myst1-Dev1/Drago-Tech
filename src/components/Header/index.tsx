@@ -20,18 +20,18 @@ export function Header() {
                         <FaSearch className = {styles.icon} />
                     </div>
                     <div className={`d-flex gap-4 ${styles.headerIcons}`}>
-                        <div className='d-flex flex-column gap-3 justify-content-center align-items-center'>
+                        <Link href="" className='d-flex flex-column gap-3 justify-content-center align-items-center'>
                             <FaHeart className={styles.icon} />
                             <h6>Lista de desejos</h6>
-                        </div>
+                        </Link>
                         <Link className='d-flex flex-column gap-3 justify-content-center align-items-center' href="/cartPage">
                             <FaShoppingCart className={styles.icon} />
                             <h6>Seu carrinho</h6>
                         </Link>
-                        <div className='d-flex flex-column gap-3 justify-content-center align-items-center'>
+                        <Link href="/signUpPage" className='d-flex flex-column gap-3 justify-content-center align-items-center'>
                             <FaUser className={styles.icon} />
                             <h6>Criar conta</h6>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
