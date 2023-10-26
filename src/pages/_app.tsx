@@ -4,13 +4,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ProductsProvider } from '../services/hooks/useProducts/useProducts';
+import { CartProvider } from '../services/hooks/useCart/useCart';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ProductsProvider>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <CartProvider>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </CartProvider>
     </ProductsProvider>
   );
 }

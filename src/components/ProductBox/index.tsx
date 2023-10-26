@@ -7,9 +7,12 @@ interface ProductBoxProps {
     name:string;
     price:number;
     slug:string;
+    id:string;
+    handleAddToCart:(id:string) => void;
 }
 
-export function ProductBox({ url, name, price, slug }:ProductBoxProps) {
+export function ProductBox({ url, name, price, slug, id, handleAddToCart }:ProductBoxProps) {
+
     return (
         <>
             <Head>
@@ -32,7 +35,7 @@ export function ProductBox({ url, name, price, slug }:ProductBoxProps) {
                         }).format(price)}
                     </h5>
                 </a>
-                <Button>Adicionar ao carrinho</Button>
+                <Button onClick={() => handleAddToCart(id)}>Adicionar ao carrinho</Button>
             </div>
         </>
     )

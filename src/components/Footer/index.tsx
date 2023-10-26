@@ -5,7 +5,7 @@ export function Footer() {
     return (
         <>
             <div className={`py-5 text-light ${styles.footer}`}>
-                <div className='d-flex wrap m-auto justify-content-between align-items-center container
+                <div className='d-flex wrap m-auto justify-content-between container
                     '>
                     <div>
                         <h2 className='fw-bold'>Sobre</h2>

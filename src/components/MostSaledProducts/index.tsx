@@ -4,9 +4,10 @@ import styles from './styles.module.scss';
 
 interface MostSaledProductsProps {
     onProducts: Products[];
+    onHandleAddToCart:(id:string) => void;
 }
 
-export function MostSaledProducts({ onProducts }: MostSaledProductsProps) {
+export function MostSaledProducts({ onProducts, onHandleAddToCart }: MostSaledProductsProps) {
 
     return (
         <div className={`mb-5 container ${styles.newProducts}`}>
@@ -19,6 +20,8 @@ export function MostSaledProducts({ onProducts }: MostSaledProductsProps) {
                         url={product?.node.image.url}
                         price={product?.node.price}
                         slug={product?.node.slug}
+                        id={product?.node.id}
+                        handleAddToCart={onHandleAddToCart}
                     />
                 ))}
             </div>

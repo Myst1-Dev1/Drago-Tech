@@ -12,16 +12,27 @@
         }
     }
 
-    h6 {
-        color: var(--gray-500);
-    }
+    .productBox {
+        h5 {
+            max-width: 20ch;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
-    .imgContainer {
-        width: 250px;
-
-        img {
-            width: 100%;
-            object-fit: cover;
+        h6 {
+            color: var(--gray-500);
+        }
+    
+        .imgContainer {
+            width: 200px;
+            height: 200px;
+    
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
         }
     }
 

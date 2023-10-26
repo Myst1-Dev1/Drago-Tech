@@ -12,7 +12,6 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ productDetail }: ProductPageProps) {
-    console.log(productDetail);
 
     return (
         <>

@@ -1,21 +1,21 @@
-import Head from 'next/head';
 import styles from './styles.module.scss';
 import { useContext, useState } from 'react';
 import { ProductBox } from '../../components/ProductBox';
 import { FaEllipsisV, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { ProductsContext } from '../../services/hooks/useProducts/useProducts';
+import { useTitle } from '../../utils/useTitle';
+import { CartContext } from '@/services/hooks/useCart/useCart';
 
 export default function Shop() {
     const [priceFilter, setPriceFilter] = useState(6000);
 
     const { products } = useContext(ProductsContext);
+    const { handleAddToCart } = useContext(CartContext);
+
+    useTitle('Loja | Drago Tech')
 
     return (
         <>
-            <Head>
-                <title>Loja | Drago Tech</title>
-            </Head>
-
             <div className={`px-5 py-5 ${styles.shop}`}>
                 <div className={`d-flex m-auto ${styles.shopContainer}`}>
                     <div className={`${styles.filter}`}>
@@ -120,6 +120,8 @@ export default function Shop() {
                                     url={product.node.image.url}
                                     price={product.node.price}
                                     slug={product.node.slug}
+                                    id={product?.node.id}
+                                    handleAddToCart={handleAddToCart}
                                 />
                             ))}
                         </div>
