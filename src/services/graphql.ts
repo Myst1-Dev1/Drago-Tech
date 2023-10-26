@@ -77,6 +77,13 @@ export const getProductsDetails = async (slug:any) => {
             }
             brand
             portion
+            commentsID {
+              comment
+              createdAt
+              avaliation
+              name
+              id
+            }
             }
         }
     `
@@ -84,4 +91,16 @@ export const getProductsDetails = async (slug:any) => {
     const results:any = await request(graphqlAPI, query, {slug});
 
     return results.products;
+}
+
+export const submitComment = async(obj:any) => {
+  const result = await fetch('/api/comments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  });
+
+  return result.json();
 }

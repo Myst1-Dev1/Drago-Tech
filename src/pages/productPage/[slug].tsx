@@ -12,6 +12,8 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ productDetail }: ProductPageProps) {
+    console.log(productDetail);
+
     return (
         <>
             <Head>
@@ -64,8 +66,8 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                         </div>
                     </div>
                     <ProductDescription name={product.name} description={product.description} />
-                    <ProductAvaliationForm />
-                    <ProductAvaliations />
+                    <ProductAvaliationForm slug={product.slug} />
+                    <ProductAvaliations comments ={product.commentsID} />
                 </div>
             ))}
         </>
