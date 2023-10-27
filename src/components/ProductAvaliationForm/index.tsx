@@ -1,4 +1,4 @@
-import { useEffect, useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import styles from './styles.module.scss';
 import { Button } from '../Button';
@@ -28,10 +28,6 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
             console.log('Tivemos um erro', error);
         }
     }
-
-    useEffect(() => {
-        handleCreateComment();
-    }, []);
 
     return (
         <div className={`container ${styles.productAvaliationForm}`}>

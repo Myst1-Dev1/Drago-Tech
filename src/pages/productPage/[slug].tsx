@@ -1,24 +1,48 @@
 import styles from './styles.module.scss';
 import Head from 'next/head';
+import { useContext } from 'react';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { ProductDescription } from '../../components/ProductDescription';
 import { ProductAvaliationForm } from '../../components/ProductAvaliationForm';
 import { ProductAvaliations } from '../../components/ProductAvaliations';
 import { getProducts, getProductsDetails } from '@/services/graphql';
+import { CartContext } from '@/services/hooks/useCart/useCart';
 
 interface ProductPageProps {
     productDetail: [] | any
 }
 
 export default function ProductPage({ productDetail }: ProductPageProps) {
+    const { handleAddToCart } = useContext(CartContext);
+
+    const productValue = productDetail.map((product:any) => ({
+        id:product.id,
+        image:product.image.url,
+        name:product.name,
+        description:product.description,
+        slug:product.slug,
+        commentsID:product.commentsID,
+        price: new Intl.NumberFormat('pt-br', {
+            style:'currency',
+            currency:'BRL'
+        }).format(product.price),
+        promotion: new Intl.NumberFormat('pt-br', {
+            style:'currency',
+            currency:'BRL'
+        }).format(product.price * 0.95),
+        portion: new Intl.NumberFormat('pt-br', {
+            style:'currency',
+            currency:'BRL'
+        }).format(product.price / product.portion),
+    }))
 
     return (
         <>
             <Head>
                 <title>Página do produto | Drago Tech</title>
             </Head>
-            {productDetail.map((product:any) => (
+            {productValue.map((product:any) => (
                 <div key={product.id}>
                     <div className={`mt-5 container ${styles.productPage}`}>
                         <h2 className='fw-bold'>{product.name}</h2>
@@ -32,31 +56,18 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                     <FaHeart className={styles.icon} />
                                 </div>
                                 <div className={`m-auto ${styles.imgContainer}`}>
-                                    <img src={product.image.url} alt="product-image" />
+                                    <img src={product.image} alt="product-image" />
                                 </div>
                             </div>
                             <div className={`col-md-6 ${styles.priceBox}`}>
-                                <h4 className='fw-bold'>
-                                    {Intl.NumberFormat('pt-br', {
-                                        style:'currency',
-                                        currency:'BRL'
-                                    }).format(product.price)}
-                                </h4>
+                                <h4 className='fw-bold'>{product.price}</h4>
                                 <h6 className='mt-3'>Á vista no PIX com até 5% OFF</h6>
-                                <h6 className='mt-3'>
-                                    {Intl.NumberFormat('pt-br', {
-                                        style:'currency',
-                                        currency:'BRL'
-                                    }).format(product.price * 0.95)}
-                                </h6>
+                                <h6 className='mt-3'>{product.promotion}</h6>
                                 <h6>Em até {product.portion}x 
-                                de {Intl.NumberFormat('pt-br', {
-                                        style:'currency',
-                                        currency:'BRL'
-                                    }).format(product.price / product.portion)} sem juros no cartão
+                                de {product.portion} sem juros no cartão
                                  </h6>
                                 <h6 className='mb-5'>Ou em 1x no cartão com 5% OFF</h6>
-                                <Button>
+                                <Button onClick={() => handleAddToCart(product.id)}>
                                     <div className='d-flex align-items-center justify-content-center gap-3'>
                                     <FaShoppingCart /> Comprar
                                     </div>

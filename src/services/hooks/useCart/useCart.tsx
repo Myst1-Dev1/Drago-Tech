@@ -1,6 +1,7 @@
 import { useContext, useState, createContext, ReactNode } from 'react';
 import { ProductsContext } from '../useProducts/useProducts';
 import { CartProducts } from '../../../types/CartProducts';
+import { useRouter } from 'next/router';
 
 interface CartProductsData {
     cart: CartProducts[];
@@ -22,6 +23,8 @@ export const CartContext = createContext(
 export function CartProvider({ children }:CartProviderProps) {
     const [ cart, setCart ] = useState<CartProducts[]>([]);
 
+    const router = useRouter();
+
     const totalCart = cart.reduce((total, current) => {
         return total + (current.product.node.price * current.quantity)
     }, 0);
@@ -37,6 +40,7 @@ export function CartProvider({ children }:CartProviderProps) {
             ? cart.map(item => (item.product.node.id === id ? { ...item, quantity: item.quantity + 1 } : item))
             : [...cart, { product: productItem!, quantity: 1 }];
     
+        router.push('/cartPage');
         setCart(newCart);
     };
 

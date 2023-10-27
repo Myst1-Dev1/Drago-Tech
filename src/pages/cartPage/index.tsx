@@ -5,9 +5,12 @@ import { useState, useContext } from 'react'
 import { FaLuggageCart, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { CartContext } from '../../services/hooks/useCart/useCart';
+import { useRouter } from 'next/router';
 
 export default function CartPage() {
     const [isOpenCart, setIsOpenCart] = useState(false);
+
+    const router = useRouter();
 
     const { 
             cart, 
@@ -40,6 +43,10 @@ export default function CartPage() {
 
     function handleOpenCart() {
         setIsOpenCart(!isOpenCart);
+    }
+
+    function handleRedirectToContinuePay() {
+        router.push('/shop');
     }
 
     return (
@@ -128,7 +135,7 @@ export default function CartPage() {
                         <div className={`mt-3 d-flex flex-column gap-3 justify-content-center align-items-center ${styles.buttonContainer}`}>
                             <Button>Ir para o pagamento</Button>
                             <div className={styles.continuePay}>
-                                <button>Continuar Comprando</button>
+                                <button onClick={handleRedirectToContinuePay}>Continuar Comprando</button>
                             </div>
                         </div>
                         </div>
