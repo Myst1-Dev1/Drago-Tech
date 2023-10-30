@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { NavBar } from '../NavBar';
 import styles from './styles.module.scss';
-import { FaDragon, FaSearch, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaDragon, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { CartContext } from '../../services/hooks/useCart/useCart';
+import { Search } from '../Search';
 
 export function Header() {
     const { cart } = useContext(CartContext);
@@ -18,11 +19,7 @@ export function Header() {
                         </h3>
                         <FaDragon className={`h3 ${styles.rose}`} />
                     </div>
-                    <div className={`d-flex justify-content-between align-items-center
-                        ${styles.inputBox}`}>
-                        <input type="text" placeholder='Pesquisar ...' />
-                        <FaSearch className = {styles.icon} />
-                    </div>
+                    <Search />
                     <div className={`d-flex gap-4 ${styles.headerIcons}`}>
                         <Link href="" className='d-flex flex-column gap-3 justify-content-center align-items-center'>
                             <FaHeart className={styles.icon} />

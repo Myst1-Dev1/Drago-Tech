@@ -6,7 +6,6 @@ interface ProductAvaliationsProps {
 }
 
 export function ProductAvaliations({ comments }:ProductAvaliationsProps) {
-    console.log(comments);
 
     const date = new Date(comments.map((comment:any) => comment.createdAt));
     const createdAt = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year:'numeric' });
@@ -30,13 +29,15 @@ export function ProductAvaliations({ comments }:ProductAvaliationsProps) {
                     </div>
                 ))}
             </div>
-            <div className={`d-flex gap-3 justify-content-center align-items-center mt-5 ${styles.pagination}`}>
+            {comments.length === 0 ? '' :
+                <div className={`d-flex gap-3 justify-content-center align-items-center mt-5 ${styles.pagination}`}>
                     <button><FaArrowLeft /></button>
                     <button>1</button>
                     <button>2</button>
                     <button>3</button>
                     <button><FaArrowRight /></button>
-            </div>
+                </div>
+            }
         </div>
     )
 }
