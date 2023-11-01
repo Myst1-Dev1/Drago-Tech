@@ -8,18 +8,17 @@ import { CartContext } from '../../services/hooks/useCart/useCart';
 import { Products } from '../../types/Products';
 import { CheckboxFilter } from '../../components/CheckboxFilter';
 import { Pagination } from '../../components/Pagination';
+import { PaginationContext } from '../../services/hooks/usePagination';
 
 export default function Shop() {
+    const { startIndex, endIndex } = useContext(PaginationContext);
+
     const [priceFilter, setPriceFilter] = useState(6000);
-    const [currentPage, setCurrentPage] = useState(0);
     const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
 
     const { products } = useContext(ProductsContext);
     const { handleAddToCart } = useContext(CartContext);
 
-    const itensPerPage = 6;
-    const startIndex = currentPage * itensPerPage;
-    const endIndex = startIndex + itensPerPage;
     const currentItens = filteredProducts.slice(startIndex, endIndex);
 
     function filterByPrice() {
@@ -37,7 +36,7 @@ export default function Shop() {
     return (
         <>
             <div className={`px-5 py-5 ${styles.shop}`}>
-                <div className={`d-flex gap-3 m-auto ${styles.shopContainer}`}>
+                <div className={`d-flex gap-5 m-auto ${styles.shopContainer}`}>
                     <div className={`${styles.filter}`}>
                         <div className='d-flex flex-column gap-2'>
                             <h5 className='fw-bold'>Preço</h5>
@@ -80,9 +79,6 @@ export default function Shop() {
                 </div>
                 <Pagination 
                     data={filteredProducts}  
-                    onItensPerPage={itensPerPage} 
-                    onCurrentPage={currentPage}
-                    onSetCurrentPage={setCurrentPage}
                 />
             </div>
         </>
