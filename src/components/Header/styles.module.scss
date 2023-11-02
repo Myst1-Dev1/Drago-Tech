@@ -35,8 +35,8 @@
         .cartQuantity {
             background-color: var(--rose-600);
             padding: 10px;
-            width: 20px;
-            height: 20px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             position: absolute;
             top: -10px;
@@ -63,8 +63,14 @@
             }
         }
 
-        .icon {
-            width: 15px;
+        .headerIcons {
+            .icon {
+                width: 15px;
+            }
+    
+            .cartQuantity {
+                left:10px;
+            }
         }
     }
 }

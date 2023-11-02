@@ -1,7 +1,7 @@
 .shop {
 
     .shopContainer {
-        .filter {
+        .filter, .responsiveFilter {
             h5, h6, label, span {
                 color: var(--gray-500);
             }
@@ -36,7 +36,7 @@
             }
         }
     
-        .responsiveFilterButton {
+        .responsiveFilterButton, .closeResponsiveFilterIcon {
             display: none;
         }
     }
@@ -47,14 +47,44 @@
         .shopContainer {
             flex-wrap: wrap;
 
-            .filter{
-                display: none;
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 1000;
+            }
+
+            .filter {
+                left: -100%;
+            }
+
+            .responsiveFilter {
+                left: 0;
+
+                .closeResponsiveFilterIcon {
+                    display: block;
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    color: #000;
+                }
+            }
+
+            .filter ,.responsiveFilter{
+                position: absolute;
+                background-color: #fff;
+                width: 70%;
+                min-height: 100vh;
+                top: 17%;
+                padding: 10px 20px;
+                transition: 0.3s;
             }
     
             .responsiveFilterButton {
-                display: flex;
-                align-items: center;
-                gap: 15px;
+                display: block;
                 cursor: pointer;
             }
         }

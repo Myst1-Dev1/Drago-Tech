@@ -21,7 +21,7 @@ export function Header() {
                     </div>
                     <Search />
                     <div className={`d-flex gap-4 ${styles.headerIcons}`}>
-                        <Link href="" className='d-flex flex-column gap-3 justify-content-center align-items-center'>
+                        <Link href="/wishlistPage" className='d-flex flex-column gap-3 justify-content-center align-items-center'>
                             <FaHeart className={styles.icon} />
                             <h6>Lista de desejos</h6>
                         </Link>

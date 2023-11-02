@@ -11,9 +11,7 @@ import { CartContext } from '../services/hooks/useCart/useCart';
 
 export default function Home() {
     const { newProducts } = useContext(ProductsContext);
-    const { cart, handleAddToCart } = useContext(CartContext);
-
-    console.log(cart);
+    const { handleAddToCart } = useContext(CartContext);
 
     useTitle('Início Drago | Tech');
 
