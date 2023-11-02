@@ -1,13 +1,22 @@
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { NavBar } from '../NavBar';
 import styles from './styles.module.scss';
 import { FaDragon, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { Search } from '../Search';
+import { parseCookies } from 'nookies';
 
 export function Header() {
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
+
+    useEffect(() => {
+        const { 'cart-token': token } = parseCookies();
+
+        if(token) {
+            setCart(JSON.parse(token));
+        }
+    }, [])
 
     return (
         <>

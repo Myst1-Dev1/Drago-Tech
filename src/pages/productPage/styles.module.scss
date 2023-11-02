@@ -38,12 +38,27 @@
     .productPage {
         .productBox {
             .avaliationBox{
-                width: 300px;
+                width: 340px;
             }
         }
 
         .priceBox {
             margin-top: 30px;
+        }
+    }
+}
+
+@media(max-width:320px) {
+    .productPage {
+        .productBox {
+            .avaliationBox{
+                width: 250px;
+            }
+
+            .imgContainer {
+                width: 200px;
+                height: 200px;
+            }
         }
     }
 }

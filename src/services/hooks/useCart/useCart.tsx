@@ -1,10 +1,12 @@
-import { useContext, useState, createContext, ReactNode } from 'react';
+import { useContext, useState, createContext, ReactNode, Dispatch, SetStateAction } from 'react';
 import { ProductsContext } from '../useProducts/useProducts';
 import { CartProducts } from '../../../types/CartProducts';
 import { useRouter } from 'next/router';
+import { setCookie, destroyCookie } from 'nookies';
 
 interface CartProductsData {
     cart: CartProducts[];
+    setCart:Dispatch<SetStateAction<CartProducts[]>>;
     handleAddToCart:(id:string) => void;
     handleReduceItemQuantity:(id:string) => void;
     handleRemoveItemToCart:(id:string) => void;
@@ -41,6 +43,9 @@ export function CartProvider({ children }:CartProviderProps) {
             : [...cart, { product: productItem!, quantity: 1 }];
     
         router.push('/cartPage');
+        setCookie(undefined, 'cart-token', JSON.stringify(newCart), {
+            maxAge:60 * 60 * 1 // 1 hour
+        })
         setCart(newCart);
     };
 
@@ -56,16 +61,19 @@ export function CartProvider({ children }:CartProviderProps) {
 
     function handleRemoveItemToCart(id:string) {
         const newCart:CartProducts[] = cart.filter(item => item.product.node.id !== id);
+        setCookie(undefined, 'cart-token', JSON.stringify(newCart));
         setCart(newCart);
     }
 
     function handleCleanCart() {
         setCart([]);
+        destroyCookie(null, 'cart-token');
     }
 
     return (
         <CartContext.Provider value={{ 
-                cart, 
+                cart,
+                setCart,
                 handleAddToCart, 
                 handleReduceItemQuantity,
                 handleRemoveItemToCart,

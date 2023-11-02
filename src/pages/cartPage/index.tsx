@@ -6,6 +6,7 @@ import { FaLuggageCart, FaTrashAlt } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function CartPage() {
     const [isOpenCart, setIsOpenCart] = useState(false);
@@ -133,7 +134,9 @@ export default function CartPage() {
                             {/* <span>(Economize R$:64,90)</span> */}
                         </div>
                         <div className={`mt-3 d-flex flex-column gap-3 justify-content-center align-items-center ${styles.buttonContainer}`}>
-                            <Button>Ir para o pagamento</Button>
+                            <Link href="/paymentPage">
+                                <Button>Ir para o pagamento</Button>
+                            </Link>
                             <div className={styles.continuePay}>
                                 <button onClick={handleRedirectToContinuePay}>Continuar Comprando</button>
                             </div>
