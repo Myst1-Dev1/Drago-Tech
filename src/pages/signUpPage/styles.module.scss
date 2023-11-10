@@ -3,6 +3,12 @@
     form {
         max-width: 500px;
 
+        .inputBox {
+            input[type=number]::-webkit-inner-spin-button { 
+                -webkit-appearance: none; 
+            }
+        }
+
         h6 {
             color: var(--gray-500);
             

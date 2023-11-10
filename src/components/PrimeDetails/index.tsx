@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from '../Button';
 import styles from './styles.module.scss';
 
@@ -7,7 +8,7 @@ export function PrimeDetails() {
             ${styles.primeDetails}`}>
             <h2 className='fw-bold'>Conheça Nosso Prime e Tenha</h2>
             <h2 className='fw-bold'>Descontos Exclusivos</h2>
-            <Button>Quero ser Prime</Button>
+            <Link href="/primePage" ><Button>Quero ser Prime</Button></Link>
         </div>
     )
 }

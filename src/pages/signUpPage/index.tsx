@@ -23,6 +23,13 @@ export default function SignUpPage() {
                         <Input type="text" placeholder='Endereço'/>
                     </div>
                     <div className={`d-flex gap-3 ${styles.inputBox}`}>
+                        <Input type="text" placeholder='Cidade'/>
+                        <Input type="text" placeholder='Estado'/>
+                    </div>
+                    <div className={`w-100 ${styles.inputBox}`}>
+                        <Input type="number" placeholder='CEP'/>
+                    </div>
+                    <div className={`d-flex gap-3 ${styles.inputBox}`}>
                         <Input type="password" placeholder='Senha'/>
                         <Input type="password" placeholder='Confirmar senha'/>
                     </div>

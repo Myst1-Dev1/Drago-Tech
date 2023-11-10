@@ -37,6 +37,16 @@ export default function PaymentPage() {
             <div className={`row m-auto container py-5 ${styles.paymentContainer}`}>
                 <div className={`col-md-6 mb-5 ${styles.formContainer}`}>
                     <form className='d-flex flex-column gap-3'>
+                        <div className={`d-flex gap-5 ${styles.inputBox}`}>
+                            <div>
+                                <label className='mb-3 fw-bold' htmlFor="email">Email</label>
+                                <Input required id='email' type='text' placeholder='johndoe@gmail.com' />
+                            </div>
+                            <div>
+                                <label className='mb-3 fw-bold' htmlFor="tel">Número</label>
+                                <Input required id='tel' type='tel' placeholder='55214002922' />
+                            </div>
+                        </div>
                         <div className={` ${styles.inputBox}`}>
                             <label className='mb-3 fw-bold' htmlFor="address">Endereço</label>
                             <Input required id='address' type='text' placeholder='Rua Sebastião Porto' />
