@@ -2,14 +2,28 @@ import Head from 'next/head';
 import styles from './styles.module.scss';
 import { Button } from '../../components/Button';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { FaLock, FaUser } from 'react-icons/fa';
 import axios from 'axios';
-import { setCookie } from 'nookies';
+import { getAuthenticatedUser, storeTokenInCookies } from '../../lib/common';
+import { useRouter } from 'next/router';
 
 export default function SignInPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const router = useRouter();
+
+    const redirectIfAuthenticated = async () => {
+        const isUserAuthenticated = await getAuthenticatedUser();
+        if (isUserAuthenticated?.authenticated) {
+          router.push('/');
+        }
+      };
+    
+      useEffect(() => {
+        redirectIfAuthenticated();
+      }, []);
 
     async function handleSignIn(e:FormEvent) {
         e.preventDefault();
@@ -27,10 +41,8 @@ export default function SignInPage() {
                 console.log('Você não tem um token de authenticação', response);
                 return;
             };
-
-            setCookie(undefined, 'jwt-cookie', response.data.token, {
-                maxAge:30 * 24 * 60 * 60,
-            });
+            storeTokenInCookies(response.data.token);
+            router.push('/');
         } catch (error) {
             console.log('Tivemos um erro', error);
         }

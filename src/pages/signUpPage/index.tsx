@@ -1,11 +1,12 @@
 import { Button } from '../../components/Button';
 import styles from './styles.module.scss';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Input } from '../../components/Input';
-import { createUser } from '../../services/graphql';
 import { useRouter } from 'next/router';
+import { getAuthenticatedUser } from '../../lib/common';
+import axios from 'axios';
 
 export default function SignUpPage() {
     const [name, setName] = useState('');
@@ -20,13 +21,35 @@ export default function SignUpPage() {
 
     const router = useRouter();
 
+    const redirectIfAuthenticated = async () => {
+        const isUserAuthenticated = await getAuthenticatedUser();
+        if (isUserAuthenticated?.authenticated) {
+          router.push('/');
+        }
+      };
+    
+      useEffect(() => {
+        redirectIfAuthenticated();
+      }, []);
+
     async function handleCreateUser(e?:FormEvent) {
         e?.preventDefault();
 
         try {
-            const userObj = {name, email, phone, address, city, state, zipCode, password};
+            const response = await axios({
+                method: 'post',
+                url: '/api/auth/signup',
+                data: {
+                    name, email, phone, address, city, state, zipCode, password
+                }
+            });
 
-            await createUser(userObj);
+            if (!response?.data?.token) {
+                console.log('Something went wrong during signing up: ', response);
+                return;
+              }
+
+              router.push('/signInPage');
         } catch (error) {
             console.log('Tivemos um erro');
         }
