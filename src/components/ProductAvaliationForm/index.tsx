@@ -11,7 +11,7 @@ interface ProductAvaliationFormProps {
 export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
     const [isOpenAvaliationForm, setIsOpenAvaliationForm] = useState(false);
     const [name, setName] = useState('');
-    const [avaliation, setAvaliation] = useState('');
+    const [avaliation, setAvaliation] = useState('Bom');
     const [comment, setComment] = useState('');
 
     function handleOpenAvaliationForm() {
@@ -27,6 +27,10 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
         } catch (error) {
             console.log('Tivemos um erro', error);
         }
+
+        setName('');
+        setAvaliation('Bom');
+        setComment('');
     }
 
     return (

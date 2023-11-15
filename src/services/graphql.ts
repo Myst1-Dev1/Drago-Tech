@@ -62,7 +62,6 @@ export const getNewProducts = async () => {
 }
 
 export const getProductsDetails = async (slug:any) => {
-    console.log('Slug:', slug);
     const query = gql`
         query getProductsDetails($slug: String!) {
             products(where: { slug: $slug }) {
@@ -103,4 +102,50 @@ export const submitComment = async(obj:any) => {
   });
 
   return result.json();
+}
+
+export const createUser = async(obj:any) => {
+  const result = await fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  });
+
+  return result.json();
+}
+
+export const signIn = async(obj:any) => {
+  const result = await fetch('/api/auth/signin', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  });
+
+  return result.json();
+}
+
+export const getUserData = async(email:any) => {
+  const query = gql`
+    query getUserData($email: String!) {
+      userDataId(where: {email: $email}) {
+        address
+        city
+        email
+        id
+        name
+        phone
+        state
+        token
+        zipCode
+      }
+    }
+  `
+
+  const results:any = await request(graphqlAPI, query, { email })
+
+  return results.userDataId;
 }
