@@ -31,6 +31,8 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
         setName('');
         setAvaliation('Bom');
         setComment('');
+
+        alert('Seu comentário foi enviado para avaliação');
     }
 
     return (

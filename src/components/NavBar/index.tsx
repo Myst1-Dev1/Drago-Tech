@@ -27,9 +27,9 @@ export function NavBar() {
                 <div className={`container d-flex gap-5 ${styles.navContent}`}>
                     <Link href="/">Início</Link>
                     <Link href="/shop">Loja</Link>
-                    <Link href="">Sobre</Link>
+                    <Link href="/about">Sobre</Link>
                     <Link href="/primePage">Prime</Link>
-                    <Link href="">Contato</Link>
+                    <Link href="/contact">Contato</Link>
                 </div>
                 <FaTimes onClick={handleCloseResponsiveNavBar} className={styles.closeResponsiveMenuIcon} />
             </div>

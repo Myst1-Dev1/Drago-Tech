@@ -120,7 +120,7 @@ export default function SignUpPage() {
                             onChange={e => setState(e.target.value)}
                         />
                     </div>
-                    <div className={`w-100 ${styles.inputBox}`}>
+                    <div className={`w-100 d-flex gap-3 ${styles.inputBox}`}>
                         <Input 
                             type="number" 
                             placeholder='CEP'

@@ -63,7 +63,7 @@ export function Header() {
                         {authenticated ? 
                             <div className={styles.userContainer}>
                                 <div onClick={handleOpenUserBox} className={styles.imgContainer}>
-                                    <img src="/images/userIcon.png" alt="icone de usuário" />
+                                    <img src="/images/imgUser.png" alt="icone de usuário" />
                                 </div>
                                {isUserBoxOpen && <UserBox />}
                             </div>
