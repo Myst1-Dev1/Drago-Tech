@@ -1,8 +1,20 @@
+import { useRouter } from 'next/router';
 import { useUser } from '../../lib/customHooks';
+import { useEffect } from 'react';
+import { parseCookies } from 'nookies';
 
 export default function Profile() {
     const { user } = useUser();
-    console.log(user);
+    
+    const router = useRouter();
+
+    const { 'authenticated-cookie':authcookie } = parseCookies();
+
+    useEffect(() => {
+        if(!authcookie) {
+            router.push('/signInPage');
+        }
+    },[]);
 
     return (
         <div>

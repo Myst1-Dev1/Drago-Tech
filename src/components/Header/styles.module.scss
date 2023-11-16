@@ -32,6 +32,19 @@
             font-size: 15px;
         }
 
+        .userContainer {
+            position: relative;
+            .imgContainer {
+                width: 30px;
+                cursor: pointer;
+    
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+
         .cartQuantity {
             background-color: var(--rose-600);
             padding: 10px;

@@ -23,6 +23,7 @@ query getUserData($email: String!) {
       state
       token
       zipCode
+      prime
     }
   }
 `;

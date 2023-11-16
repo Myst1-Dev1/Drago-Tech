@@ -30,7 +30,6 @@ export function NavBar() {
                     <Link href="">Sobre</Link>
                     <Link href="/primePage">Prime</Link>
                     <Link href="">Contato</Link>
-                    <Link href="/profile">Profile</Link>
                 </div>
                 <FaTimes onClick={handleCloseResponsiveNavBar} className={styles.closeResponsiveMenuIcon} />
             </div>

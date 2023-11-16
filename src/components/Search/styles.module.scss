@@ -31,6 +31,7 @@
             overflow-y: scroll;
             color: #000;
             background-color: #fff;
+            border-bottom: 1px solid var(--gray-300);
 
             &::-webkit-scrollbar {
                 width: 8px;

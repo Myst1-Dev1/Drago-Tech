@@ -33,6 +33,7 @@ query getUserData($email: String!) {
       address
       phone
       id
+      prime
     }
   }
 `;

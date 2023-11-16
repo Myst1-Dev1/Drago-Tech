@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { NavBar } from '../NavBar';
 import styles from './styles.module.scss';
-import { FaDragon, FaHeart, FaShoppingCart, FaSignOutAlt, FaUser } from 'react-icons/fa';
+import { FaDragon, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { Search } from '../Search';
-import { destroyCookie, parseCookies } from 'nookies';
+import { parseCookies } from 'nookies';
 import { useUser } from '../../lib/customHooks';
+import { UserBox } from '../UserBox';
 import { useRouter } from 'next/router';
 
 export function Header() {
@@ -16,33 +17,23 @@ export function Header() {
 
     const { cart, setCart } = useContext(CartContext);
 
+    const [isUserBoxOpen, setIsUserBoxOpen] = useState(false);
+
+    function handleOpenUserBox() {
+        setIsUserBoxOpen(!isUserBoxOpen);
+    }
+
     useEffect(() => {
         const { 'cart-token': token } = parseCookies();
 
         if(token) {
             setCart(JSON.parse(token));
         }
-    }, [])
+    }, []);
 
-    async function handleLogout() {
-        destroyCookie(null, 'authenticated-cookie');
-        router.reload();
-        // try {
-        //     const response = await axios.delete('/api/auth/signout', {
-        //         headers: {
-        //           'Content-Type': 'application/json',
-        //         },
-        //       });
-        
-        //       if (response.status === 200) {
-        //         console.log('Logout bem-sucedido');
-        //       } else {
-        //         console.error('Erro durante o logout:', response.statusText);
-        //       }
-        //     } catch (error) {
-        //       console.error('Erro durante o logout:', error);
-        //     }
-    }
+    useEffect(() => {
+        setIsUserBoxOpen(false);
+    },[router.pathname]);
 
     return (
         <>
@@ -70,10 +61,12 @@ export function Header() {
                             <h6>Seu carrinho</h6>
                         </Link>
                         {authenticated ? 
-                            <div className='d-flex flex-column gap-2'>
-                                usuário logado com sucesso 
-                                <FaSignOutAlt onClick={handleLogout} />
-                            </div> 
+                            <div className={styles.userContainer}>
+                                <div onClick={handleOpenUserBox} className={styles.imgContainer}>
+                                    <img src="/images/userIcon.png" alt="icone de usuário" />
+                                </div>
+                               {isUserBoxOpen && <UserBox />}
+                            </div>
                             :
                             <Link 
                                 href="/signUpPage" 
