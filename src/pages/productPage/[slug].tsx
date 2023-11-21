@@ -1,13 +1,15 @@
 import styles from './styles.module.scss';
 import Head from 'next/head';
-import { useContext } from 'react';
+import { useContext, FormEvent} from 'react';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { ProductDescription } from '../../components/ProductDescription';
 import { ProductAvaliationForm } from '../../components/ProductAvaliationForm';
 import { ProductAvaliations } from '../../components/ProductAvaliations';
-import { getProducts, getProductsDetails } from '@/services/graphql';
-import { CartContext } from '@/services/hooks/useCart/useCart';
+import { getProducts, getProductsDetails, submitFavorite } from '../../services/graphql';
+import { CartContext } from '../../services/hooks/useCart/useCart';
+import { useUser } from '../../lib/customHooks';
+import { parseCookies } from 'nookies';
 
 interface ProductPageProps {
     productDetail: [] | any
@@ -15,6 +17,8 @@ interface ProductPageProps {
 
 export default function ProductPage({ productDetail }: ProductPageProps) {
     const { handleAddToCart } = useContext(CartContext);
+
+    const { user } = useUser();
 
     const productValue = productDetail.map((product:any) => ({
         id:product.id,
@@ -35,8 +39,41 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
             style:'currency',
             currency:'BRL'
         }).format(product.price / product.portion),
-    }))
+    }));
 
+    const { 'authenticated-cookie':authcookie } = parseCookies();
+
+    async function handleCreateFavorite(e?:FormEvent) {
+        e?.preventDefault();
+
+        try {
+            const favoriteName = productDetail.map((product: any) => product.name).join(', ');
+            const favoritePrice = productDetail.map((product: any) => product.price);
+            const favoriteImage = productDetail.map((product: any) => product.image.url);
+            const email = user.email;
+
+            const favoriteData = {
+            favoriteName: favoriteName,
+            favoritePrice: parseFloat(favoritePrice[0]),
+            favoriteImage: favoriteImage[0],
+            email: email,
+            };
+
+            if(!authcookie) {
+                alert('Você precisa estar logado para ter favoritos');
+            } else {
+                await submitFavorite(favoriteData);
+                alert('Produto adicionado ao favoritos com sucesso');
+            }
+        } catch (error) {
+            console.log('Tivemos um erro', error);
+        }
+    };
+    
+    const productName = productDetail.map((product:any) => product.name);
+    const favoriteName = user && user.favorites.find((favorite: any) =>
+    favorite.favoriteName.toLowerCase() === productName[0].toLowerCase());
+   
     return (
         <>
             <Head>
@@ -53,7 +90,12 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                         <img src="/images/FiveStars.png" alt="fivestar-image" />
                                         <span>(106)</span>
                                     </div>
-                                    <FaHeart className={styles.icon} />
+                                    <div>
+                                        <FaHeart
+                                            onClick={handleCreateFavorite} 
+                                            className={favoriteName ? styles.favoriteProduct : styles.icon} 
+                                        />
+                                    </div>
                                 </div>
                                 <div className={`m-auto ${styles.imgContainer}`}>
                                     <img src={product.image} alt="product-image" />

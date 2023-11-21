@@ -16,6 +16,8 @@ export default function Profile() {
         }
     },[]);
 
+    console.log(user);
+
     return (
         <div>
             sou o profile

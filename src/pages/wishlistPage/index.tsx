@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
 import { FaTrashAlt } from 'react-icons/fa';
+import { useUser } from '../../lib/customHooks';
 
 export default function WishListPage() {
+    const { user } = useUser();
+
     return (
         <>
             <Head>
@@ -23,19 +26,28 @@ export default function WishListPage() {
                                 <th scope="col">Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>
-                                    <div className={styles.imgContainer}>
-                                        <img src="/images/productImageExample.png" alt="wishlist-product" />
-                                    </div>
-                                </td>
-                                <td>AMD Ryzen 5700</td>
-                                <td className="fw-bold">R$:1.230,90</td>
-                                <td><FaTrashAlt className={`${styles.icon}`} /></td>
-                            </tr>
-                        </tbody>
+                        {user &&
+                            <tbody>
+                               {user.favorites.map((favorite:any, index:number) => (
+                                    <tr key={favorite.id}>
+                                        <th scope="row">{index + 1}</th>
+                                        <td>
+                                            <div className={styles.imgContainer}>
+                                                <img src={favorite.favoriteImage} alt="wishlist-product" />
+                                            </div>
+                                        </td>
+                                        <td><h6>{favorite.favoriteName}</h6></td>
+                                        <td className="fw-bold">
+                                            {Intl.NumberFormat('pt-br', {
+                                                style:'currency',
+                                                currency:'BRL'
+                                            }).format(favorite.favoritePrice)}
+                                        </td>
+                                        <td><FaTrashAlt className={`${styles.icon}`} /></td>
+                                    </tr>
+                               ))}
+                            </tbody>
+                        }
                     </table>
                 </div>
             </div>

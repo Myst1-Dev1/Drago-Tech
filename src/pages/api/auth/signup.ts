@@ -35,7 +35,7 @@ mutation createUser($userData: UserDataIdCreateInput!) {
 `;
 
 export default async function handler(req: NextApiRequest, res:NextApiResponse) {
-    const { email, password, name, address, city, state, phone, zipCode, prime } = req.body;
+    const { email, password, name, address, city, state, phone, zipCode } = req.body;
     if(!email || !password || !name || !address || !city || !state || !phone || !zipCode) {
         res.status(400).end();
     }

@@ -34,6 +34,12 @@ query getUserData($email: String!) {
       phone
       id
       prime
+      favorites {
+        favoriteImage
+        favoriteName
+        favoritePrice
+        id
+      }
     }
   }
 `;

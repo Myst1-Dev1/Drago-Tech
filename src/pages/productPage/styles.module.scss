@@ -3,14 +3,17 @@
     .productBox {
         .avaliationBox {
             width: 400px;
-            span {
+            span, .icon {
                 color: var(--gray-400);
             }
 
-            .icon {
-                color: var(--gray-400);
+            .icon, .favoriteProduct {
                 font-size: 20px;
                 cursor: pointer;
+            }
+
+            .favoriteProduct {
+                color:red;
             }
         }
 

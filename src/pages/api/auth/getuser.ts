@@ -24,6 +24,12 @@ query getUserData($email: String!) {
       token
       zipCode
       prime
+      favorites {
+        favoriteImage
+        favoriteName
+        favoritePrice
+        id
+      }
     }
   }
 `;
