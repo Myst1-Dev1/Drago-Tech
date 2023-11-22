@@ -69,10 +69,10 @@ export function Header() {
                             </div>
                             :
                             <Link 
-                                href="/signUpPage" 
+                                href="/signInPage" 
                                 className='d-flex flex-column gap-3 justify-content-center align-items-center'>
                                 <FaUser className={styles.icon} />
-                                <h6>Criar conta</h6>
+                                <h6>Login</h6>
                             </Link>
                         }
                     </div>

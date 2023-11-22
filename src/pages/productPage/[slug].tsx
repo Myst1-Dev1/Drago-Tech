@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import Head from 'next/head';
-import { useContext, FormEvent} from 'react';
+import { useContext } from 'react';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { ProductDescription } from '../../components/ProductDescription';
@@ -9,7 +9,6 @@ import { ProductAvaliations } from '../../components/ProductAvaliations';
 import { getProducts, getProductsDetails, submitFavorite } from '../../services/graphql';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { useUser } from '../../lib/customHooks';
-import { parseCookies } from 'nookies';
 
 interface ProductPageProps {
     productDetail: [] | any
@@ -41,10 +40,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
         }).format(product.price / product.portion),
     }));
 
-    const { 'authenticated-cookie':authcookie } = parseCookies();
-
-    async function handleCreateFavorite(e?:FormEvent) {
-        e?.preventDefault();
+    async function handleCreateFavorite() {
 
         try {
             const favoriteName = productDetail.map((product: any) => product.name).join(', ');
@@ -59,14 +55,12 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
             email: email,
             };
 
-            if(!authcookie) {
-                alert('Você precisa estar logado para ter favoritos');
-            } else {
-                await submitFavorite(favoriteData);
-                alert('Produto adicionado ao favoritos com sucesso');
-            }
+            await submitFavorite(favoriteData);
+            alert('Produto adicionado ao favoritos com sucesso');
+            
         } catch (error) {
             console.log('Tivemos um erro', error);
+            alert('Você precisa estar logado para ter favoritos');
         }
     };
     

@@ -1,10 +1,38 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
+import { useEffect } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useUser } from '../../lib/customHooks';
+import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
+import { deleteFavorite } from '../../services/graphql';
 
 export default function WishListPage() {
     const { user } = useUser();
+
+    const router = useRouter();
+
+    const { 'authenticated-cookie':authcookie } = parseCookies();
+
+    async function handleDeleteFavorite(id:any) {
+        try {
+          const idObj = {
+            id: id
+          }
+
+          await deleteFavorite(idObj);
+          alert('Favorito deletado com sucesso');
+        } catch (error) {
+          console.log('Deu erro ao tentar deletar o favorito', error);
+          alert('Erro ao deletar o favorito');
+        }
+      }
+
+    useEffect(() => {
+        if(!authcookie) {
+            router.push('/signInPage');
+        }
+    },[]);
 
     return (
         <>
@@ -43,7 +71,12 @@ export default function WishListPage() {
                                                 currency:'BRL'
                                             }).format(favorite.favoritePrice)}
                                         </td>
-                                        <td><FaTrashAlt className={`${styles.icon}`} /></td>
+                                        <td>
+                                            <FaTrashAlt
+                                                onClick = {() => handleDeleteFavorite(favorite.id)} 
+                                                className={`${styles.icon}`} 
+                                            />
+                                        </td>
                                     </tr>
                                ))}
                             </tbody>

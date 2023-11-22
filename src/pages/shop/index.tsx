@@ -71,6 +71,7 @@ export default function Shop() {
                     </div>
                     <div className={`container ${styles.responsiveFilterButton}`}>
                         <FaEllipsisV onClick={handleOpenResponsiveFilter} />
+                        <h6>Filtro</h6>
                     </div>
                     <div>
                         <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
