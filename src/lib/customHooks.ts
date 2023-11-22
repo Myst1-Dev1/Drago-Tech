@@ -8,10 +8,6 @@ export function useUser() {
     useEffect(() => {
         async function getUserDetails() {
           const { authenticated, user } = await getAuthenticatedUser();
-          // if (!authenticated) {
-          //   Router.push('/signInPage');
-          //   return;
-          // }
           setUser(user);
           setAutenticated(authenticated);
         }

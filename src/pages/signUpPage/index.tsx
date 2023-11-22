@@ -18,6 +18,7 @@ export default function SignUpPage() {
     const [zipCode, setZipCode] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isError, setIsError] = useState(false);
 
     const router = useRouter();
 
@@ -36,6 +37,11 @@ export default function SignUpPage() {
         e?.preventDefault();
 
         try {
+            if (password !== confirmPassword) {
+                setIsError(true);
+                return;
+              }
+
             const response = await axios({
                 method: 'post',
                 url: '/api/auth/signup',
@@ -49,7 +55,6 @@ export default function SignUpPage() {
                 return;
               }
 
-              router.push('/signInPage');
         } catch (error) {
             console.log('Tivemos um erro');
         }
@@ -82,12 +87,14 @@ export default function SignUpPage() {
                         <Input 
                             type="text" 
                             placeholder='Nome'
+                            required
                             value={name}
                             onChange={e => setName(e.target.value)}
                         />
                         <Input 
                             type="tel" 
                             placeholder='Telefone'
+                            required
                             value={phone}
                             onChange={e => setPhone(e.target.value)}
                         />
@@ -96,12 +103,14 @@ export default function SignUpPage() {
                         <Input 
                             type="email" 
                             placeholder='Email'
+                            required
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
                         <Input 
                             type="text" 
                             placeholder='Endereço'
+                            required
                             value={address}
                             onChange={e => setAddress(e.target.value)}
                         />
@@ -110,12 +119,14 @@ export default function SignUpPage() {
                         <Input 
                             type="text" 
                             placeholder='Cidade'
+                            required
                             value={city}
                             onChange={e => setCity(e.target.value)}
                         />
                         <Input 
                             type="text" 
                             placeholder='Estado'
+                            required
                             value={state}
                             onChange={e => setState(e.target.value)}
                         />
@@ -124,24 +135,33 @@ export default function SignUpPage() {
                         <Input 
                             type="number" 
                             placeholder='CEP'
+                            required
                             value={zipCode}
                             onChange={e => setZipCode(e.target.value)}
                         />
                     </div>
-                    <div className={`d-flex gap-3 ${styles.inputBox}`}>
-                        <Input 
-                            type="password" 
-                            placeholder='Senha'
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                        />
-                        <Input 
-                            type="password" 
-                            placeholder='Confirmar senha'
-                            value={confirmPassword}
-                            onChange={e => setConfirmPassword(e.target.value)}
-                        />
-                       {/* {password !== confirmPassword ? 'as senhas não coincidem' : ''} */}
+                    <div className='d-flex flex-column gap-3'>
+                        <div className={`d-flex gap-3 ${styles.inputBox}`}>
+                            <Input 
+                                type="password" 
+                                placeholder='Senha'
+                                required
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            <Input 
+                                type="password" 
+                                placeholder='Confirmar senha'
+                                required
+                                value={confirmPassword}
+                                onChange={e => setConfirmPassword(e.target.value)}
+                            />
+                        </div>
+                        {isError ?
+                            <span className='text-center text-danger fw-bold'>
+                                As senhas não coincidem
+                            </span>
+                        : ''}
                     </div>
                     <Button type='submit'>Criar conta</Button>
                     <h6 className='fw-bold'>Já possui uma conta? <Link href="/signInPage">Entrar</Link></h6>

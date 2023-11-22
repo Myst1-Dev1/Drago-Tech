@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 export default function SignInPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isError, setIsError] = useState(false);
 
     const router = useRouter();
 
@@ -37,6 +38,8 @@ export default function SignInPage() {
                 }
             });
 
+            console.log(response);
+
             if(!response.data?.token) {
                 console.log('Você não tem um token de authenticação', response);
                 return;
@@ -46,6 +49,7 @@ export default function SignInPage() {
             router.reload();
         } catch (error) {
             console.log('Tivemos um erro', error);
+            setIsError(true);
         }
 
         setEmail('');
@@ -80,6 +84,11 @@ export default function SignInPage() {
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
+                    {isError ? 
+                        <span className='text-center text-danger fw-bold'>
+                            Email ou senha incorretos
+                        </span>
+                    : ''}
                     <Button type='submit'>Entrar</Button>
                     <h6 className='fw-bold'>Novo por aqui? <Link href="/signUpPage">Criar conta</Link></h6>
                 </form>

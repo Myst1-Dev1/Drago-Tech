@@ -3,15 +3,28 @@ import { useRouter } from 'next/router';
 import styles from './styles.module.scss'
 import Link from 'next/link'
 import { destroyCookie } from 'nookies';
+import axios from 'axios';
 
 export function UserBox() {
     const router = useRouter();
 
     async function handleLogout() {
-        destroyCookie(null, 'authenticated-cookie');
-        router.reload();
-        router.push('/signInPage');
+        try {
+            const response = await axios({
+                method:'delete',
+                url:'/api/auth/signout',
+            });
+
+            destroyCookie(null, 'authenticated-cookie');
+            router.push('/signInPage');
+            router.reload();
+
+            console.log(response);
+        } catch (error) {
+            console.log('erro', error);
+        }    
     }
+    
     return (
         <div className={`mt-3 ${styles.userBox}`}>
             <Link href="/profile" className='d-flex gap-2 align-items-center'>
