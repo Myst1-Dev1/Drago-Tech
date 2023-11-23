@@ -69,7 +69,7 @@ export default function CartPage() {
                         <div>
                             <h5 className='fw-bold mb-0'>{item.name}</h5>
                             <h6 className='fw-bold mt-3'>
-                            Com desconto no PIX: {item.price}
+                            Com desconto no Prime: {item.price}
                             </h6>
                             <h6 className='fw-bold'>
                                 Parcelado no cartão até {item.portion} vezes sem juros {item.parceledValue}
