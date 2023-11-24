@@ -32,7 +32,7 @@ export default function Home() {
             <ProductsCollection />
             <NewProducts onProducts = {newProducts} onHandleAddToCart = {handleAddToCart} />
             <PrimeDetails />
-            <MostSaledProducts onProducts = {newProducts} onHandleAddToCart = {handleAddToCart} />
+            {/* <MostSaledProducts onProducts = {newProducts} onHandleAddToCart = {handleAddToCart} /> */}
         </>
     )
 }

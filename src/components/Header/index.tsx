@@ -2,13 +2,14 @@ import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 import { NavBar } from '../NavBar';
 import styles from './styles.module.scss';
-import { FaDragon, FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { Search } from '../Search';
 import { parseCookies } from 'nookies';
 import { useUser } from '../../lib/customHooks';
 import { UserBox } from '../UserBox';
 import { useRouter } from 'next/router';
+import { Logo } from '../Logo';
 
 export function Header() {
     const { authenticated } = useUser();
@@ -39,12 +40,7 @@ export function Header() {
         <>
             <div className={`text-light w-100 ${styles.header}`}>
                 <div className='d-flex wrap py-5 justify-content-between align-items-center container m-auto'>
-                    <div className='d-flex gap-3 align-items-center'>
-                        <h3>
-                            <span className={`h3 ${styles.rose}`}>Drago</span> Tech
-                        </h3>
-                        <FaDragon className={`h3 ${styles.rose}`} />
-                    </div>
+                    <Logo />
                     <Search />
                     <div className={`d-flex gap-4 ${styles.headerIcons}`}>
                         <Link href="/wishlistPage" className='d-flex flex-column gap-3 justify-content-center align-items-center'>
@@ -65,7 +61,11 @@ export function Header() {
                                 <div onClick={handleOpenUserBox} className={styles.imgContainer}>
                                     <img src="/images/imgUser.png" alt="icone de usuário" />
                                 </div>
-                               {isUserBoxOpen && <UserBox />}
+                              
+                               <UserBox 
+                                    onIsUserBoxOpen={isUserBoxOpen} 
+                                    onsetIsUserBoxOpen={setIsUserBoxOpen} 
+                                />
                             </div>
                             :
                             <Link 

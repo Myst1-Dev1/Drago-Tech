@@ -1,52 +1,74 @@
 .userBox {
-    background-color: #fff;
-    border: 1px solid var(--gray-300);
-    padding: 10px;
-    position: absolute;
-    width: 120px;
-    animation:scrollHeigth 1s ease;
+    right:0;
+}
 
-    @keyframes scrollHeigth {
-        0%{
-            height: 0;
-            padding: 0;
+.active {
+    right: -100%;
+}
+
+.userBox, .active {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    transition: 0.6s;
+
+    .userBoxContainer {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1000;
+        background-color: #15161D;
+        padding: 20px;
+        width: 300px;
+        height: 100%;
+
+        h5 {
+            cursor: pointer;
+            transition: 0.3s;
+            
+            &:hover {
+                color: var(--rose-600);
+            }
         }
-        100%{
-            height: 70px;
+
+        .closeUserBoxIcon {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                color: var(--rose-600);
+            }
         }
-    }
-    
-    a, .icon {
-        color: #000;
-    }
 
-    .icon {
-        cursor: pointer;
-        transition: 0.3s;
+        .icon {
+            font-size: 20px;
+        }
 
-        &:hover {
-            color: var(--rose-600);
+        .imgContainer {
+            width: 40px;
+            height: 40px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
         }
     }
 }
 
 @media(max-width:430px) {
     .userBox {
-        width: 30px;
-        left: 12px;
+        .userBoxContainer {
+            width: 100%;
 
-        .icon {
-            font-size: 10px;
-        }
-
-        @keyframes scrollHeigth {
-            0%{
-                height: 0;
-                padding: 0;
-            }
-            100%{
-                height: 58px;
-            }
         }
     }
 }
