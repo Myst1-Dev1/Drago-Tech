@@ -1,16 +1,25 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
 
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
 import { MdPayment } from 'react-icons/md';
 import { FaCheck, FaMapMarkedAlt } from 'react-icons/fa';
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect, useContext } from 'react';
 import { InformationForm } from '../../components/InformationForm';
 import { PaymentForm } from '../../components/PaymentForm';
 import { ConclusionForm } from '../../components/ConclusionForm';
+import { CartContext } from '../../services/hooks/useCart/useCart';
 
 export default function PaymentPage() {
+    const { totalCart, cart } = useContext(CartContext);
 
     const [step, setStep] = useState(1);
+    const [clientSecret, setClientSecret] = useState('');
+    const [paymentIntent, setPaymentIntent] = useState('');
+
+    const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
 
     function handleNextStep (e?:FormEvent) {
         e?.preventDefault();
@@ -29,6 +38,35 @@ export default function PaymentPage() {
         setStep(1);
         }
     };
+
+    console.log(totalCart);
+
+    const amountValue = parseInt(totalCart);
+
+    console.log(amountValue * 100);
+
+    useEffect(() => {
+    fetch('/api/createStripePayment', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            amount: amountValue * 100,
+            payment_intent_id: '',
+          }),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+        setClientSecret(data.client_secret), setPaymentIntent(data.id);
+      });
+}, []);
+
+    const appearance = {
+        theme: 'stripe',
+      };
+      const options:any = {
+        clientSecret,
+        appearance,
+      };
     
     return (
         <>
@@ -61,17 +99,32 @@ export default function PaymentPage() {
                 </div>
 
                 {step === 1 && (
-                    <InformationForm 
-                        onHandleNextStep = {handleNextStep}
-                        onHandlePrevStep = {handlePrevStep} 
-                    />
+                   <div>
+                    {clientSecret && (
+                        <Elements options={options} stripe={stripePromise}>
+                             <InformationForm
+                                paymentIntent={paymentIntent}
+                                onHandleNextStep = {handleNextStep}
+                                onHandlePrevStep = {handlePrevStep} 
+                            />
+                        </Elements>
+                    )}
+                   </div>
                 )}
-                {step === 2 && (
-                    <PaymentForm 
-                        onHandleNextStep = {handleNextStep}
-                        onHandlePrevStep = {handlePrevStep}
-                    />
-                )}
+                <div>
+                {/* {step === 2 && (
+                    <div>
+                        {clientSecret && (
+                            <Elements options={options} stripe={stripePromise}>
+                                <PaymentForm 
+                                onHandleNextStep = {handleNextStep}
+                                onHandlePrevStep = {handlePrevStep}
+                            />
+                            </Elements>
+                        )}
+                    </div>
+                )} */}
+                </div>
                 {step === 3 && (
                     <ConclusionForm
                         onHandlePrevStep = {handlePrevStep}

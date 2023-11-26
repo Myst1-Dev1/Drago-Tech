@@ -11,7 +11,7 @@ interface CartProductsData {
     handleReduceItemQuantity:(id:string) => void;
     handleRemoveItemToCart:(id:string) => void;
     handleCleanCart:() => void;
-    totalCart:number;
+    totalCart:number | any;
 };
 
 interface CartProviderProps {

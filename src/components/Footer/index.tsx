@@ -9,7 +9,7 @@ export function Footer() {
             <div className={`gap-4 d-flex flex-column justify-content-center align-items-center ${styles.footer}`}>
                 <Logo />
                 <div className='d-flex align-items-center gap-3'>
-                    <Link href="/">Ínicio</Link>
+                    <Link href="/">Início</Link>
                     <Link href="/shop">Loja</Link>
                     <Link href="/about">Sobre</Link>
                     <Link href="/primePage">Prime</Link>

@@ -100,7 +100,7 @@ export default function CartPage() {
                             </div>
                         </div>
                         <div className={styles.priceBox}>
-                            <h6 className='fw-bold'>Preço á vista no PIX</h6>
+                            <h6 className='fw-bold'>Preço á vista com o Prime</h6>
                             <h6 className={`fw-bold mt-3 ${styles.rose}`}>
                                 {item.price}
                             </h6>
@@ -129,7 +129,7 @@ export default function CartPage() {
                             <span>(em até 3x de {parceledTotalPrice} sem juros)</span>
                         </div> */}
                         <div className='mt-3 d-flex flex-column gap-3 justify-content-center align-items-center'>
-                            <span>Valor á vista no PIX</span>
+                            <span>Valor á vista com o Prime</span>
                             <h4 className={`mb-0 fw-bold ${styles.rose}`}>{totalCartPrice}</h4>
                             {/* <span>(Economize R$:64,90)</span> */}
                         </div>
