@@ -22,7 +22,12 @@
     }
 
     form {
-        max-width: 600px;
+        max-width:600px;
+
+        label {
+            display: inline-block;
+            width: 20px;
+        }
 
         input[type=number]::-webkit-inner-spin-button { 
             -webkit-appearance: none; 
@@ -49,10 +54,6 @@
 
             label {
                 font-size: 10px;
-            }
-
-            button {
-                width: 100px;
             }
         }
     }
