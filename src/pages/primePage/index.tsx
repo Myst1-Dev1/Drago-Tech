@@ -1,4 +1,4 @@
-import { FaPercent } from 'react-icons/fa';
+import { FaPercent, FaRocket, FaTicketAlt } from 'react-icons/fa';
 import styles from './styles.module.scss';
 import { Button } from '../../components/Button';
 import Head from 'next/head';
@@ -22,12 +22,12 @@ export default function PrimePage() {
                             <h6>Descontos <br /> Exclusivos</h6>
                         </div>
                         <div className={`d-flex flex-column gap-3 justify-content-center align-items-center ${styles.primeBenefitBox}`}>
-                            <FaPercent className={styles.icon} />
-                            <h6>Descontos <br /> Exclusivos</h6>
+                            <FaRocket className={styles.icon} />
+                            <h6>Entrega <br /> Ágil</h6>
                         </div>
                         <div className={`d-flex flex-column gap-3 justify-content-center align-items-center ${styles.primeBenefitBox}`}>
-                            <FaPercent className={styles.icon} />
-                            <h6>Descontos <br /> Exclusivos</h6>
+                            <FaTicketAlt className={styles.icon} />
+                            <h6>Cupoms <br /> Extra</h6>
                         </div>
                     </div>
                     <h2 className='fw-bold'>TA ESPERANDO O QUE?</h2>

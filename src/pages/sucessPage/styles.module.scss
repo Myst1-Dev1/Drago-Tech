@@ -1,0 +1,43 @@
+.sucessPage {
+
+    .imgContainer {
+        width: 80px;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .paymentDetailsContainer {
+        width: 500px;
+
+        button {
+            width: 100px;
+        }
+
+        span {
+            color: var(--gray-500);
+        }
+    }
+}
+
+@media(max-width:430px) {
+    .sucessPage {
+        h5 {
+            font-size: 15px;
+        }
+
+        .imgContainer {
+            width: 40px;
+        }
+
+        .paymentDetailsContainer{
+            width: 300px;
+
+            span, h6 {
+                font-size: 10px;
+            }
+        }
+    }
+}
