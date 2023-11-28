@@ -11,9 +11,6 @@ interface ProductAvaliationsProps {
 export function ProductAvaliations({ comments }:ProductAvaliationsProps) {
     const { startIndex, endIndex } = useContext(PaginationContext);
 
-    const date = new Date(comments.map((comment:any) => comment.createdAt));
-    const createdAt = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year:'numeric' });
-
     const currentItens = comments.slice(startIndex, endIndex);
 
     return (
@@ -27,7 +24,7 @@ export function ProductAvaliations({ comments }:ProductAvaliationsProps) {
                     <div key={comment.id} className={`col-md-6 d-flex flex-column gap-3 ${styles.avaliationBox}`}>
                         <h6 className='fw-bold mb-0'>{comment.name}</h6>
                         <span>{comment.avaliation}</span>
-                        <span>Avaliado em  {createdAt}</span>
+                        <span>Avaliado em {new Date(comment.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year:'numeric' })}</span>
                         <p>{comment.comment}</p>
                     </div>
                 ))}

@@ -12,7 +12,7 @@ import { PaymentForm } from '../../components/PaymentForm';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 
 export default function PaymentPage() {
-    const { totalCart } = useContext(CartContext);
+    const { totalCart, cart } = useContext(CartContext);
 
     const [step, setStep] = useState(1);
     const [clientSecret, setClientSecret] = useState('');
@@ -29,7 +29,7 @@ export default function PaymentPage() {
           }
       };
 
-    const amountValue = parseInt(totalCart);
+    const amountValue = parseFloat(totalCart);
 
     useEffect(() => {
     fetch('/api/createStripePayment', {
@@ -61,7 +61,7 @@ export default function PaymentPage() {
             </Head>
 
             <div className={`m-auto py-5 ${styles.paymentContainer}`}>
-                <div className='row align-items-center m-auto'>
+                <div className='row m-auto'>
                     <div className='col-md-8 m-auto d-flex flex-column justify-content-center align-items-center'>
                         <div className={`d-flex align-items-center justify-content-center wrap gap-5 ${styles.multiStepContainer}`}>
                             <div className={`d-flex flex-column justify-content-center align-items-center gap-3`}>
@@ -107,10 +107,35 @@ export default function PaymentPage() {
                         )}
                         </div>
                     </div>
-                    <div className={`col-md-4 ${styles.cartContainer}`}>
+                    <div className={`col-md-4`}>
                         <h5 className='mb-5 fw-bold'>Carrinho</h5>
-                        <div className={`py-3 ${styles.cartBox}`}>
-                            sou os items do carrinho
+                        <div className={`d-flex flex-column justify-content-between ${styles.cartContainer}`}>
+                            {cart.map(item => (
+                                <div key={item.product.node.id} 
+                                    className={`py-3 d-flex align-items-center gap-3 ${styles.cartBox}`}>
+                                    <div className={styles.imgContainer}>
+                                        <img src={item.product.node.image.url} alt="produto do carrinho" />
+                                    </div>
+                                    <div>
+                                        <h6 className={styles.itemName}>{item.product.node.name}</h6>
+                                        <h6>
+                                            {Intl.NumberFormat('pt-br', {
+                                                style:'currency',
+                                                currency:'BRL'
+                                            }).format(item.product.node.price)}
+                                        </h6>
+                                    </div>
+                                </div>
+                            ))}
+                            <div className='mt-5 d-flex justify-content-between'>
+                                <h6>Total:</h6>
+                                <h6 className='fw-bold'>
+                                    {Intl.NumberFormat('pt-br', {
+                                        style:'currency',
+                                        currency:'BRL'
+                                    }).format(totalCart)}
+                                </h6>
+                            </div>
                         </div>
                     </div>
                 </div>
