@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Button } from '../Button';
 import styles from './styles.module.scss';
+import { formatPrice } from '../../utils/useFormatPrice';
 
 interface ProductBoxProps {
     url:string;
@@ -28,12 +29,7 @@ export function ProductBox({ url, name, price, slug, id, handleAddToCart }:Produ
                         <img src={url} alt="product-image" />
                     </div>
                     <h6>{name}</h6>
-                    <h5 className='fw-bold'>
-                        {Intl.NumberFormat('pt-br', {
-                            style:'currency',
-                            currency:'BRL'
-                        }).format(price)}
-                    </h5>
+                    <h5 className='fw-bold'>{formatPrice(price)}</h5>
                 </a>
                 <Button onClick={() => handleAddToCart(id)}>Adicionar ao carrinho</Button>
             </div>

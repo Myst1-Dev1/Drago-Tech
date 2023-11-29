@@ -6,7 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 import { MdPayment } from 'react-icons/md';
 import { FaCheck, FaMapMarkedAlt } from 'react-icons/fa';
-import { useState, FormEvent, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { InformationForm } from '../../components/InformationForm';
 import { PaymentForm } from '../../components/PaymentForm';
 import { CartContext } from '../../services/hooks/useCart/useCart';
@@ -19,15 +19,6 @@ export default function PaymentPage() {
     const [paymentIntent, setPaymentIntent] = useState('');
 
     const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
-
-    function handleNextStep (e?:FormEvent) {
-        e?.preventDefault();
-        if (step < 3) {
-            setStep(step + 1);
-          } else {
-            setStep(3);
-          }
-      };
 
     const amountValue = parseFloat(totalCart);
 
@@ -89,7 +80,8 @@ export default function PaymentPage() {
                         {step === 1 && (
                         <div>
                             <InformationForm
-                                onHandleNextStep = {handleNextStep}
+                                onSetStep = {setStep}
+                                onStep = {step}
                             />
                         </div>
                         )}

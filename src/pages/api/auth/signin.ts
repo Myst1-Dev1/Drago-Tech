@@ -40,6 +40,17 @@ query getUserData($email: String!) {
         favoritePrice
         id
       }
+      orders {
+        cep
+        cidade
+        createdAt
+        email
+        endereco
+        estado
+        id
+        telefone
+        orderTotalPrice
+      }
     }
   }
 `;

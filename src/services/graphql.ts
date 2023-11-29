@@ -116,6 +116,18 @@ export const submitFavorite = async(obj:any) => {
   return result.json();
 }
 
+export const submitOrder = async(obj:any) => {
+  const result = await fetch('/api/orders', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  })
+
+  return result.json();
+}
+
 export const deleteFavorite = async(obj:any) => {
   const result = await fetch('/api/deleteFavorites', {
     method: 'DELETE',

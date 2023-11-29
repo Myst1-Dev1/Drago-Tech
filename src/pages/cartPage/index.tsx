@@ -7,6 +7,7 @@ import { Button } from '../../components/Button';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { formatPrice } from '../../utils/useFormatPrice';
 
 export default function CartPage() {
     const [isOpenCart, setIsOpenCart] = useState(false);
@@ -32,14 +33,8 @@ export default function CartPage() {
         image: item.product.node.image.url,
         quantity: item.quantity,
         portion:item.product.node.portion,
-        price: new Intl.NumberFormat('pt-br', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(item.product.node.price * item.quantity),
-        parceledValue:new Intl.NumberFormat('pt-br', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format((item.product.node.price * item.quantity) / item.product.node.portion)
+        price: formatPrice(item.product.node.price * item.quantity),
+        parceledValue:formatPrice((item.product.node.price * item.quantity) / item.product.node.portion)
     }));
 
     function handleOpenCart() {
