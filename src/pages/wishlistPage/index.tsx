@@ -1,18 +1,11 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
-import { useEffect } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useUser } from '../../lib/customHooks';
-import { useRouter } from 'next/router';
-import { parseCookies } from 'nookies';
 import { deleteFavorite } from '../../services/graphql';
 
 export default function WishListPage() {
     const { user } = useUser();
-
-    const router = useRouter();
-
-    const { 'authenticated-cookie':authcookie } = parseCookies();
 
     async function handleDeleteFavorite(id:any) {
         try {
@@ -27,12 +20,6 @@ export default function WishListPage() {
           alert('Erro ao deletar o favorito');
         }
       }
-
-    useEffect(() => {
-        if(!authcookie) {
-            router.push('/signInPage');
-        }
-    },[]);
 
     return (
         <>

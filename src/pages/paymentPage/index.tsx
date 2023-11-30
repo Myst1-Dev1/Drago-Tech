@@ -10,6 +10,7 @@ import { useState, useEffect, useContext } from 'react';
 import { InformationForm } from '../../components/InformationForm';
 import { PaymentForm } from '../../components/PaymentForm';
 import { CartContext } from '../../services/hooks/useCart/useCart';
+import { formatPrice } from '@/utils/useFormatPrice';
 
 export default function PaymentPage() {
     const { totalCart, cart } = useContext(CartContext);
@@ -110,23 +111,13 @@ export default function PaymentPage() {
                                     </div>
                                     <div>
                                         <h6 className={styles.itemName}>{item.product.node.name}</h6>
-                                        <h6>
-                                            {Intl.NumberFormat('pt-br', {
-                                                style:'currency',
-                                                currency:'BRL'
-                                            }).format(item.product.node.price)}
-                                        </h6>
+                                        <h6>{formatPrice(item.product.node.price)}</h6>
                                     </div>
                                 </div>
                             ))}
                             <div className='mt-5 d-flex justify-content-between'>
                                 <h6>Total:</h6>
-                                <h6 className='fw-bold'>
-                                    {Intl.NumberFormat('pt-br', {
-                                        style:'currency',
-                                        currency:'BRL'
-                                    }).format(totalCart)}
-                                </h6>
+                                <h6 className='fw-bold'>{formatPrice(totalCart)}</h6>
                             </div>
                         </div>
                     </div>
