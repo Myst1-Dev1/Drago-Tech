@@ -22,7 +22,7 @@ export function ChartGraph({ graphDate, orderValue }:ChartGraphProps) {
             curve: 'smooth'
         },
         xaxis: {
-            categories:graphDate,
+            categories:graphDate === undefined ? 'carregando...' : graphDate,
         },
         tooltip: {
             enabled:true,

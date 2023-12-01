@@ -1,0 +1,25 @@
+.profileFormContainer {
+    form {
+        max-width: 500px;
+    }
+}
+
+@media(max-width:430px) {
+    .profileFormContainer {
+        form {
+            margin: auto;
+
+            .inputBox {
+                margin: auto;
+
+                input {
+                    width: 350px;
+                }
+            }
+
+            button {
+                margin: auto;
+            }
+        }
+    }
+}
