@@ -10,7 +10,7 @@
     }
 
     .paymentDetailsContainer {
-        width: 500px;
+        width: 700px;
 
         button {
             width: 120px;
@@ -19,6 +19,13 @@
         span {
             color: var(--gray-500);
         }
+    }
+
+    .itemName {
+        max-width: 30ch;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 

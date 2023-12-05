@@ -12,7 +12,9 @@ interface InformationFormProps {
 
 export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
     const { user } = useUser();
-    const { totalCart } = useContext(CartContext);
+    const { totalCart, cart } = useContext(CartContext);
+
+    const productName = cart?.map(item => item.product.node.name);
 
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -32,6 +34,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                 estado: state,
                 cep: zipCode,
                 orderTotalPrice: parseFloat(totalCart),
+                orderProductName: productName && productName.length > 0 ? productName : ['Sem Produto'],
                 userEmail: user.email
             });
             console.log('Pedido enviado com sucesso!');

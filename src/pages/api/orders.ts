@@ -13,7 +13,7 @@ export default async function createOrders(req: NextApiRequest, res:NextApiRespo
 
     const query = gql`
         mutation createOrder($email:String!, $telefone:String!, $endereco:String!, $cidade:String!, 
-            $estado:String!, $cep:String!, $orderTotalPrice:Float! $userEmail:String!) {
+            $estado:String!, $cep:String!, $orderTotalPrice:Float!, $orderProductName:[String!]! $userEmail:String!) {
                 createOrder(
                     data: {
                         email: $email, 
@@ -21,7 +21,8 @@ export default async function createOrders(req: NextApiRequest, res:NextApiRespo
                         endereco: $endereco, 
                         cidade: $cidade, 
                         estado: $estado, 
-                        cep: $cep, 
+                        cep: $cep,
+                        orderProductName:$orderProductName
                         orderTotalPrice: $orderTotalPrice
                         usersData: {connect: {email: $userEmail}}}
                   ) {
@@ -34,6 +35,7 @@ export default async function createOrders(req: NextApiRequest, res:NextApiRespo
                     id
                     telefone
                     orderTotalPrice
+                    orderProductName
                   }
         }
     `;
@@ -46,6 +48,7 @@ export default async function createOrders(req: NextApiRequest, res:NextApiRespo
         estado: req.body.estado,
         cep:req.body.cep,
         orderTotalPrice:req.body.orderTotalPrice,
+        orderProductName:req.body.orderProductName,
         userEmail:req.body.userEmail
     });
 

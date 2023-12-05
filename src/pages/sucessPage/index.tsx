@@ -9,6 +9,8 @@ import { formatPrice } from '../../utils/useFormatPrice';
 export default function SucessPage() {
     const { user } = useUser();
 
+    console.log(user);
+
     async function handleScreenShot() {
         const paymentDetails:any = document.getElementById('payment-details');
         const screenshot = await html2canvas(paymentDetails);
@@ -60,6 +62,12 @@ export default function SucessPage() {
                         <div className='d-flex justify-content-between'>
                             <span>CEP</span>
                             <h6>{orders.cep}</h6>
+                        </div>
+                        <div className='d-flex justify-content-between'>
+                            <span>Items Comprados:</span>
+                            <div>{orders.orderProductName.map((item:any, index:number) => (
+                                <h6 className={styles.itemName} key={index}>{item}</h6>
+                            ))}</div>
                         </div>
                         <div className='d-flex justify-content-between mt-3'>
                             <span>Valor do Pedido</span>

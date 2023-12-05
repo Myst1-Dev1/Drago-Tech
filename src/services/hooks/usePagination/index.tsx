@@ -24,7 +24,7 @@ export function PaginationProvider({children}:PaginationProviderProps) {
     const endIndex = startIndex + itensPerPage;
 
     function renderPaginationButtons(data:[] | any) {
-        const totalPages = Math.ceil(data.length / itensPerPage); 
+        const totalPages = Math.ceil(data?.length / itensPerPage); 
         const buttons = [];
 
         for(let i = 0; i < totalPages; i++) {

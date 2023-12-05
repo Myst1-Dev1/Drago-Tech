@@ -16,7 +16,7 @@ export default function Profile() {
 
     const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice);
 
-    console.log(orderValue);
+    console.log(user);
 
     function handleOpenUpdateUserProfile() {
         setIsUpdateUserProfileOpen(!isUpdateUserProfileOpen);

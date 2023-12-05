@@ -58,7 +58,7 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
                             </div>
                             <div className='d-flex align-items-center gap-3'>
                                 <FaClipboardList className={styles.icon} />
-                                <Link href="/">Meus Pedidos</Link>
+                                <Link href="/orderPage">Meus Pedidos</Link>
                             </div>
                             <div className='d-flex align-items-center gap-3'>
                                 <FaFileSignature className={styles.icon} />

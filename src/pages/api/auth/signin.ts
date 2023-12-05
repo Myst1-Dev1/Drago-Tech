@@ -49,6 +49,7 @@ query getUserData($email: String!) {
         estado
         id
         telefone
+        orderProductName
         orderTotalPrice
       }
     }

@@ -103,18 +103,20 @@ export default function PaymentPage() {
                     <div className={`col-md-4`}>
                         <h5 className='mb-5 fw-bold'>Carrinho</h5>
                         <div className={`d-flex flex-column justify-content-between ${styles.cartContainer}`}>
-                            {cart.map(item => (
-                                <div key={item.product.node.id} 
-                                    className={`py-3 d-flex align-items-center gap-3 ${styles.cartBox}`}>
-                                    <div className={styles.imgContainer}>
-                                        <img src={item.product.node.image.url} alt="produto do carrinho" />
+                            <div>
+                                {cart.map(item => (
+                                    <div key={item.product.node.id} 
+                                        className={`d-flex align-items-center gap-3 ${styles.cartBox}`}>
+                                        <div className={styles.imgContainer}>
+                                            <img src={item.product.node.image.url} alt="produto do carrinho" />
+                                        </div>
+                                        <div>
+                                            <h6 className={styles.itemName}>{item.product.node.name}</h6>
+                                            <h6>{formatPrice(item.product.node.price)}</h6>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h6 className={styles.itemName}>{item.product.node.name}</h6>
-                                        <h6>{formatPrice(item.product.node.price)}</h6>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                             <div className='mt-5 d-flex justify-content-between'>
                                 <h6>Total:</h6>
                                 <h6 className='fw-bold'>{formatPrice(totalCart)}</h6>

@@ -1,7 +1,7 @@
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import styles from './styles.module.scss';
 import { useContext } from 'react';
-import { PaginationContext } from '@/services/hooks/usePagination';
+import { PaginationContext } from '../../services/hooks/usePagination';
 
 interface PaginationProps {
     data: [] | any;
