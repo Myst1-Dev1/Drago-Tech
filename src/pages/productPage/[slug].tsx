@@ -27,6 +27,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
         description:product.description,
         slug:product.slug,
         commentsID:product.commentsID,
+        portionValue:product.portion,
         price: formatPrice(product.price),
         promotion: formatPrice(product.price * 0.95),
         portion: formatPrice(product.price / product.portion),
@@ -89,10 +90,10 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                             </div>
                             <div className={`col-md-6 ${styles.priceBox}`}>
                                 <h4 className='fw-bold'>{product.price}</h4>
-                                <h6 className='mt-3'>Á vista com o Prime com até 5% OFF</h6>
+                                <h6 className='mt-3'>Á vista com o Prime em até 5% OFF</h6>
                                 <h6 className='mt-3'>{product.promotion}</h6>
-                                <h6>Em até {product.portion}x 
-                                de {product.price} sem juros no cartão
+                                <h6>Em até {product.portionValue}x 
+                                de {product.portion} sem juros no cartão
                                  </h6>
                                 <h6 className='mb-5'>Ou em 1x no cartão com 5% OFF</h6>
                                 <Button onClick={() => handleAddToCart(product.id)}>

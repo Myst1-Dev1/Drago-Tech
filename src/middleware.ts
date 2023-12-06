@@ -20,5 +20,5 @@ export default function middleware(request:NextRequest) {
 }
 
 export const config = {
-    matcher: ['/wishlistPage', '/profile']
+    matcher: ['/wishlistPage', '/profile', '/orderPage', '/sucessPayment', '/sucessDelivery']
 }

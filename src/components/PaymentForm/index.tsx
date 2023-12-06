@@ -76,7 +76,7 @@ export function PaymentForm({paymentIntent }:PaymentFormProps) {
         const { error } = await stripe.confirmPayment({
           elements,
           confirmParams: {
-            return_url: "http://localhost:3000/sucessPage",
+            return_url: "http://localhost:3000/sucessPayment",
           },
         });
     

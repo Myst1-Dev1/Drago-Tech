@@ -11,7 +11,7 @@ interface InformationFormProps {
 }
 
 export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
-    const { user } = useUser();
+    const { user, authenticated } = useUser();
     const { totalCart, cart } = useContext(CartContext);
 
     const productName = cart?.map(item => item.product.node.name);
@@ -27,12 +27,12 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
         e?.preventDefault();
         try {
             await submitOrder({
-                email: email,
-                telefone: phone,
-                endereco: address,
-                cidade: city,
-                estado: state,
-                cep: zipCode,
+                email: authenticated ? user.email : email,
+                telefone: authenticated ? user.phone : phone,
+                endereco: authenticated ? user.address : address,
+                cidade: authenticated ? user.city : city,
+                estado: authenticated ? user.state : state,
+                cep: authenticated ? user.zipCode : zipCode,
                 orderTotalPrice: parseFloat(totalCart),
                 orderProductName: productName && productName.length > 0 ? productName : ['Sem Produto'],
                 userEmail: user.email
@@ -60,7 +60,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                             id='email' 
                             type='email' 
                             placeholder='johndoe@gmail.com'
-                            value={email}
+                            value={authenticated ? user.email : email}
                             onChange={e => setEmail(e.target.value)} 
                         />
                     </div>
@@ -71,7 +71,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                             id='tel' 
                             type='tel' 
                             placeholder='55214002922'
-                            value={phone}
+                            value={authenticated ? user.phone : phone}
                             onChange={e => setPhone(e.target.value)} 
                         />
                      </div>
@@ -83,7 +83,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                         id='address' 
                         type='text' 
                         placeholder='Rua Sebastião Porto' 
-                        value={address}
+                        value={authenticated ? user.address : address}
                         onChange={e => setAddress(e.target.value)}
                         />
                 </div>
@@ -94,7 +94,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                         id='city' 
                         type='text' 
                         placeholder='Santo Lorem' 
-                        value={city}
+                        value={authenticated ? user.city : city}
                         onChange={e => setCity(e.target.value)}
                         />
                 </div>
@@ -106,7 +106,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                             id='state' 
                             type='text' 
                             placeholder='RJ'
-                            value={state}
+                            value={authenticated ? user.state : state}
                             onChange={e => setState(e.target.value)} 
                         />
                     </div>
@@ -117,7 +117,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                             id='zipCode' 
                             type='tel' 
                             placeholder='XXXXXXX'
-                            value={zipCode}
+                            value={authenticated ? user.zipCode : zipCode}
                             onChange={e => setZipCode(e.target.value)} 
                         />
                      </div>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useUser } from '../../lib/customHooks';
 import { formatPrice } from '../../utils/useFormatPrice';
 
-export default function SucessPage() {
+export default function SucessPayment() {
     const { user } = useUser();
 
     console.log(user);
@@ -77,7 +77,7 @@ export default function SucessPage() {
                         </div>
                         <div className='mt-5 d-flex justify-content-center gap-5'>
                             <Button onClick={handleScreenShot}>Print</Button>
-                            <Link href="/"><Button>Ver Pedidos</Button></Link>
+                            <Link href="/orderPage"><Button>Ver Pedidos</Button></Link>
                         </div>
                     </div>
                 )}
