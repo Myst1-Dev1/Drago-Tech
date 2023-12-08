@@ -128,6 +128,18 @@ export const submitOrder = async(obj:any) => {
   return result.json();
 }
 
+export const updateUser = async(obj:any) => {
+  const result = await fetch('/api/updateUserData', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  })
+
+  return result.json();
+}
+
 export const deleteFavorite = async(obj:any) => {
   const result = await fetch('/api/deleteFavorites', {
     method: 'DELETE',

@@ -16,8 +16,6 @@ export default function Profile() {
 
     const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice);
 
-    console.log(user);
-
     function handleOpenUpdateUserProfile() {
         setIsUpdateUserProfileOpen(!isUpdateUserProfileOpen);
     }
@@ -35,7 +33,7 @@ export default function Profile() {
                         <div className={styles.imgContainer}>
                             <img src="/images/imgUser.png" alt="icone do usuário" />
                         </div>
-                        <h5 className='fw-bold'>John Doe</h5>
+                        <h5 className='fw-bold'>{user.name}</h5>
                     </div>
                     <div className={`${styles.profileDetails}`}>
                         <div className={`d-flex justify-content-between`}>

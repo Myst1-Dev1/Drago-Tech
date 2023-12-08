@@ -12,6 +12,7 @@ export default function SignInPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isError, setIsError] = useState(false);
+    const [loading , setLoading] = useState(false);
 
     const router = useRouter();
 
@@ -38,12 +39,11 @@ export default function SignInPage() {
                 }
             });
 
-            console.log(response);
-
             if(!response.data?.token) {
                 console.log('Você não tem um token de authenticação', response);
                 return;
             };
+            setLoading(true)
             storeTokenInCookies(response.data.token);
             router.push('/');
             router.reload();
@@ -89,7 +89,9 @@ export default function SignInPage() {
                             Email ou senha incorretos
                         </span>
                     : ''}
-                    <Button type='submit'>Entrar</Button>
+                    <Button type='submit'>{loading ? 
+                        <div>Carregando...</div> : 'Entrar'}
+                    </Button>
                     <h6 className='fw-bold'>Novo por aqui? <Link href="/signUpPage">Criar conta</Link></h6>
                 </form>
             </div>
