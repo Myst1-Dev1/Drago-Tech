@@ -10,11 +10,13 @@ import { useState } from 'react';
 export default function Profile() {
     const { user } = useUser();
 
+    console.log(user);
+
     const [isUpdateUserProfileOpen, setIsUpdateUserProfileOpen] = useState(false);
 
     const createdAt = user?.orders?.map((order:any) => new Date(order?.createdAt).toLocaleDateString('pt-BR', {month: 'long'}));
 
-    const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice);
+    const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice.toFixed(2));
 
     function handleOpenUpdateUserProfile() {
         setIsUpdateUserProfileOpen(!isUpdateUserProfileOpen);

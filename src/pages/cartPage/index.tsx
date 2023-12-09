@@ -8,9 +8,11 @@ import { CartContext } from '../../services/hooks/useCart/useCart';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { formatPrice } from '../../utils/useFormatPrice';
+import { useUser } from '../../lib/customHooks';
 
 export default function CartPage() {
     const [isOpenCart, setIsOpenCart] = useState(false);
+    const { user } = useUser();
 
     const router = useRouter();
 
@@ -33,8 +35,9 @@ export default function CartPage() {
         image: item.product.node.image.url,
         quantity: item.quantity,
         portion:item.product.node.portion,
-        price: formatPrice(item.product.node.price * item.quantity),
-        parceledValue:formatPrice((item.product.node.price * item.quantity) / item.product.node.portion)
+        price: formatPrice(user?.prime === true ? ((item.product.node.price * 0.95) * item.quantity) : item.product.node.price * item.quantity),
+        parceledValue:formatPrice(user?.prime === true ? (((item.product.node.price * 0.95) * item.quantity) / item.product.node.portion) : 
+        (item.product.node.price * item.quantity) / item.product.node.portion)
     }));
 
     function handleOpenCart() {

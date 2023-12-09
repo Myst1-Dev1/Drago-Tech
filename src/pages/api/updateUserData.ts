@@ -1,5 +1,6 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { NextApiRequest, NextApiResponse } from 'next';
+import bcrypt from 'bcryptjs';
 
 const graphqlAPI:any = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 const graphCMSToken = process.env.GRAPHCMS_TOKEN
@@ -28,15 +29,18 @@ export default async function updateUserData(req:NextApiRequest, res:NextApiResp
         }
       `;
 
+      const { name, address, phone, city, state, password, zipCode, email } = req.body;
+      const hashedPassword = await bcrypt.hash(password, 8);
+
       const result = await graphQLClient.request(query, {
-        name: req.body.name,
-        address: req.body.address,
-        phone: req.body.phone,
-        city: req.body.city,
-        state: req.body.state,
-        password: req.body.password,
-        zipCode: req.body.zipCode,
-        email: req.body.email
+        name,
+        address,
+        phone,
+        city,
+        state,
+        password: hashedPassword,
+        zipCode,
+        email
       });
 
       return res.status(200).send(result);

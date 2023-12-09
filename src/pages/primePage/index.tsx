@@ -2,8 +2,36 @@ import { FaPercent, FaRocket, FaTicketAlt } from 'react-icons/fa';
 import styles from './styles.module.scss';
 import { Button } from '../../components/Button';
 import Head from 'next/head';
+import { loadStripe } from '@stripe/stripe-js';
+import { useUser } from '../../lib/customHooks';
+import { updateUserPrime } from '../../services/graphql';
 
 export default function PrimePage() {
+    const { user } = useUser();
+
+    async function handleRedirectToCheckout() {
+        const stripe:any = await loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
+        const { sessionId } = await fetch('/api/createCheckoutSession', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({
+                email:user?.email
+            })
+          }).then((res) => res.json());
+
+          await updateUserPrime({email: user?.email, prime:true});
+
+          const { error } = await stripe.redirectToCheckout({
+            sessionId,
+          });
+      
+          if (error) {
+            console.error('Tivemos um erro ao criar uma assinatura', error);
+          }
+    }
+
     return (
         <>
             <Head>
@@ -33,7 +61,10 @@ export default function PrimePage() {
                     <h2 className='fw-bold'>TA ESPERANDO O QUE?</h2>
                     <h5 className='fw-bold'>Assine Já !</h5>
                     <h5 className='fw-bold'>R$: 19,90</h5>
-                    <Button>Quero ser Prime</Button>
+                    {user?.prime === true ? <h5 className='fw-bold'>Você já possui o prime</h5> 
+                        : 
+                    <Button onClick={handleRedirectToCheckout}>Quero ser Prime</Button>
+                    }
                 </div>
                 <div className='text-light col-md-6'>
                     <div className={styles.imgContainer}>

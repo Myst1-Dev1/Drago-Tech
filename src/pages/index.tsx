@@ -3,7 +3,6 @@ import { ProductsCollection } from "../components/ProductsCollection";
 import { NewProducts } from "../components/NewProducts";
 import { PrimeDetails } from "../components/PrimeDetails";
 import { Button } from "../components/Button";
-import { MostSaledProducts } from "../components/MostSaledProducts";
 import { useContext } from "react";
 import { ProductsContext } from "../services/hooks/useProducts/useProducts";
 import { useTitle } from "../utils/useTitle";
@@ -32,7 +31,6 @@ export default function Home() {
             <ProductsCollection />
             <NewProducts onProducts = {newProducts} onHandleAddToCart = {handleAddToCart} />
             <PrimeDetails />
-            {/* <MostSaledProducts onProducts = {newProducts} onHandleAddToCart = {handleAddToCart} /> */}
         </>
     )
 }

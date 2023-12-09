@@ -3,6 +3,7 @@ import { ProductsContext } from '../useProducts/useProducts';
 import { CartProducts } from '../../../types/CartProducts';
 import { useRouter } from 'next/router';
 import { setCookie, destroyCookie } from 'nookies';
+import { useUser } from '../../../lib/customHooks';
 
 interface CartProductsData {
     cart: CartProducts[];
@@ -23,12 +24,15 @@ export const CartContext = createContext(
 );
 
 export function CartProvider({ children }:CartProviderProps) {
+    const { user } = useUser();
+
     const [ cart, setCart ] = useState<CartProducts[]>([]);
 
     const router = useRouter();
 
     const totalCart = cart.reduce((total, current) => {
-        return total + (current.product.node.price * current.quantity)
+        return user?.prime === true ? total + ((current.product.node.price * 0.95) * current.quantity)
+        : total + (current.product.node.price * current.quantity)
     }, 0);
 
     const { products } = useContext(ProductsContext);

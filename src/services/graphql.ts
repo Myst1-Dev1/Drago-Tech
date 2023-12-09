@@ -140,6 +140,18 @@ export const updateUser = async(obj:any) => {
   return result.json();
 }
 
+export const updateUserPrime = async(obj:any) => {
+  const result = await fetch('/api/updateUserPrime', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  })
+
+  return result.json();
+}
+
 export const deleteFavorite = async(obj:any) => {
   const result = await fetch('/api/deleteFavorites', {
     method: 'DELETE',

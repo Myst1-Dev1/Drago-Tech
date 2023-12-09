@@ -30,7 +30,8 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
         portionValue:product.portion,
         price: formatPrice(product.price),
         promotion: formatPrice(product.price * 0.95),
-        portion: formatPrice(product.price / product.portion),
+        portion: formatPrice(user?.prime ? ((product.price * 0.95) / product.portion) : 
+        product.price / product.portion),
     }));
 
     async function handleCreateFavorite() {
@@ -89,7 +90,9 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                 </div>
                             </div>
                             <div className={`col-md-6 ${styles.priceBox}`}>
-                                <h4 className='fw-bold'>{product.price}</h4>
+                                <h4 className='fw-bold'>
+                                    {user?.prime === true ? product.promotion : product.price}
+                                </h4>
                                 <h6 className='mt-3'>Á vista com o Prime em até 5% OFF</h6>
                                 <h6 className='mt-3'>{product.promotion}</h6>
                                 <h6>Em até {product.portionValue}x 

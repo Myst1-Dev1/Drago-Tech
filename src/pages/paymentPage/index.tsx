@@ -10,9 +10,12 @@ import { useState, useEffect, useContext } from 'react';
 import { InformationForm } from '../../components/InformationForm';
 import { PaymentForm } from '../../components/PaymentForm';
 import { CartContext } from '../../services/hooks/useCart/useCart';
-import { formatPrice } from '@/utils/useFormatPrice';
+import { formatPrice } from '../../utils/useFormatPrice';
+import { useUser } from '../../lib/customHooks';
 
 export default function PaymentPage() {
+    const { user } = useUser();
+
     const { totalCart, cart } = useContext(CartContext);
 
     const [step, setStep] = useState(1);
@@ -112,7 +115,10 @@ export default function PaymentPage() {
                                         </div>
                                         <div>
                                             <h6 className={styles.itemName}>{item.product.node.name}</h6>
-                                            <h6>{formatPrice(item.product.node.price)}</h6>
+                                            <h6>
+                                                {formatPrice(user?.prime === true ? item.product.node.price * 0.95 :
+                                                    item.product.node.price)}
+                                            </h6>
                                         </div>
                                     </div>
                                 ))}

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Button } from '../Button';
 import styles from './styles.module.scss';
 import { formatPrice } from '../../utils/useFormatPrice';
+import { useUser } from '../../lib/customHooks';
 
 interface ProductBoxProps {
     url:string;
@@ -13,6 +14,9 @@ interface ProductBoxProps {
 }
 
 export function ProductBox({ url, name, price, slug, id, handleAddToCart }:ProductBoxProps) {
+    const { user } = useUser();
+
+    const primeValue = user?.prime === true ? price * 0.95 : price;
 
     return (
         <>
@@ -29,7 +33,7 @@ export function ProductBox({ url, name, price, slug, id, handleAddToCart }:Produ
                         <img src={url} alt="product-image" />
                     </div>
                     <h6>{name}</h6>
-                    <h5 className='fw-bold'>{formatPrice(price)}</h5>
+                    <h5 className='fw-bold'>{formatPrice(primeValue)}</h5>
                 </a>
                 <Button onClick={() => handleAddToCart(id)}>Adicionar ao carrinho</Button>
             </div>
