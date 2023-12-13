@@ -3,12 +3,15 @@ import { FaPlus, FaTimes } from 'react-icons/fa';
 import styles from './styles.module.scss';
 import { Button } from '../Button';
 import { submitComment } from '../../services/graphql';
+import { useUser } from '../../lib/customHooks';
 
 interface ProductAvaliationFormProps {
     slug:string;
 }
 
 export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
+    const { user, authenticated } = useUser();
+
     const [isOpenAvaliationForm, setIsOpenAvaliationForm] = useState(false);
     const [name, setName] = useState('');
     const [avaliation, setAvaliation] = useState('Bom');
@@ -21,9 +24,12 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
     async function handleCreateComment(e?:FormEvent) {
         e?.preventDefault();
         try {
-            const commentObj = {name, avaliation, comment, slug};
-
-            await submitComment(commentObj);
+            await submitComment({
+                name: authenticated ? user?.name : name,
+                avaliation:avaliation,
+                comment:comment,
+                slug:slug
+            });
         } catch (error) {
             console.log('Tivemos um erro', error);
         }
@@ -49,18 +55,18 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
                         type="text" 
                         placeholder='Nome' 
                         className={styles.inputBox}
-                        value={name}
+                        value={authenticated ? user?.name : name}
                         onChange={e => setName(e.target.value)} 
                     />
                     <select
                         value={avaliation}
                         onChange={e => setAvaliation(e.target.value)}
                     >
-                        <option value="Bom">Bom</option>
+                        <option value="Muito ruim">Muito ruim</option>
                         <option value="Ruim">Ruim</option>
+                        <option value="Bom">Bom</option>
                         <option value="Incrivel">Incrivel</option>
-                        <option value="Espetacular">Espetacular</option>
-                        <option value="Perfeito">Pefeito</option>
+                        <option value="Espetacular">Espetacular</option>   
                     </select>
                     <textarea
                         value={comment}

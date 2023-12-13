@@ -48,6 +48,7 @@ query getUserData($email: String!) {
         endereco
         estado
         id
+        isReceived
         telefone
         orderProductName
         orderTotalPrice

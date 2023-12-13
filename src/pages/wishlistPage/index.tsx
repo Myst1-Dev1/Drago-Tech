@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import { FaTrashAlt } from 'react-icons/fa';
 import { useUser } from '../../lib/customHooks';
 import { deleteFavorite } from '../../services/graphql';
+import { formatPrice } from '../../utils/useFormatPrice';
 
 export default function WishListPage() {
     const { user } = useUser();
@@ -53,10 +54,9 @@ export default function WishListPage() {
                                         </td>
                                         <td><h6>{favorite.favoriteName}</h6></td>
                                         <td className="fw-bold">
-                                            {Intl.NumberFormat('pt-br', {
-                                                style:'currency',
-                                                currency:'BRL'
-                                            }).format(favorite.favoritePrice)}
+                                            {formatPrice(user?.prime === true ? 
+                                                  favorite.favoritePrice * 0.95 
+                                                : favorite.favoritePrice)}
                                         </td>
                                         <td>
                                             <FaTrashAlt

@@ -31,6 +31,8 @@ export default function SignInPage() {
         e.preventDefault();
 
         try {
+            setLoading(true);
+
             const response = await axios({
                 method:'post',
                 url:'/api/auth/signin',
@@ -43,7 +45,6 @@ export default function SignInPage() {
                 console.log('Você não tem um token de authenticação', response);
                 return;
             };
-            setLoading(true)
             storeTokenInCookies(response.data.token);
             router.push('/');
             router.reload();
@@ -90,7 +91,7 @@ export default function SignInPage() {
                         </span>
                     : ''}
                     <Button type='submit'>{loading ? 
-                        <div>Carregando...</div> : 'Entrar'}
+                        <div className='spinner-border'><span className='sr-only'></span></div> : 'Entrar'}
                     </Button>
                     <h6 className='fw-bold'>Novo por aqui? <Link href="/signUpPage">Criar conta</Link></h6>
                 </form>

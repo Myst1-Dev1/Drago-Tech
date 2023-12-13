@@ -75,7 +75,7 @@ export default function Shop() {
                     </div>
                     <div>
                         <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
-                            {currentItens?.map((product:any) => (
+                            {currentItens.length === 0 ? 'Carregando...' : currentItens?.map((product:any) => (
                                 <ProductBox
                                     key={product.node.id}
                                     name={product.node.name}

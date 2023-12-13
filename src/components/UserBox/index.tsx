@@ -1,5 +1,4 @@
-import { FaClipboardList, FaFileSignature, FaSignOutAlt, FaTimes, FaUserAlt } from 'react-icons/fa'
-import { AiFillLike } from 'react-icons/ai';
+import { FaClipboardList, FaSignOutAlt, FaTimes, FaUserAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router';
 import styles from './styles.module.scss'
 import Link from 'next/link'
@@ -59,14 +58,6 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
                             <div className='d-flex align-items-center gap-3'>
                                 <FaClipboardList className={styles.icon} />
                                 <Link href="/orderPage">Meus Pedidos</Link>
-                            </div>
-                            <div className='d-flex align-items-center gap-3'>
-                                <FaFileSignature className={styles.icon} />
-                                <Link href="/">Assinaturas</Link>
-                            </div>
-                            <div className='d-flex align-items-center gap-3'>
-                                <AiFillLike className={styles.icon} />
-                                <Link href="/">Avaliações</Link>
                             </div>
                         </div>
                     </div>

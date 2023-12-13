@@ -111,7 +111,11 @@ export function PaymentForm({paymentIntent }:PaymentFormProps) {
                   className='bg-danger text-light rounded border-0 py-3 w-100 mt-3' 
                   disabled={isLoading || !stripe || !elements} id="submit">
                   <span id="button-text">
-                      {isLoading ? <div className="spinner" id="spinner">carregando...</div> : "Realizar Pagamento"}
+                      {isLoading ? 
+                        <div className="spinner-border" id="spinner"><span className='sr-only'></span></div> 
+                          : 
+                        "Realizar Pagamento"
+                      }
                   </span>
               </button>
               {message && <div id="payment-message">{message}</div>}

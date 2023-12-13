@@ -7,9 +7,13 @@ import { useUser } from '../../lib/customHooks';
 import { updateUserPrime } from '../../services/graphql';
 
 export default function PrimePage() {
-    const { user } = useUser();
+    const { user, authenticated } = useUser();
 
     async function handleRedirectToCheckout() {
+        if(authenticated === false) {
+            alert('Você precisa estar logado para isso')
+        }
+
         const stripe:any = await loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
         const { sessionId } = await fetch('/api/createCheckoutSession', {
             method: 'POST',

@@ -61,7 +61,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
     const productName = productDetail.map((product:any) => product.name);
     const favoriteName = user && user.favorites.find((favorite: any) =>
     favorite.favoriteName.toLowerCase() === productName[0].toLowerCase());
-   
+         
     return (
         <>
             <Head>
@@ -75,8 +75,9 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                             <div className={`col-md-6 ${styles.productBox}`}>
                                 <div className={`mb-5 d-flex justify-content-between align-items-center ${styles.avaliationBox}`}>
                                     <div className='d-flex align-items-center gap-2'>
-                                        <img src="/images/FiveStars.png" alt="fivestar-image" />
-                                        <span>(106)</span>
+                                    {product.commentsID.length === 0 ? '' :
+                                        <img src="/images/FiveStars.png" alt="fivestar-image" />}
+                                        <span>({product.commentsID.length})</span>
                                     </div>
                                     <div>
                                         <FaHeart

@@ -19,6 +19,7 @@ export default function SignUpPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
 
@@ -41,6 +42,8 @@ export default function SignUpPage() {
                 setIsError(true);
                 return;
               }
+
+            setIsLoading(true);
 
             const response = await axios({
                 method: 'post',
@@ -163,7 +166,10 @@ export default function SignUpPage() {
                             </span>
                         : ''}
                     </div>
-                    <Button type='submit'>Criar conta</Button>
+                    <Button type='submit'>
+                        {isLoading ? <div className='spinner-border'><span className='sr-only'></span></div> 
+                        : 'Criar conta'}
+                    </Button>
                     <h6 className='fw-bold'>Já possui uma conta? <Link href="/signInPage">Entrar</Link></h6>
                 </form>
             </div>

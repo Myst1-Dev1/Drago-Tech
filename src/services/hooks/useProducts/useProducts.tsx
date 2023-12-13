@@ -1,10 +1,9 @@
-import { getProducts, getNewProducts } from '../../../services/graphql';
+import { getProducts } from '../../../services/graphql';
 import { Products } from '../../../types/Products';
 import { useContext, createContext, ReactNode, useState, useEffect } from 'react';
 
 interface ProductsContextData {
     products: Products[];
-    newProducts: Products[];
 }
 
 interface ProductsProviderProps {
@@ -17,20 +16,14 @@ export const ProductsContext = createContext(
 
 export function ProductsProvider({ children }: ProductsProviderProps) {
     const [products, setProducts] = useState<Products[]>([]);
-    const [newProducts, setNewProducts] = useState<Products[]>([]);
 
     useEffect(() => {
         getProducts()
         .then((product) => setProducts(product));
-    }, []);
-
-    useEffect(() => {
-        getNewProducts()
-        .then((product) => setNewProducts(product));
-    }, []);
+    }, [products]);
 
     return (
-        <ProductsContext.Provider value={{products, newProducts}}>
+        <ProductsContext.Provider value={{products}}>
             {children}
         </ProductsContext.Provider>
     )

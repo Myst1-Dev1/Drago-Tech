@@ -4,12 +4,11 @@ import { NewProducts } from "../components/NewProducts";
 import { PrimeDetails } from "../components/PrimeDetails";
 import { Button } from "../components/Button";
 import { useContext } from "react";
-import { ProductsContext } from "../services/hooks/useProducts/useProducts";
 import { useTitle } from "../utils/useTitle";
 import { CartContext } from '../services/hooks/useCart/useCart';
+import Link from 'next/link';
 
 export default function Home() {
-    const { newProducts } = useContext(ProductsContext);
     const { handleAddToCart } = useContext(CartContext);
 
     useTitle('Início Drago | Tech');
@@ -24,12 +23,12 @@ export default function Home() {
                     </div>
                     <div className="d-flex flex-column gap-3 col-md-6">
                         <h3>Os Melhores Equipamentos <br /> Você Encontra Aqui</h3>
-                        <Button>Ver loja</Button>
+                        <Link href="/shop"><Button>Ver loja</Button></Link>
                     </div>
                 </div>
             </div>
             <ProductsCollection />
-            <NewProducts onProducts = {newProducts} onHandleAddToCart = {handleAddToCart} />
+            <NewProducts onHandleAddToCart = {handleAddToCart} />
             <PrimeDetails />
         </>
     )

@@ -33,6 +33,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                 cidade: authenticated ? user.city : city,
                 estado: authenticated ? user.state : state,
                 cep: authenticated ? user.zipCode : zipCode,
+                isReceived:false,
                 orderTotalPrice: parseFloat(totalCart),
                 orderProductName: productName && productName.length > 0 ? productName : ['Sem Produto'],
                 userEmail: user.email
