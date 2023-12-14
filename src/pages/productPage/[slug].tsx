@@ -1,6 +1,6 @@
 import styles from './styles.module.scss';
 import Head from 'next/head';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { ProductDescription } from '../../components/ProductDescription';
@@ -20,6 +20,12 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
     const { handleAddToCart } = useContext(CartContext);
 
     const { user } = useUser();
+
+    const productName = productDetail.map((product:any) => product.name);
+    const favoriteName = user && user.favorites.find((favorite: any) =>
+    favorite.favoriteName.toLowerCase() === productName[0].toLowerCase());
+
+    const [isFavorite, setIsFavorite] = useState(!!favoriteName);
 
     const productValue = productDetail.map((product:any) => ({
         id:product.id,
@@ -48,6 +54,8 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                 favoriteImage: favoriteImage[0],
                 email,
             });
+
+            setIsFavorite(true);
             toast.success("Item adicionado aos favoritos", {
                 position:toast.POSITION.TOP_RIGHT,
                 theme:'colored'
@@ -58,11 +66,12 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
             alert('Você precisa estar logado para ter favoritos');
         }
     };
-    
-    const productName = productDetail.map((product:any) => product.name);
-    const favoriteName = user && user.favorites.find((favorite: any) =>
-    favorite.favoriteName.toLowerCase() === productName[0].toLowerCase());
-         
+
+    useEffect(() => {
+        // Atualiza o estado local diretamente quando o nome do favorito muda
+        setIsFavorite(!!favoriteName);
+      }, [favoriteName]);
+
     return (
         <>
             <Head>
@@ -83,7 +92,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                     <div>
                                         <FaHeart
                                             onClick={handleCreateFavorite} 
-                                            className={favoriteName ? styles.favoriteProduct : styles.icon} 
+                                            className={isFavorite ? styles.favoriteProduct : styles.icon} 
                                         />
                                     </div>
                                 </div>

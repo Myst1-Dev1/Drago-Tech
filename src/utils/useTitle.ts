@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 export function useTitle(title: any) {
    useEffect(() => {
      const prevTitle = document.title;
-     console.log(`Setting title to: ${title}`);
      document.title = title;
  
      return () => {

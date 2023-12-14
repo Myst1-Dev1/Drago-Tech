@@ -14,5 +14,5 @@ export function useUser() {
         getUserDetails();
       }, []);
 
-      return { user, authenticated };
+      return { user, setUser ,authenticated };
 }

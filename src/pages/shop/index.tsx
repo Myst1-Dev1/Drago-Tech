@@ -38,7 +38,12 @@ export default function Shop() {
 
     useEffect(() => {
         filterByPrice();
-    }, [priceFilter]);
+    }, []);
+
+    useEffect(() => {
+        // Atualizando a filtragem quando os produtos ou o filtro de preço mudam
+        filterByPrice();
+    }, [priceFilter, products]);
 
     useTitle('Loja | Drago Tech')
 

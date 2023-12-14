@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import { Button } from '../Button';
 import { submitComment } from '../../services/graphql';
 import { useUser } from '../../lib/customHooks';
+import { toast } from 'react-toastify';
 
 interface ProductAvaliationFormProps {
     slug:string;
@@ -38,7 +39,10 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
         setAvaliation('Bom');
         setComment('');
 
-        alert('Seu comentário foi enviado para avaliação');
+        toast.success("Comentário enviado para avaliação", {
+            position:toast.POSITION.TOP_RIGHT,
+            theme:'colored'
+        })
     }
 
     return (
