@@ -20,7 +20,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
     useEffect(() => {
         getProducts()
         .then((product) => setProducts(product));
-    }, [products]);
+    }, []);
 
     return (
         <ProductsContext.Provider value={{products}}>

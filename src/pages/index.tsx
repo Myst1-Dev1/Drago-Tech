@@ -11,7 +11,7 @@ import Link from 'next/link';
 export default function Home() {
     const { handleAddToCart } = useContext(CartContext);
 
-    useTitle('Início Drago | Tech');
+   useTitle('Início | Drago Tech');
 
     return (
         <>

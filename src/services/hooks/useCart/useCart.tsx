@@ -4,6 +4,7 @@ import { CartProducts } from '../../../types/CartProducts';
 import { useRouter } from 'next/router';
 import { setCookie, destroyCookie } from 'nookies';
 import { useUser } from '../../../lib/customHooks';
+import { toast } from 'react-toastify';
 
 interface CartProductsData {
     cart: CartProducts[];
@@ -31,9 +32,9 @@ export function CartProvider({ children }:CartProviderProps) {
     const router = useRouter();
 
     const totalCart = cart.reduce((total, current) => {
-        return user?.prime === true ? total + ((current.product.node.price * 0.95) * current.quantity)
-        : total + (current.product.node.price * current.quantity)
-    }, 0);
+        const productPrice = user?.prime ? current.product.node.price * 0.95 : current.product.node.price;
+        return total + productPrice * current.quantity;
+    }, 0).toFixed(2);
 
     const { products } = useContext(ProductsContext);
 
@@ -46,11 +47,15 @@ export function CartProvider({ children }:CartProviderProps) {
             ? cart.map(item => (item.product.node.id === id ? { ...item, quantity: item.quantity + 1 } : item))
             : [...cart, { product: productItem!, quantity: 1 }];
     
-        router.push('/cartPage');
         setCookie(undefined, 'cart-token', JSON.stringify(newCart), {
             maxAge:60 * 60 * 1 // 1 hour
         })
         setCart(newCart);
+
+        toast.success("Item adicionado ao carrinho", {
+            position:toast.POSITION.TOP_RIGHT,
+            theme:'colored'
+        })
     };
 
     function handleReduceItemQuantity(id:string) {

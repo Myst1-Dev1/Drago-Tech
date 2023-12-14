@@ -1,6 +1,11 @@
 import { AppProps } from 'next/app';
+
 import '../styles/global.scss';
 import 'bootstrap/dist/css/bootstrap.css';
+import "react-toastify/dist/ReactToastify.css";
+
+import { ToastContainer } from 'react-toastify';
+
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { ProductsProvider } from '../services/hooks/useProducts/useProducts';
@@ -13,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <CartProvider>
         <PaginationProvider>
           <Header />
+          <ToastContainer />
           <Component {...pageProps} />
           <Footer />
         </PaginationProvider>

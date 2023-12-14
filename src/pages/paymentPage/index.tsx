@@ -26,6 +26,8 @@ export default function PaymentPage() {
 
     const amountValue = parseFloat(totalCart);
 
+    console.log(totalCart, 'Total do carrinho');
+
     useEffect(() => {
     fetch('/api/createStripePayment', {
         method: 'POST',

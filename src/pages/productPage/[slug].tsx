@@ -10,6 +10,7 @@ import { getProducts, getProductsDetails, submitFavorite } from '../../services/
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { useUser } from '../../lib/customHooks';
 import { formatPrice } from '../../utils/useFormatPrice';
+import { toast } from 'react-toastify';
 
 interface ProductPageProps {
     productDetail: [] | any
@@ -35,22 +36,22 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
     }));
 
     async function handleCreateFavorite() {
-
         try {
             const favoriteName = productDetail.map((product: any) => product.name).join(', ');
             const favoritePrice = productDetail.map((product: any) => product.price);
             const favoriteImage = productDetail.map((product: any) => product.image.url);
-            const email = user.email;
+            const email = user?.email;
 
-            const favoriteData = {
-            favoriteName: favoriteName,
-            favoritePrice: parseFloat(favoritePrice[0]),
-            favoriteImage: favoriteImage[0],
-            email: email,
-            };
-
-            await submitFavorite(favoriteData);
-            alert('Produto adicionado ao favoritos com sucesso');
+            await submitFavorite({
+                favoriteName: favoriteName,
+                favoritePrice: parseFloat(favoritePrice),
+                favoriteImage: favoriteImage[0],
+                email,
+            });
+            toast.success("Item adicionado aos favoritos", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'colored'
+            })
             
         } catch (error) {
             console.log('Tivemos um erro', error);
@@ -119,8 +120,6 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
 
 export async function getStaticProps({ params }:any) {
     const data = await getProductsDetails(params.slug);
-
-    console.log(data);
 
     return {
       props: {

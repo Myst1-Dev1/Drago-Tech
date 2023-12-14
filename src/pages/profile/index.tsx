@@ -10,13 +10,33 @@ import { useState } from 'react';
 export default function Profile() {
     const { user } = useUser();
 
-    console.log(user);
-
     const [isUpdateUserProfileOpen, setIsUpdateUserProfileOpen] = useState(false);
 
-    const createdAt = user?.orders?.map((order:any) => new Date(order?.createdAt).toLocaleDateString('pt-BR', {month: 'long'}));
+    // const createdAt = user?.orders?.map((order:any) => new Date(order?.createdAt).toLocaleDateString('pt-BR', {month: 'long'}));
 
-    const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice.toFixed(2));
+    // const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice.toFixed(2));
+
+    const allMonths = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+    const aggregatedValues: { [month: string]: number } = Object.fromEntries(allMonths.map(month => [month, 0]));
+
+    user?.orders?.forEach((order: any) => {
+        const month = new Date(order?.createdAt).toLocaleDateString('pt-BR', { month: 'short' }).toLowerCase();
+        const value = order?.orderTotalPrice;
+
+        if (aggregatedValues[month] === undefined) {
+            aggregatedValues[month] = 0;
+        }
+
+        aggregatedValues[month] += value;
+    });
+
+    const months = Object.keys(aggregatedValues);
+    const values = Object.values(aggregatedValues);
+
+    const dataPoints = months.map((month, index) => ({
+        x: month,
+        y: values[index].toFixed(2),
+    }));
 
     function handleOpenUpdateUserProfile() {
         setIsUpdateUserProfileOpen(!isUpdateUserProfileOpen);
@@ -69,7 +89,7 @@ export default function Profile() {
                 </div>
                 <div className={`col-md-6 ${styles.graphContainer}`}>
                     <h4 className='fw-bold mb-5'>Gastos dos Últimos Pedidos</h4>
-                    <ChartGraph graphDate = {createdAt} orderValue = {orderValue} />
+                    <ChartGraph graphDate = {months} orderValue = {dataPoints} />
                 </div>
             </div>}
             {isUpdateUserProfileOpen && <ProfileForm />}

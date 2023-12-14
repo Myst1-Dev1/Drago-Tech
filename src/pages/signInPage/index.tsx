@@ -7,6 +7,7 @@ import { FaLock, FaUser } from 'react-icons/fa';
 import axios from 'axios';
 import { getAuthenticatedUser, storeTokenInCookies } from '../../lib/common';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export default function SignInPage() {
     const [email, setEmail] = useState('');
@@ -41,10 +42,16 @@ export default function SignInPage() {
                 }
             });
 
+            toast.success("Login feito com sucesso", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'light'
+            })
+
             if(!response.data?.token) {
                 console.log('Você não tem um token de authenticação', response);
                 return;
             };
+
             storeTokenInCookies(response.data.token);
             router.push('/');
             router.reload();

@@ -61,6 +61,7 @@ export const getProducts = async () => {
 //     return results.productsConnection.edges;
 // }
 
+
 export const getProductsDetails = async (slug:any) => {
     const query = gql`
         query getProductsDetails($slug: String!) {
