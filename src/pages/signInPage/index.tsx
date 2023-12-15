@@ -2,10 +2,10 @@ import Head from 'next/head';
 import styles from './styles.module.scss';
 import { Button } from '../../components/Button';
 import Link from 'next/link';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { FaLock, FaUser } from 'react-icons/fa';
 import axios from 'axios';
-import { getAuthenticatedUser, storeTokenInCookies } from '../../lib/common';
+import { storeTokenInCookies } from '../../lib/common';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -16,17 +16,6 @@ export default function SignInPage() {
     const [loading , setLoading] = useState(false);
 
     const router = useRouter();
-
-    const redirectIfAuthenticated = async () => {
-        const isUserAuthenticated = await getAuthenticatedUser();
-        if (isUserAuthenticated?.authenticated) {
-          router.push('/');
-        }
-      };
-    
-      useEffect(() => {
-        redirectIfAuthenticated();
-      }, []);
 
     async function handleSignIn(e:FormEvent) {
         e.preventDefault();
@@ -53,8 +42,8 @@ export default function SignInPage() {
             };
 
             storeTokenInCookies(response.data.token);
-            router.push('/');
             router.reload();
+            router.push('/');
         } catch (error) {
             console.log('Tivemos um erro', error);
             setIsError(true);

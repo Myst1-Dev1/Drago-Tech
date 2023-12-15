@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { useTitle } from "../utils/useTitle";
 import { CartContext } from '../services/hooks/useCart/useCart';
 import Link from 'next/link';
+import { MostSaledProducts } from '../components/mostSaledProducts';
 
 export default function Home() {
     const { handleAddToCart } = useContext(CartContext);
@@ -30,6 +31,7 @@ export default function Home() {
             <ProductsCollection />
             <NewProducts onHandleAddToCart = {handleAddToCart} />
             <PrimeDetails />
+            <MostSaledProducts onHandleAddToCart = {handleAddToCart}/>
         </>
     )
 }

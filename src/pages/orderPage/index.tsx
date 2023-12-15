@@ -11,6 +11,7 @@ import { Pagination } from '../../components/Pagination';
 import { PaginationContext } from '../../services/hooks/usePagination';
 import { updateReceivedProduct } from '../../services/graphql';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export default function OrderPage() {
     const { startIndex, endIndex } = useContext(PaginationContext);
@@ -31,7 +32,10 @@ export default function OrderPage() {
                 isReceived:true
             });
 
-            console.log('Pedido recebido com sucesso');
+            toast.success("Pedido recebido com sucesso", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'light'
+            })
 
            router.push('/sucessDelivery');
         } catch (error) {

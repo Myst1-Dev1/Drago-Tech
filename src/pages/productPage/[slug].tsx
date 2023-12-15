@@ -19,7 +19,7 @@ interface ProductPageProps {
 export default function ProductPage({ productDetail }: ProductPageProps) {
     const { handleAddToCart } = useContext(CartContext);
 
-    const { user } = useUser();
+    const { user, authenticated } = useUser();
 
     const productName = productDetail.map((product:any) => product.name);
     const favoriteName = user && user.favorites.find((favorite: any) =>
@@ -55,11 +55,19 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                 email,
             });
 
-            setIsFavorite(true);
-            toast.success("Item adicionado aos favoritos", {
-                position:toast.POSITION.TOP_RIGHT,
-                theme:'colored'
-            })
+            if(authenticated === false) {
+                setIsFavorite(false);
+                toast.error("Você precisa estar logado", {
+                    position:toast.POSITION.TOP_RIGHT,
+                    theme:'colored'
+                })
+            } else {
+                setIsFavorite(true);
+                toast.success("Item adicionado aos favoritos", {
+                    position:toast.POSITION.TOP_RIGHT,
+                    theme:'colored'
+                })
+            }
             
         } catch (error) {
             console.log('Tivemos um erro', error);

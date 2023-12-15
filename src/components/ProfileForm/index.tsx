@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 import { updateUser } from '../../services/graphql';
 import { useUser } from '../../lib/customHooks';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export function ProfileForm() {
     const { user } = useUser();
@@ -41,8 +42,12 @@ export function ProfileForm() {
                 email: user?.email
             });
 
+            toast.success("Dados atualizados com sucesso", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'light'
+            });
+            
             router.reload();
-            console.log('Dados de usuário atualizados com sucesso');
 
         } catch (error) {
             console.log('Erro ao atualizar dados do usuário', error);

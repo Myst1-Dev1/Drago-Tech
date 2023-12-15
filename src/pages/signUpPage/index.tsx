@@ -7,6 +7,7 @@ import { Input } from '../../components/Input';
 import { useRouter } from 'next/router';
 import { getAuthenticatedUser } from '../../lib/common';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 export default function SignUpPage() {
     const [name, setName] = useState('');
@@ -52,6 +53,11 @@ export default function SignUpPage() {
                     name, email, phone, address, city, state, zipCode, password
                 }
             });
+
+            toast.success("Cadastro feito com sucesso", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'light'
+            })
 
             if (!response?.data?.token) {
                 console.log('Something went wrong during signing up: ', response);

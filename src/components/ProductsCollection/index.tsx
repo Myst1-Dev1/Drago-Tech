@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './styles.module.scss';
 
 export function ProductsCollection() {
@@ -8,7 +9,7 @@ export function ProductsCollection() {
                     ${styles.collectionBox}`}>
                     <div className='d-flex flex-column gap-3'>
                         <h5 className='fw-bold'>Coleção de Laptops</h5>
-                        <h6>Compre Agora</h6>
+                        <Link href="/shop"><h6>Compre Agora</h6></Link>
                     </div>
                     <img src='/images/laptopImage.png' />
                 </div>
@@ -16,7 +17,7 @@ export function ProductsCollection() {
                     ${styles.collectionBox}`}>
                     <div className='d-flex flex-column gap-3'>
                         <h5 className='fw-bold'>Coleção de Periféricos</h5>
-                        <h6>Compre Agora</h6>
+                        <Link href="/shop"><h6>Compre Agora</h6></Link>
                     </div>
                     <img src='/images/periphericsImage.png' />
                 </div>
@@ -24,7 +25,7 @@ export function ProductsCollection() {
                     ${styles.collectionBox}`}>
                     <div className='d-flex flex-column gap-3'>
                         <h5 className='fw-bold'>Coleção de Câmeras</h5>
-                        <h6>Compre Agora</h6>
+                        <Link href="/shop"><h6>Compre Agora</h6></Link>
                     </div>
                     <img src='/images/cameraImage.png' />
                 </div>

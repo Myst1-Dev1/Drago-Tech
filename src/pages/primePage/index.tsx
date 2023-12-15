@@ -5,13 +5,20 @@ import Head from 'next/head';
 import { loadStripe } from '@stripe/stripe-js';
 import { useUser } from '../../lib/customHooks';
 import { updateUserPrime } from '../../services/graphql';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 export default function PrimePage() {
     const { user, authenticated } = useUser();
 
+    const [isLoading, setIsLoading] = useState(false);
+
     async function handleRedirectToCheckout() {
         if(authenticated === false) {
-            alert('Você precisa estar logado para isso')
+            toast.error("Você precisa estar logado para isso", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'colored'
+            })
         }
 
         const stripe:any = await loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
@@ -26,6 +33,8 @@ export default function PrimePage() {
           }).then((res) => res.json());
 
           await updateUserPrime({email: user?.email, prime:true});
+
+          setIsLoading(true);
 
           const { error } = await stripe.redirectToCheckout({
             sessionId,
@@ -67,7 +76,10 @@ export default function PrimePage() {
                     <h5 className='fw-bold'>R$: 19,90</h5>
                     {user?.prime === true ? <h5 className='fw-bold'>Você já possui o prime</h5> 
                         : 
-                    <Button onClick={handleRedirectToCheckout}>Quero ser Prime</Button>
+                    <Button onClick={handleRedirectToCheckout}>
+                        {isLoading ? <div className='spinner-border'><span className='sr-only'></span></div>  
+                        : 'Quero ser Prime'}
+                    </Button>
                     }
                 </div>
                 <div className='text-light col-md-6'>

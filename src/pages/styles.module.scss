@@ -7,3 +7,11 @@
         background-size: cover;
     }
 }
+
+@media(max-width:420px) {
+    .home {
+        .banner {
+            min-height: 60vh;
+        }
+    }
+}

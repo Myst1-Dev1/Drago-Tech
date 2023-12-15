@@ -6,8 +6,8 @@ import { FaInstagram, FaFacebook, FaTwitter } from 'react-icons/fa';
 export function Footer() {
     return (
         <>
-            <div className={`gap-4 d-flex flex-column justify-content-center align-items-center ${styles.footer}`}>
-                <Logo />
+            <div className={`gap-4 d-flex flex-column justify-content-center align-items-center text-light ${styles.footer}`}>
+                <div className='mt-3'><Logo /></div>
                 <div className='d-flex align-items-center gap-3'>
                     <Link href="/">Início</Link>
                     <Link href="/shop">Loja</Link>
@@ -20,8 +20,8 @@ export function Footer() {
                     <FaInstagram className={styles.icon} />
                     <FaTwitter className={styles.icon} />
                 </div>
-                <div className={`d-flex justify-content-center ${styles.copyright}`}>
-                    <p className='mt-3'>© 2023 Design por <span className='fw-bold'>Myst1 Dev</span></p>
+                <div className={`d-flex justify-content-center align-items-center m-auto ${styles.copyright}`}>
+                    <p className='mt-3'>© 2023 Desenvolvido por <span className='fw-bold'>Myst1 Dev</span></p>
                 </div>
             </div>
         </>

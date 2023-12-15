@@ -24,8 +24,8 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
             });
 
             destroyCookie(null, 'authenticated-cookie');
-            router.push('/signInPage');
             router.reload();
+            router.push('/signInPage');
 
             console.log(response);
         } catch (error) {

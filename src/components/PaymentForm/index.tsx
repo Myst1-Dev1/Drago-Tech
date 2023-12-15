@@ -6,6 +6,7 @@ import {
     useElements
   } from "@stripe/react-stripe-js";
 import styles from './styles.module.scss';
+import { toast } from 'react-toastify';
 
 interface PaymentFormProps {
     paymentIntent: string | any;
@@ -72,6 +73,10 @@ export function PaymentForm({paymentIntent }:PaymentFormProps) {
         }
     
         setIsLoading(true);
+        toast.success("Pagamento feito com sucesso", {
+          position:toast.POSITION.TOP_RIGHT,
+          theme:'light'
+      })
     
         const { error } = await stripe.confirmPayment({
           elements,

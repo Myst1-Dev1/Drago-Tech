@@ -15,7 +15,7 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
 
     const [isOpenAvaliationForm, setIsOpenAvaliationForm] = useState(false);
     const [name, setName] = useState('');
-    const [avaliation, setAvaliation] = useState('Bom');
+    const [avaliation, setAvaliation] = useState('Muito ruim');
     const [comment, setComment] = useState('');
 
     function handleOpenAvaliationForm() {
