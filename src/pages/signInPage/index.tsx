@@ -47,6 +47,7 @@ export default function SignInPage() {
         } catch (error) {
             console.log('Tivemos um erro', error);
             setIsError(true);
+            setLoading(false);
         }
 
         setEmail('');
