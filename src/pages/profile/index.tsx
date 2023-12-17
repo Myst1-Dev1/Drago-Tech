@@ -1,5 +1,6 @@
 import styles from './styles.module.scss'
 import Head from 'next/head';
+import Image from 'next/image';
 
 import { useUser } from '../../lib/customHooks';
 import { Button } from '../../components/Button';
@@ -11,10 +12,6 @@ export default function Profile() {
     const { user } = useUser();
 
     const [isUpdateUserProfileOpen, setIsUpdateUserProfileOpen] = useState(false);
-
-    // const createdAt = user?.orders?.map((order:any) => new Date(order?.createdAt).toLocaleDateString('pt-BR', {month: 'long'}));
-
-    // const orderValue = user?.orders?.map((order:any) => order?.orderTotalPrice.toFixed(2));
 
     const allMonths = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
     const aggregatedValues: { [month: string]: number } = Object.fromEntries(allMonths.map(month => [month, 0]));
@@ -52,8 +49,8 @@ export default function Profile() {
                 <div className={`col-md-6 mb-5 ${styles.profileBox}`}>
                     <h4 className='fw-bold mb-5'>Perfil</h4>
                     <div className='d-flex align-items-center gap-3 mb-5'>
-                        <div className={styles.imgContainer}>
-                            <img src="/images/imgUser.png" alt="icone do usuário" />
+                        <div>
+                            <Image width={80} height={80} src="/images/imgUser.webp" alt="icone do usuário" />
                         </div>
                         <h5 className='fw-bold'>{user.name}</h5>
                     </div>

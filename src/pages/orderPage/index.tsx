@@ -23,8 +23,6 @@ export default function OrderPage() {
 
     const router = useRouter();
 
-    console.log(order);
-
     async function handleReceivedProduct(id:any) {
         try {
             await updateReceivedProduct({

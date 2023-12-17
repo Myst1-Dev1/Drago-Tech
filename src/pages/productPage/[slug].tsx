@@ -1,5 +1,7 @@
 import styles from './styles.module.scss';
 import Head from 'next/head';
+import Image from 'next/image';
+
 import { useContext, useEffect, useState } from 'react';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '../../components/Button';
@@ -94,7 +96,8 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                 <div className={`mb-5 d-flex justify-content-between align-items-center ${styles.avaliationBox}`}>
                                     <div className='d-flex align-items-center gap-2'>
                                     {product.commentsID.length === 0 ? '' :
-                                        <img src="/images/FiveStars.png" alt="fivestar-image" />}
+                                        <Image width={95} height={15} 
+                                            src="/images/FiveStars.webp" alt="fivestar-image" />}
                                         <span>({product.commentsID.length})</span>
                                     </div>
                                     <div>

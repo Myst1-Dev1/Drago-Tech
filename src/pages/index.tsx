@@ -20,7 +20,7 @@ export default function Home() {
                 <div className={`d-flex wrap text-light justify-content-center align-items-center 
                     ${styles.banner}`}>
                     <div className="col-md-6">
-                        <img className="img-fluid" src="/images/bannerImage.png" alt="image-banner" />
+                        <img className="img-fluid" src="/images/bannerImage.webp" alt="image-banner" />
                     </div>
                     <div className="d-flex flex-column gap-3 col-md-6">
                         <h3>Os Melhores Equipamentos <br /> Você Encontra Aqui</h3>

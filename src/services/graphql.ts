@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { request, gql } from 'graphql-request';
 
 const graphqlAPI:any = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
@@ -29,38 +30,6 @@ export const getProducts = async () => {
 
     return results.productsConnection.edges;
 }
-
-// export const getNewProducts = async () => {
-//   const query = gql`
-//     query NewProducts {
-//       productsConnection(
-//         first: 6,
-//         orderBy: createdAt_DESC
-//       ) {
-//         edges {
-//           node {
-//             brand
-//             description
-//             id
-//             image {
-//               url
-//             }
-//             name
-//             portion
-//             price
-//             slug
-//             type
-//           }
-//         }
-//       }
-//     }
-//   `
-
-//     const results:any = await request(graphqlAPI, query);
-    
-//     return results.productsConnection.edges;
-// }
-
 
 export const getProductsDetails = async (slug:any) => {
     const query = gql`
@@ -94,85 +63,107 @@ export const getProductsDetails = async (slug:any) => {
 }
 
 export const submitComment = async(obj:any) => {
-  const result = await fetch('/api/comments', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  });
+  try {
+    const response = await axios.post('http://localhost:3000/api/comments', obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export const submitFavorite = async(obj:any) => {
-  const result = await fetch('/api/favorites', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  });
+  try {
+    const response = await axios.post('http://localhost:3000/api/favorites', obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export const submitOrder = async(obj:any) => {
-  const result = await fetch('/api/orders', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  })
+  try {
+    const response = await axios.post('http://localhost:3000/api/orders', obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export const updateUser = async(obj:any) => {
-  const result = await fetch('/api/updateUserData', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  })
+  try {
+    const response = await axios.put('http://localhost:3000/api/updateUserData', obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export const updateUserPrime = async(obj:any) => {
-  const result = await fetch('/api/updateUserPrime', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  })
+  try {
+    const response = await axios.put('http://localhost:3000/api/updateUserPrime', obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export const updateReceivedProduct = async(obj:any) => {
-  const result = await fetch('/api/receivedProduct', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  })
+  try {
+    const response = await axios.put('http://localhost:3000/api/receivedProduct', obj, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }
 
 export const deleteFavorite = async(obj:any) => {
-  const result = await fetch('/api/deleteFavorites', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(obj),
-  });
+  try {
+    const response = await axios.delete('/api/deleteFavorites', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: obj,
+    });
 
-  return result.json();
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
 }

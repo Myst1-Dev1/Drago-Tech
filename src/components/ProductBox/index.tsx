@@ -3,6 +3,7 @@ import { Button } from '../Button';
 import styles from './styles.module.scss';
 import { formatPrice } from '../../utils/useFormatPrice';
 import { useUser } from '../../lib/customHooks';
+import Link from 'next/link';
 
 interface ProductBoxProps {
     url:string;
@@ -26,7 +27,7 @@ export function ProductBox({ url, name, price, slug, id, handleAddToCart }:Produ
             <div
                 className={`col-md-4 d-flex justify-content-center align-items-center flex-column gap-3 
                 ${styles.productBox}`}>
-                <a className='d-flex justify-content-center align-items-center flex-column gap-3' 
+                <Link className='d-flex justify-content-center align-items-center flex-column gap-3' 
                     href={`/productPage/${slug}`}
                 >
                     <div className={styles.imgContainer}>
@@ -34,7 +35,7 @@ export function ProductBox({ url, name, price, slug, id, handleAddToCart }:Produ
                     </div>
                     <h6>{name}</h6>
                     <h5 className='fw-bold'>{formatPrice(primeValue)}</h5>
-                </a>
+                </Link>
                 <Button onClick={() => handleAddToCart(id)}>Adicionar ao carrinho</Button>
             </div>
         </>

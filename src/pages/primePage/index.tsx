@@ -1,7 +1,9 @@
-import { FaPercent, FaRocket, FaTicketAlt } from 'react-icons/fa';
 import styles from './styles.module.scss';
-import { Button } from '../../components/Button';
 import Head from 'next/head';
+import Image from 'next/image';
+
+import { Button } from '../../components/Button';
+import { FaPercent, FaRocket, FaTicketAlt } from 'react-icons/fa';
 import { loadStripe } from '@stripe/stripe-js';
 import { useUser } from '../../lib/customHooks';
 import { updateUserPrime } from '../../services/graphql';
@@ -84,7 +86,14 @@ export default function PrimePage() {
                 </div>
                 <div className='text-light col-md-6'>
                     <div className={styles.imgContainer}>
-                        <img src="/images/primeImage.png" alt="primePage-image" />
+                        <Image
+                            className='img-fluid' 
+                            width={800} 
+                            height={500} 
+                            src="/images/primeImage.webp" 
+                            alt="primePage-image"
+                            priority 
+                        />
                     </div>
                 </div>
             </div>

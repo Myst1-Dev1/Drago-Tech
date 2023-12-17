@@ -1,5 +1,7 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from './styles.module.scss';
+
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { useState, FormEvent } from 'react';
@@ -83,9 +85,11 @@ export default function Contact() {
                     </Button>
                 </form>
                 <div className={`col-md-6 py-5 ${styles.imgContainer}`}>
-                    <img 
+                    <Image
+                        width={400}
+                        height={400} 
                         className='img-fluid' 
-                        src="/images/contactImg.png" 
+                        src="/images/contactImg.webp" 
                         alt="secretaria que recebe as mensagems" 
                     />
                 </div>

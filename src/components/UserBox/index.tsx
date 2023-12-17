@@ -1,9 +1,11 @@
-import { FaClipboardList, FaSignOutAlt, FaTimes, FaUserAlt } from 'react-icons/fa'
-import { useRouter } from 'next/router';
 import styles from './styles.module.scss'
 import Link from 'next/link'
-import { destroyCookie } from 'nookies';
 import axios from 'axios';
+import Image from 'next/image';
+
+import { FaClipboardList, FaSignOutAlt, FaTimes, FaUserAlt } from 'react-icons/fa'
+import { useRouter } from 'next/router';
+import { destroyCookie } from 'nookies';
 import { useUser } from '../../lib/customHooks';
 
 interface UserBoxProps {
@@ -46,7 +48,7 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
                     <div>
                         <div className='d-flex align-items-center gap-3 mb-5'>
                             <div className={styles.imgContainer}>
-                                <img src="/images/imgUser.png" alt="imagem do usuário logado" />
+                                <Image width={40} height={40} src="/images/imgUser.webp" alt="imagem do usuário logado" />
                             </div>
                             <h5 className='fw-bold'>{user.name}</h5>
                         </div>

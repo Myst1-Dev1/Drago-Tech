@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 
 export default function SucessDelivery() {
     return (
@@ -20,8 +21,8 @@ export default function SucessDelivery() {
                             atendam plenamente às suas necessidades e expectativas.
                         </h5>
                     </div>
-                    <img className="img-fluid col-md-6" 
-                        src="/images/successDelivery.png" 
+                    <Image width={558} height={534} className="img-fluid col-md-6" 
+                        src="/images/successDelivery.webp" 
                         alt="image de entrega feita com sucesso" 
                     />
                 </div>

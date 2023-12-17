@@ -11,23 +11,11 @@ import { Footer } from '../components/Footer';
 import { ProductsProvider } from '../services/hooks/useProducts/useProducts';
 import { CartProvider } from '../services/hooks/useCart/useCart';
 import { PaginationProvider } from '../services/hooks/usePagination';
-import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loading , setLoading] = useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      }, []);
 
   return (
     <>
-    {loading ? (<div className='loading'>
-                  <img src="/images/loading.gif" alt="imagem de loading" />
-                </div>) : (
         <ProductsProvider>
           <CartProvider>
             <PaginationProvider>
@@ -38,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
             </PaginationProvider>
           </CartProvider>
       </ProductsProvider>
-    )}
     </>
   );
 }

@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
-import { Button } from '../../components/Button';
 import Link from 'next/link';
+import Image from 'next/image';
+
+import { Button } from '../../components/Button';
 import { useUser } from '../../lib/customHooks';
 import { formatPrice } from '../../utils/useFormatPrice';
 
@@ -18,7 +20,7 @@ export default function SucessPayment() {
             <div className={`container py-5 ${styles.sucessPage}`}>
                 <div className='d-flex justify-content-center align-items-center flex-column mb-5'>
                     <div className={styles.imgContainer}>
-                        <img src="/images/sucessIcon.png" alt="imagem de sucesso" />
+                        <Image width={80} height={80} src="/images/sucessIcon.webp" alt="imagem de sucesso" />
                     </div>
                     <h5 className='text-success fw-bold py-3'>Pagamento realizado com sucesso</h5>
                 </div>
@@ -74,7 +76,7 @@ export default function SucessPayment() {
                         )}
                     </div>
                     <div className='col-md-4'>
-                        <img className='img-fluid' src="/images/deliveryIsComing.png" alt="imagem de entrega" />
+                        <Image width={486} height={486} className='img-fluid' src="/images/deliveryIsComing.webp" alt="imagem de entrega" />
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@ export function Footer() {
                     <FaTwitter className={styles.icon} />
                 </div>
                 <div className={`d-flex justify-content-center align-items-center m-auto ${styles.copyright}`}>
-                    <p className='mt-3'>© 2023 Desenvolvido por <span className='fw-bold'>Myst1 Dev</span></p>
+                    <p className='mt-3'>© 2023 Desenvolvido por Myst1 Dev</p>
                 </div>
             </div>
         </>

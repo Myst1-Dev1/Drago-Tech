@@ -1,7 +1,9 @@
 import Link from 'next/link';
+import styles from './styles.module.scss';
+import Image from 'next/image';
+
 import { useContext, useEffect, useState } from 'react';
 import { NavBar } from '../NavBar';
-import styles from './styles.module.scss';
 import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { Search } from '../Search';
@@ -59,7 +61,11 @@ export function Header() {
                         {authenticated ? 
                             <div className={styles.userContainer}>
                                 <div onClick={handleOpenUserBox} className={styles.imgContainer}>
-                                    <img src="/images/imgUser.png" alt="icone de usuário" />
+                                    <Image width={50} height={50} 
+                                        className='img-fluid'
+                                        src="/images/imgUser.webp" 
+                                        alt="icone de usuário" 
+                                    />
                                 </div>
                               
                                <UserBox 
