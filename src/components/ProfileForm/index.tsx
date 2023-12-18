@@ -21,9 +21,11 @@ export function ProfileForm() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handleUpdateUserData(e?:FormEvent) {
         e?.preventDefault();
+        setIsLoading(true);
 
         try {
             if (password !== confirmPassword) {
@@ -41,6 +43,8 @@ export function ProfileForm() {
                 zipCode: zipCode,
                 email: user?.email
             });
+
+            setIsLoading(false);
 
             toast.success("Dados atualizados com sucesso", {
                 position:toast.POSITION.TOP_RIGHT,
@@ -162,7 +166,11 @@ export function ProfileForm() {
                         : ''}
                 </div>
                 <div className='m-auto mt-3'>
-                    <Button type='submit'>Atualizar Dados</Button>
+                    <Button type='submit'>
+                        {isLoading ? 
+                            <div className='spinner-border'><span className='sr-only'></span></div>  
+                        : 'Atualizar Dados'}
+                    </Button>
                 </div>
             </form>
         </div>

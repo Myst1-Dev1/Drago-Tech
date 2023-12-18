@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { request, gql } from 'graphql-request';
+import { api } from '../services/axios';
 
 const graphqlAPI:any = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
@@ -64,7 +64,7 @@ export const getProductsDetails = async (slug:any) => {
 
 export const submitComment = async(obj:any) => {
   try {
-    const response = await axios.post('http://localhost:3000/api/comments', obj, {
+    const response = await api.post('comments', obj, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -79,7 +79,7 @@ export const submitComment = async(obj:any) => {
 
 export const submitFavorite = async(obj:any) => {
   try {
-    const response = await axios.post('http://localhost:3000/api/favorites', obj, {
+    const response = await api.post('favorites', obj, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -94,7 +94,7 @@ export const submitFavorite = async(obj:any) => {
 
 export const submitOrder = async(obj:any) => {
   try {
-    const response = await axios.post('http://localhost:3000/api/orders', obj, {
+    const response = await api.post('orders', obj, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -109,7 +109,7 @@ export const submitOrder = async(obj:any) => {
 
 export const updateUser = async(obj:any) => {
   try {
-    const response = await axios.put('http://localhost:3000/api/updateUserData', obj, {
+    const response = await api.put('updateUserData', obj, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -124,7 +124,7 @@ export const updateUser = async(obj:any) => {
 
 export const updateUserPrime = async(obj:any) => {
   try {
-    const response = await axios.put('http://localhost:3000/api/updateUserPrime', obj, {
+    const response = await api.put('updateUserPrime', obj, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -139,7 +139,7 @@ export const updateUserPrime = async(obj:any) => {
 
 export const updateReceivedProduct = async(obj:any) => {
   try {
-    const response = await axios.put('http://localhost:3000/api/receivedProduct', obj, {
+    const response = await api.put('receivedProduct', obj, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -154,7 +154,7 @@ export const updateReceivedProduct = async(obj:any) => {
 
 export const deleteFavorite = async(obj:any) => {
   try {
-    const response = await axios.delete('/api/deleteFavorites', {
+    const response = await api.delete('deleteFavorites', {
       headers: {
         'Content-Type': 'application/json',
       },

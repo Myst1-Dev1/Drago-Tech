@@ -42,8 +42,8 @@ export default function SignInPage() {
             };
 
             storeTokenInCookies(response.data.token);
-            router.reload();
             router.push('/');
+            router.reload();
         } catch (error) {
             console.log('Tivemos um erro', error);
             setIsError(true);

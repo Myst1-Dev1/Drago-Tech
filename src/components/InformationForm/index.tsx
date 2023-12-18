@@ -22,9 +22,11 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipCode, setZipCode] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     async function handleCreateOrder (e?:FormEvent) {
         e?.preventDefault();
+        setIsLoading(true);
         try {
             await submitOrder({
                 email: authenticated ? user.email : email,
@@ -38,7 +40,7 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                 orderProductName: productName && productName.length > 0 ? productName : ['Sem Produto'],
                 userEmail: user.email
             });
-            console.log('Pedido enviado com sucesso!');
+            setIsLoading(false);
 
             if (onStep < 3) {
                 onSetStep(onStep + 1);
@@ -124,7 +126,10 @@ export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
                      </div>
                 </div>
                 <div className='d-flex justify-content-center'>
-                    <Button type='submit'>Prosseguir</Button>
+                    <Button type='submit'>
+                        {isLoading ? <div className='spinner-border'><span className='sr-only'></span></div> 
+                        : 'Prosseguir'}
+                    </Button>
                 </div>
             </form>
         </div>

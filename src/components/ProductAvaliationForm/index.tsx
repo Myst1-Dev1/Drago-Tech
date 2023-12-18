@@ -17,6 +17,7 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
     const [name, setName] = useState('');
     const [avaliation, setAvaliation] = useState('Muito ruim');
     const [comment, setComment] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     function handleOpenAvaliationForm() {
         setIsOpenAvaliationForm(!isOpenAvaliationForm);
@@ -24,6 +25,7 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
 
     async function handleCreateComment(e?:FormEvent) {
         e?.preventDefault();
+        setIsLoading(true);
         try {
             await submitComment({
                 name: authenticated ? user?.name : name,
@@ -38,6 +40,7 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
         setName('');
         setAvaliation('Bom');
         setComment('');
+        setIsLoading(false);
 
         toast.success("Comentário enviado para avaliação", {
             position:toast.POSITION.TOP_RIGHT,
@@ -77,7 +80,10 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
                         onChange={e => setComment(e.target.value)} 
                         placeholder='Mensagem'
                     />
-                    <Button type='submit'>Enviar</Button>
+                    <Button type='submit'>
+                        {isLoading ? <div className='spinner-border'><span className='sr-only'></span></div>  
+                        : 'Enviar'}
+                    </Button>
                 </form>
             )}
         </div>
