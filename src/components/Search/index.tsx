@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export function Search() {
-    const { products } = useContext(ProductsContext);
+    const { data } = useContext(ProductsContext);
 
     const router = useRouter();
 
@@ -17,12 +17,12 @@ export function Search() {
 
     function searchProducts() {
         if(search !== '') {
-            const filteredProducts = products.filter((e:Products) => 
+            const filteredProducts = data.filter((e:Products) => 
             e.node.name.toLowerCase().includes(search.toLowerCase()))
 
             setFilter(filteredProducts);
         } else {
-            setFilter(products);
+            setFilter(data);
         };
     };
 

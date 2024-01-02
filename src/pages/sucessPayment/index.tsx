@@ -8,7 +8,7 @@ import { useUser } from '../../lib/customHooks';
 import { formatPrice } from '../../utils/useFormatPrice';
 
 export default function SucessPayment() {
-    const { user } = useUser();
+    const { user, isLoading } = useUser();
 
     const orders = user?.orders.slice(-1)[0];
 
@@ -26,7 +26,7 @@ export default function SucessPayment() {
                 </div>
                 <div className='row align-items-center m-auto container'>
                     <div id='payment-details' className='col-md-8 mb-5'>
-                        {user === null ? <span className='mt-5 h1'>Carregando...</span> 
+                        {isLoading ? <span className='mt-5 h1'>Carregando...</span> 
                             : orders && (
                             <div className={`mt-3 ${styles.paymentDetailsContainer}`}>
                                 <div className='d-flex justify-content-between'>

@@ -4,10 +4,12 @@ import { Button } from '../../components/Button';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { FaLock, FaUser } from 'react-icons/fa';
-import axios from 'axios';
 import { storeTokenInCookies } from '../../lib/common';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { api } from '../../services/axios';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../services/queryClient';
 
 export default function SignInPage() {
     const [email, setEmail] = useState('');
@@ -23,13 +25,11 @@ export default function SignInPage() {
         try {
             setLoading(true);
 
-            const response = await axios({
-                method:'post',
-                url:'/api/auth/signin',
-                data: {
-                    email, password
-                }
-            });
+            const response = await api.post('/auth/signin', {email, password}, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
 
             toast.success("Login feito com sucesso", {
                 position:toast.POSITION.TOP_RIGHT,
@@ -43,7 +43,6 @@ export default function SignInPage() {
 
             storeTokenInCookies(response.data.token);
             router.push('/');
-            router.reload();
         } catch (error) {
             console.log('Tivemos um erro', error);
             setIsError(true);
@@ -54,6 +53,14 @@ export default function SignInPage() {
         setPassword('');
     }
 
+    const mutation = useMutation({
+        mutationFn:handleSignIn,
+        onSuccess: () => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries({queryKey: ['userData']})
+        }
+    })
+
     return (
         <>
             <Head>
@@ -62,7 +69,7 @@ export default function SignInPage() {
             <div className={`container py-5 d-flex flex-column justify-content-center align-items-center 
                 ${styles.signInPage}`}>
                 <h2 className='fw-bold'>Entrar</h2>
-                <form onSubmit={handleSignIn} 
+                <form onSubmit={mutation.mutate} 
                     className='d-flex flex-column justify-content-center align-items-center gap-4 mt-5'>
                     <div className={`d-flex align-items-center gap-2 ${styles.inputBox}`}>
                         <FaUser className={styles.icon} />

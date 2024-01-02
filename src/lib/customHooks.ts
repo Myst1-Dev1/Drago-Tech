@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react';
 import { getAuthenticatedUser } from './common';
+import { useQuery } from '@tanstack/react-query';
 
 export function useUser() {
-    const [user, setUser] = useState<null | any>(null);
-    const [authenticated, setAutenticated] = useState(false);
 
-    useEffect(() => {
-        async function getUserDetails() {
-          const { authenticated, user } = await getAuthenticatedUser();
-          setUser(user);
-          setAutenticated(authenticated);
-        }
-        getUserDetails();
-      }, []);
+    const { data, isLoading } = useQuery({
+      queryKey:['userData'],
+      queryFn:getAuthenticatedUser
+    })
 
-      return { user, setUser ,authenticated };
+    const user = data?.user || null;
+    const authenticated = data?.authenticated || false;
+
+    return { user ,authenticated, data, isLoading };
 }

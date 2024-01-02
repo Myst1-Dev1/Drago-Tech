@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { Logo } from '../Logo';
 
 export function Header() {
-    const { authenticated } = useUser();
+    const { authenticated, isLoading } = useUser();
 
     const router = useRouter();
 
@@ -59,20 +59,20 @@ export function Header() {
                             <h6>Seu carrinho</h6>
                         </Link>
                         {authenticated ? 
-                            <div className={styles.userContainer}>
-                                <div onClick={handleOpenUserBox} className={styles.imgContainer}>
-                                    <Image width={50} height={50} 
-                                        className='img-fluid'
-                                        src="/images/imgUser.webp" 
-                                        alt="icone de usuário" 
+                            isLoading ? 'carregando...' :
+                                <div className={styles.userContainer}>
+                                    <div onClick={handleOpenUserBox} className={styles.imgContainer}>
+                                        <Image width={50} height={50} 
+                                            className='img-fluid'
+                                            src="/images/imgUser.webp" 
+                                            alt="icone de usuário" 
+                                        />
+                                    </div>
+                                <UserBox 
+                                        onIsUserBoxOpen={isUserBoxOpen} 
+                                        onsetIsUserBoxOpen={setIsUserBoxOpen} 
                                     />
                                 </div>
-                              
-                               <UserBox 
-                                    onIsUserBoxOpen={isUserBoxOpen} 
-                                    onsetIsUserBoxOpen={setIsUserBoxOpen} 
-                                />
-                            </div>
                             :
                             <Link 
                                 href="/signInPage" 

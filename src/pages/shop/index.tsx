@@ -17,13 +17,13 @@ export default function Shop() {
     const [filteredProducts, setFilteredProducts] = useState<Products[]>([]);
     const [responsiveFilter, setResponsiveFilter] = useState(false);
 
-    const { products } = useContext(ProductsContext);
+    const { data, isLoading } = useContext(ProductsContext);
     const { handleAddToCart } = useContext(CartContext);
 
-    const currentItens = filteredProducts.slice(startIndex, endIndex);
+    const currentItens = filteredProducts?.slice(startIndex, endIndex);
 
     function filterByPrice() {
-        const priceFiltered = products.filter(product => product.node.price <= priceFilter);
+        const priceFiltered = data?.filter((product:any) => product.node.price <= priceFilter);
         
         setFilteredProducts(priceFiltered);
     };
@@ -37,13 +37,9 @@ export default function Shop() {
     }
 
     useEffect(() => {
-        filterByPrice();
-    }, []);
-
-    useEffect(() => {
         // Atualizando a filtragem quando os produtos ou o filtro de preço mudam
         filterByPrice();
-    }, [priceFilter, products]);
+    }, [priceFilter]);
 
     useTitle('Loja | Drago Tech')
 
@@ -70,7 +66,7 @@ export default function Shop() {
                                         currency: 'BRL'
                                     }).format(priceFilter)}</span>
                             </div>
-                            <CheckboxFilter onProducts={products} onSetFilteredProducts={setFilteredProducts} />
+                            <CheckboxFilter onProducts={data} onSetFilteredProducts={setFilteredProducts} />
                             <FaTimes onClick={handleCloseResponsiveFilter} className={styles.closeResponsiveFilterIcon} />
                         </div>
                     </div>
@@ -80,7 +76,7 @@ export default function Shop() {
                     </div>
                     <div>
                         <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
-                            {currentItens.length === 0 ? 'Carregando...' : currentItens?.map((product:any) => (
+                            {isLoading ? 'Carregando...' : currentItens?.map((product:any) => (
                                 <ProductBox
                                     key={product.node.id}
                                     name={product.node.name}

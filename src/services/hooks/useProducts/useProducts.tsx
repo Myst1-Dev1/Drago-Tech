@@ -1,9 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
 import { getProducts } from '../../../services/graphql';
 import { Products } from '../../../types/Products';
-import { useContext, createContext, ReactNode, useState, useEffect } from 'react';
+import { useContext, createContext, ReactNode } from 'react';
 
 interface ProductsContextData {
-    products: Products[];
+    isLoading:boolean;
+    data:any;
 }
 
 interface ProductsProviderProps {
@@ -15,15 +17,19 @@ export const ProductsContext = createContext(
 );
 
 export function ProductsProvider({ children }: ProductsProviderProps) {
-    const [products, setProducts] = useState<Products[]>([]);
 
-    useEffect(() => {
-        getProducts()
-        .then((product) => setProducts(product));
-    }, []);
+    async function getProductsData() {
+        const products = await getProducts();
+        return products;
+    }
+
+    const { data, isLoading } = useQuery<Products[]>({
+        queryKey: ['products'],
+        queryFn: getProductsData
+    });
 
     return (
-        <ProductsContext.Provider value={{products}}>
+        <ProductsContext.Provider value={{data, isLoading}}>
             {children}
         </ProductsContext.Provider>
     )

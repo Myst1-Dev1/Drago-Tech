@@ -15,11 +15,11 @@ import { toast } from 'react-toastify';
 
 export default function OrderPage() {
     const { startIndex, endIndex } = useContext(PaginationContext);
-    const { user } = useUser();
+    const { data } = useUser();
 
-    const orderData = user?.orders?.slice(startIndex, endIndex);
+    const orderData = data?.user?.orders?.slice(startIndex, endIndex);
 
-    const order = user?.orders;
+    const order = data?.user?.orders;
 
     const router = useRouter();
 
@@ -51,7 +51,7 @@ export default function OrderPage() {
                 <h2>Seus Pedidos</h2>
 
                 <div className={`mt-5 row gap-5 justify-content-center m-auto ${styles.orderContainer}`}>
-                    {user === null ? 'Carregando...' : orderData?.map((order:any) => (
+                    {data?.user === null ? 'Carregando...' : orderData?.map((order:any) => (
                         <div key={order.id} className={`d-flex flex-column justify-content-between col-md-4 ${styles.orderBox}`}>
                             <div>
                                 <div className='d-flex justify-content-between'>

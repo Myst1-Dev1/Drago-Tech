@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 import { useContext, useEffect, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../services/queryClient';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { Button } from '../../components/Button';
 import { ProductDescription } from '../../components/ProductDescription';
@@ -59,10 +61,6 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
 
             if(authenticated === false) {
                 setIsFavorite(false);
-                toast.error("Você precisa estar logado", {
-                    position:toast.POSITION.TOP_RIGHT,
-                    theme:'colored'
-                })
             } else {
                 setIsFavorite(true);
                 toast.success("Item adicionado aos favoritos", {
@@ -72,10 +70,20 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
             }
             
         } catch (error) {
-            console.log('Tivemos um erro', error);
-            alert('Você precisa estar logado para ter favoritos');
+            toast.error("Você precisa estar logado", {
+                position:toast.POSITION.TOP_RIGHT,
+                theme:'colored'
+            })
         }
     };
+
+    const mutation:any = useMutation({
+        mutationFn: handleCreateFavorite,
+        onSuccess: () => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries({queryKey: ['userData']})
+        }
+    });
 
     useEffect(() => {
         // Atualiza o estado local diretamente quando o nome do favorito muda
@@ -102,7 +110,12 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                     </div>
                                     <div>
                                         <FaHeart
-                                            onClick={handleCreateFavorite} 
+                                            onClick={() => {
+                                                mutation.mutate({
+                                                    id: Date.now(),
+                                                    title: 'Add to favorites'
+                                                })
+                                            }} 
                                             className={isFavorite ? styles.favoriteProduct : styles.icon} 
                                         />
                                     </div>

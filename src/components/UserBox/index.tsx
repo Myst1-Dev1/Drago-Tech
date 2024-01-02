@@ -7,6 +7,8 @@ import { FaClipboardList, FaSignOutAlt, FaTimes, FaUserAlt } from 'react-icons/f
 import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
 import { useUser } from '../../lib/customHooks';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../services/queryClient';
 
 interface UserBoxProps {
     onsetIsUserBoxOpen:any;
@@ -26,7 +28,6 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
             });
 
             destroyCookie(null, 'authenticated-cookie');
-            router.reload();
             router.push('/signInPage');
 
             console.log(response);
@@ -34,6 +35,14 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
             console.log('erro', error);
         }    
     }
+
+    const mutation:any = useMutation({
+        mutationFn:handleLogout,
+        onSuccess: () => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries({queryKey: ['userData']})
+        }
+    })
     
     function handleCloseUserBox() {
         onsetIsUserBoxOpen(false);
@@ -65,7 +74,10 @@ export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
                     </div>
                     <div className='d-flex align-items-center gap-3'>
                         <FaSignOutAlt className={styles.icon} />
-                        <h5 onClick={handleLogout} className='mb-0'>Sair</h5>
+                        <h5 onClick={() => mutation.mutate({
+                            id: Date.now(),
+                            title: 'Logout user'
+                        })} className='mb-0'>Sair</h5>
                     </div>
                 </div>
             </div>

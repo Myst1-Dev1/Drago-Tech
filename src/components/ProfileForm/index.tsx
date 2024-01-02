@@ -4,13 +4,12 @@ import { Input } from '../Input';
 import styles from './styles.module.scss';
 import { updateUser } from '../../services/graphql';
 import { useUser } from '../../lib/customHooks';
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../services/queryClient';
 
 export function ProfileForm() {
     const { user } = useUser();
-
-    const router = useRouter();
 
     const [name, setName] = useState('');
     const [zipCode, setZipCode] = useState('');
@@ -50,17 +49,23 @@ export function ProfileForm() {
                 position:toast.POSITION.TOP_RIGHT,
                 theme:'light'
             });
-            
-            router.reload();
 
         } catch (error) {
             console.log('Erro ao atualizar dados do usuário', error);
         }
     }
 
+    const mutation = useMutation({
+        mutationFn:handleUpdateUserData,
+        onSuccess: () => {
+            // Invalidate and refetch
+            queryClient.invalidateQueries({queryKey: ['userData']})
+        }
+    })
+
     return (
         <div className={`mb-5 container ${styles.profileFormContainer}`}>
-            <form onSubmit={handleUpdateUserData} className='d-flex flex-column gap-3'>
+            <form onSubmit={mutation.mutate} className='d-flex flex-column gap-3'>
                 <div className={`row ${styles.inputBox}`}>
                     <div className='col-md-6 mb-3 d-flex flex-column gap-3'>
                         <label className='fw-bold' htmlFor="name">Nome</label>

@@ -11,11 +11,13 @@ import { Footer } from '../components/Footer';
 import { ProductsProvider } from '../services/hooks/useProducts/useProducts';
 import { CartProvider } from '../services/hooks/useCart/useCart';
 import { PaginationProvider } from '../services/hooks/usePagination';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from '../services/queryClient';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
         <ProductsProvider>
           <CartProvider>
             <PaginationProvider>
@@ -26,7 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </PaginationProvider>
           </CartProvider>
       </ProductsProvider>
-    </>
+    </QueryClientProvider>
   );
 }
 

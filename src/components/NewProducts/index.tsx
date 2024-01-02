@@ -8,15 +8,15 @@ interface NewProductsProps {
 }
 
 export function NewProducts({ onHandleAddToCart }: NewProductsProps) {
-    const { products } = useContext(ProductsContext);
+    const { data, isLoading } = useContext(ProductsContext);
 
-    const productData = products.slice(0, 6);
+    const productData = data?.slice(0, 6);
 
     return (
         <div className={`mb-5 container ${styles.newProducts}`}>
             <h2 className='fw-bold'>Novos Produtos</h2>
             <div className='mt-5 m-auto row gap-5 justify-content-center align-items-center'>
-                {productData?.map(product => (
+                {isLoading ? 'carregando...' : productData?.map((product:any) => (
                     <ProductBox
                         key={product?.node.id}
                         name={product?.node.name}

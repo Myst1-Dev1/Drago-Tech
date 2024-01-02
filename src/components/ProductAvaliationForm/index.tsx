@@ -63,11 +63,13 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
                         placeholder='Nome' 
                         className={styles.inputBox}
                         value={authenticated ? user?.name : name}
-                        onChange={e => setName(e.target.value)} 
+                        onChange={e => setName(e.target.value)}
+                        required
                     />
                     <select
                         value={avaliation}
                         onChange={e => setAvaliation(e.target.value)}
+                        required
                     >
                         <option value="Muito ruim">Muito ruim</option>
                         <option value="Ruim">Ruim</option>
@@ -79,6 +81,7 @@ export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
                         value={comment}
                         onChange={e => setComment(e.target.value)} 
                         placeholder='Mensagem'
+                        required
                     />
                     <Button type='submit'>
                         {isLoading ? <div className='spinner-border'><span className='sr-only'></span></div>  

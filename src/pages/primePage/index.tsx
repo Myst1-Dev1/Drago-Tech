@@ -22,6 +22,7 @@ export default function PrimePage() {
                 theme:'colored'
             })
         }
+        setIsLoading(true);
 
         const stripe:any = await loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
         const { sessionId } = await fetch('/api/createCheckoutSession', {
@@ -36,7 +37,7 @@ export default function PrimePage() {
 
           await updateUserPrime({email: user?.email, prime:true});
 
-          setIsLoading(true);
+          setIsLoading(false);
 
           const { error } = await stripe.redirectToCheckout({
             sessionId,

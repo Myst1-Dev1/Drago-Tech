@@ -36,10 +36,10 @@ export function CartProvider({ children }:CartProviderProps) {
         return total + productPrice * current.quantity;
     }, 0).toFixed(2);
 
-    const { products } = useContext(ProductsContext);
+    const { data } = useContext(ProductsContext);
 
     function handleAddToCart(id:string) {
-        const productItem = products.find(product => product.node.id === id);
+        const productItem = data?.find((product:any) => product.node.id === id);
 
         const alreadyInCart = cart.find(item => item.product.node.id === id);
     
