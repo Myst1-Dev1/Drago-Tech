@@ -1,11 +1,10 @@
 import { Button } from '../../components/Button';
 import styles from './styles.module.scss';
 import Link from 'next/link';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Head from 'next/head';
 import { Input } from '../../components/Input';
 import { useRouter } from 'next/router';
-import { getAuthenticatedUser } from '../../lib/common';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -23,17 +22,6 @@ export default function SignUpPage() {
     const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
-
-    const redirectIfAuthenticated = async () => {
-        const isUserAuthenticated = await getAuthenticatedUser();
-        if (isUserAuthenticated?.authenticated) {
-          router.push('/');
-        }
-      };
-    
-      useEffect(() => {
-        redirectIfAuthenticated();
-      }, []);
 
     async function handleCreateUser(e?:FormEvent) {
         e?.preventDefault();

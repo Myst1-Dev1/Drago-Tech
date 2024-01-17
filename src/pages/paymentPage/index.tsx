@@ -11,11 +11,10 @@ import { InformationForm } from '../../components/InformationForm';
 import { PaymentForm } from '../../components/PaymentForm';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { formatPrice } from '../../utils/useFormatPrice';
-import { useUser } from '../../lib/customHooks';
+import { UserContext } from '@/services/hooks/useUser/useUser';
 
 export default function PaymentPage() {
-    const { user } = useUser();
-
+    const { user } = useContext(UserContext);
     const { totalCart, cart } = useContext(CartContext);
 
     const [step, setStep] = useState(1);

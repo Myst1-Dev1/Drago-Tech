@@ -2,7 +2,6 @@ import Head from 'next/head';
 import styles from './styles.module.scss';
 
 import { useContext } from 'react';
-import { useUser } from '../../lib/customHooks';
 import { Button } from '../../components/Button';
 
 import { formatPrice } from '../../utils/useFormatPrice';
@@ -12,10 +11,11 @@ import { PaginationContext } from '../../services/hooks/usePagination';
 import { updateReceivedProduct } from '../../services/graphql';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function OrderPage() {
     const { startIndex, endIndex } = useContext(PaginationContext);
-    const { data } = useUser();
+    const { data } = useContext(UserContext);
 
     const orderData = data?.user?.orders?.slice(startIndex, endIndex);
 

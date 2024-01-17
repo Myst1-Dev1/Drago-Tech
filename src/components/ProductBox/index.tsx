@@ -2,8 +2,9 @@ import Head from 'next/head';
 import { Button } from '../Button';
 import styles from './styles.module.scss';
 import { formatPrice } from '../../utils/useFormatPrice';
-import { useUser } from '../../lib/customHooks';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 interface ProductBoxProps {
     url:string;
@@ -15,7 +16,7 @@ interface ProductBoxProps {
 }
 
 export function ProductBox({ url, name, price, slug, id, handleAddToCart }:ProductBoxProps) {
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
 
     const primeValue = user?.prime === true ? price * 0.95 : price;
 

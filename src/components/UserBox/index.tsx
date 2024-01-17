@@ -6,9 +6,10 @@ import Image from 'next/image';
 import { FaClipboardList, FaSignOutAlt, FaTimes, FaUserAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router';
 import { destroyCookie } from 'nookies';
-import { useUser } from '../../lib/customHooks';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../services/queryClient';
+import { useContext } from 'react';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 interface UserBoxProps {
     onsetIsUserBoxOpen:any;
@@ -16,7 +17,7 @@ interface UserBoxProps {
 }
 
 export function UserBox({ onIsUserBoxOpen ,onsetIsUserBoxOpen }: UserBoxProps) {
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
 
     const router = useRouter();
 

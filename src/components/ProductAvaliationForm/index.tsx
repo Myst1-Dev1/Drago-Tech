@@ -1,17 +1,17 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useContext } from 'react';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import styles from './styles.module.scss';
 import { Button } from '../Button';
 import { submitComment } from '../../services/graphql';
-import { useUser } from '../../lib/customHooks';
 import { toast } from 'react-toastify';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 interface ProductAvaliationFormProps {
     slug:string;
 }
 
 export function ProductAvaliationForm({ slug }: ProductAvaliationFormProps) {
-    const { user, authenticated } = useUser();
+    const { user, authenticated } = useContext(UserContext);
 
     const [isOpenAvaliationForm, setIsOpenAvaliationForm] = useState(false);
     const [name, setName] = useState('');

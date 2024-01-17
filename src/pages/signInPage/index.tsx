@@ -2,16 +2,18 @@ import Head from 'next/head';
 import styles from './styles.module.scss';
 import { Button } from '../../components/Button';
 import Link from 'next/link';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useContext } from 'react';
 import { FaLock, FaUser } from 'react-icons/fa';
-import { storeTokenInCookies } from '../../lib/common';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { api } from '../../services/axios';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../services/queryClient';
+import { UserContext } from '@/services/hooks/useUser/useUser';
 
 export default function SignInPage() {
+    const { storeTokenInCookies } = useContext(UserContext);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isError, setIsError] = useState(false);

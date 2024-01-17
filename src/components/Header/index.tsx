@@ -8,13 +8,13 @@ import { FaHeart, FaShoppingCart, FaUser } from 'react-icons/fa';
 import { CartContext } from '../../services/hooks/useCart/useCart';
 import { Search } from '../Search';
 import { parseCookies } from 'nookies';
-import { useUser } from '../../lib/customHooks';
 import { UserBox } from '../UserBox';
 import { useRouter } from 'next/router';
 import { Logo } from '../Logo';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export function Header() {
-    const { authenticated, isLoading } = useUser();
+    const { authenticated, isLoading } = useContext(UserContext);
 
     const router = useRouter();
 

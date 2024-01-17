@@ -13,20 +13,23 @@ import { CartProvider } from '../services/hooks/useCart/useCart';
 import { PaginationProvider } from '../services/hooks/usePagination';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '../services/queryClient';
+import { UserProvider } from '../services/hooks/useUser/useUser';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
         <ProductsProvider>
-          <CartProvider>
-            <PaginationProvider>
-              <Header />
-              <ToastContainer />
-              <Component {...pageProps} />
-              <Footer />
-            </PaginationProvider>
-          </CartProvider>
+          <UserProvider>
+            <CartProvider>
+              <PaginationProvider>
+                <Header />
+                <ToastContainer />
+                <Component {...pageProps} />
+                <Footer />
+              </PaginationProvider>
+            </CartProvider>
+          </UserProvider>
       </ProductsProvider>
     </QueryClientProvider>
   );

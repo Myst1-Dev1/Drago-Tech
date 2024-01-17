@@ -2,8 +2,8 @@ import { FormEvent, useContext, useState } from 'react';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { submitOrder } from '../../services/graphql';
-import { useUser } from '../../lib/customHooks';
 import { CartContext } from '../../services/hooks/useCart/useCart';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 interface InformationFormProps {
     onSetStep:any;
@@ -11,7 +11,7 @@ interface InformationFormProps {
 }
 
 export function InformationForm({ onSetStep, onStep } :InformationFormProps) {
-    const { user, authenticated } = useUser();
+    const { user, authenticated } = useContext(UserContext);
     const { totalCart, cart } = useContext(CartContext);
 
     const productName = cart?.map(item => item.product.node.name);

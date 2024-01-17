@@ -5,13 +5,13 @@ import Image from 'next/image';
 import { Button } from '../../components/Button';
 import { FaPercent, FaRocket, FaTicketAlt } from 'react-icons/fa';
 import { loadStripe } from '@stripe/stripe-js';
-import { useUser } from '../../lib/customHooks';
 import { updateUserPrime } from '../../services/graphql';
 import { toast } from 'react-toastify';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function PrimePage() {
-    const { user, authenticated } = useUser();
+    const { user, authenticated } = useContext(UserContext);
 
     const [isLoading, setIsLoading] = useState(false);
 

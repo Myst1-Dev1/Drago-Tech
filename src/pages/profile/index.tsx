@@ -3,15 +3,15 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 import { format } from 'date-fns';
-import { useUser } from '../../lib/customHooks';
 import { Button } from '../../components/Button';
 import { ChartGraph } from '../../components/ChartGraph';
 import { ProfileForm } from '../../components/ProfileForm';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { ptBR } from 'date-fns/locale';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function Profile() {
-    const { data, isLoading } = useUser();
+    const { data, isLoading } = useContext(UserContext);
 
     const [isUpdateUserProfileOpen, setIsUpdateUserProfileOpen] = useState(false);
 

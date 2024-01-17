@@ -2,16 +2,16 @@ import Head from 'next/head';
 import styles from './styles.module.scss';
 
 import { FaTrashAlt } from 'react-icons/fa';
-import { useUser } from '../../lib/customHooks';
 import { deleteFavorite } from '../../services/graphql';
 import { formatPrice } from '../../utils/useFormatPrice';
 import { toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../services/queryClient';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function WishListPage() {
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
     const [isLoading , setIsLoading] = useState(false);
 
     async function handleDeleteFavorite(id:any) {

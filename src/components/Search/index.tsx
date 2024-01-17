@@ -50,7 +50,7 @@ export function Search() {
             </div>
             {search !== '' ? 
                 <div className={`${styles.searchContentContainer}`}>
-                    {filter.map(products => (
+                    {filter?.map(products => (
                         <Link key={products.node.id}  href={`/productPage/${products.node.slug}`}>
                             <div
                                 className={`d-flex align-items-center gap-2 ${styles.searchContent}`}>

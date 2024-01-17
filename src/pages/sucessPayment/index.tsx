@@ -4,11 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { Button } from '../../components/Button';
-import { useUser } from '../../lib/customHooks';
 import { formatPrice } from '../../utils/useFormatPrice';
+import { useContext } from 'react';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function SucessPayment() {
-    const { user, isLoading } = useUser();
+    const { user, isLoading } = useContext(UserContext);
 
     const orders = user?.orders.slice(-1)[0];
 

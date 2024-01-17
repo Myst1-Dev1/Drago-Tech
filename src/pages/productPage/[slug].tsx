@@ -12,9 +12,9 @@ import { ProductAvaliationForm } from '../../components/ProductAvaliationForm';
 import { ProductAvaliations } from '../../components/ProductAvaliations';
 import { getProducts, getProductsDetails, submitFavorite } from '../../services/graphql';
 import { CartContext } from '../../services/hooks/useCart/useCart';
-import { useUser } from '../../lib/customHooks';
 import { formatPrice } from '../../utils/useFormatPrice';
 import { toast } from 'react-toastify';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 interface ProductPageProps {
     productDetail: [] | any
@@ -22,8 +22,7 @@ interface ProductPageProps {
 
 export default function ProductPage({ productDetail }: ProductPageProps) {
     const { handleAddToCart } = useContext(CartContext);
-
-    const { user, authenticated } = useUser();
+    const { user, authenticated } = useContext(UserContext);
 
     const productName = productDetail.map((product:any) => product.name);
     const favoriteName = user && user.favorites.find((favorite: any) =>

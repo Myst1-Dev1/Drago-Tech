@@ -1,15 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import styles from './styles.module.scss';
 import { updateUser } from '../../services/graphql';
-import { useUser } from '../../lib/customHooks';
 import { toast } from 'react-toastify';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../services/queryClient';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export function ProfileForm() {
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
 
     const [name, setName] = useState('');
     const [zipCode, setZipCode] = useState('');

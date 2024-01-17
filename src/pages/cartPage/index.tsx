@@ -8,11 +8,11 @@ import { CartContext } from '../../services/hooks/useCart/useCart';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { formatPrice } from '../../utils/useFormatPrice';
-import { useUser } from '../../lib/customHooks';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function CartPage() {
     const [isOpenCart, setIsOpenCart] = useState(false);
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
 
     const router = useRouter();
 
