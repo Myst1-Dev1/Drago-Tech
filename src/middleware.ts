@@ -14,7 +14,7 @@ export default function middleware(request:NextRequest) {
         return NextResponse.redirect(page401);
     }
 
-    if(request.nextUrl.pathname === 'signInPage' || request.nextUrl.pathname === 'signUnPage') {
+    if(request.nextUrl.pathname === 'signInPage' || request.nextUrl.pathname === 'signUpPage') {
         return NextResponse.redirect(homeURL);
     }
 }

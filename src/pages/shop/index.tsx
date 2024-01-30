@@ -20,14 +20,6 @@ export default function Shop() {
     const { data, isLoading } = useContext(ProductsContext);
     const { handleAddToCart } = useContext(CartContext);
 
-    const currentItens = filteredProducts?.slice(startIndex, endIndex);
-
-    function filterByPrice() {
-        const priceFiltered = data?.filter((product:any) => product.node.price <= priceFilter);
-        
-        setFilteredProducts(priceFiltered);
-    };
-
     function handleOpenResponsiveFilter() {
         setResponsiveFilter(true);
     }
@@ -37,9 +29,11 @@ export default function Shop() {
     }
 
     useEffect(() => {
-        // Atualizando a filtragem quando os produtos ou o filtro de preço mudam
-        filterByPrice();
-    }, [priceFilter]);
+        const priceFiltered = data?.filter((product: any) => product.node.price <= priceFilter);
+        setFilteredProducts(priceFiltered || []);
+    }, [priceFilter, data]);
+
+    const currentItens = filteredProducts?.slice(startIndex, endIndex);
 
     useTitle('Loja | Drago Tech')
 

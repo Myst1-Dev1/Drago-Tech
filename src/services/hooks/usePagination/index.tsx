@@ -26,9 +26,9 @@ export function PaginationProvider({children}:PaginationProviderProps) {
     function renderPaginationButtons(data:[] | any) {
         const totalPages = Math.ceil(data?.length / itensPerPage); 
         const buttons = [];
-
+    
         for(let i = 0; i < totalPages; i++) {
-            if (i === currentPage || i === currentPage - 1 || i === currentPage + 1 || i === totalPages) {
+            if (i === 0 || i === totalPages - 1 || (i >= currentPage - 1 && i <= currentPage + 1)) {
                 buttons.push(
                     <button key={i} onClick={() => setCurrentPage(i)}>
                         {i + 1}
@@ -38,9 +38,10 @@ export function PaginationProvider({children}:PaginationProviderProps) {
                 buttons.push('...');
             }
         }
-
+    
         return buttons;
     };
+    
 
      function handlePreviousPage() {
         setCurrentPage(currentPage - 1);

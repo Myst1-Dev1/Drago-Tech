@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { api } from '../../services/axios';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../services/queryClient';
-import { UserContext } from '@/services/hooks/useUser/useUser';
+import { UserContext } from '../../services/hooks/useUser/useUser';
 
 export default function SignInPage() {
     const { storeTokenInCookies } = useContext(UserContext);

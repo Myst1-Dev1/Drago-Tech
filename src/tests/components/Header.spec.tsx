@@ -1,12 +1,36 @@
+
+import { UserContext } from "../../services/hooks/useUser/useUser";
 import { Header } from "../../components/Header";
 import { render, screen } from '@testing-library/react';
 
-jest.mock('../../lib/customHooks');
+jest.mock('@tanstack/react-query');
+jest.mock('next/router', () => {
+    return {
+        useRouter() {
+            return {
+                asPath: '/'
+            }
+        }
+    }
+});
 
 describe('Header components', () => {
     it('renders correclty', () => {
-        render(<Header />);
+        const data = {
+            name:'John doe'
+        }
 
-        expect(screen.getByText('Drago Tech')).toBeInTheDocument();
+        const mockUserContext:any = {
+            data:data,
+            authenticated:false
+        }
+
+        render(
+        <UserContext.Provider value={mockUserContext}>
+            <Header />
+        </UserContext.Provider>
+    );
+
+        expect(screen.getByText('Login')).toBeInTheDocument();
     });
 })

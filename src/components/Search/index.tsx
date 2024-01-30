@@ -29,12 +29,7 @@ export function Search() {
     useEffect(() => {
         searchProducts();
         // eslint-disable-next-line
-    }, [search]);
-
-    useEffect(() => {
-        router.events.on('routeChangeStart', () => setSearch(''));
-        return () => router.events.off('routeChangeStart', () => setSearch(''));
-      }, [router.pathname]);    
+    }, [search]); 
 
     return (
         <div className={`${styles.searchContainer}`}>
@@ -51,7 +46,7 @@ export function Search() {
             {search !== '' ? 
                 <div className={`${styles.searchContentContainer}`}>
                     {filter?.map(products => (
-                        <Link key={products.node.id}  href={`/productPage/${products.node.slug}`}>
+                        <Link onClick={() => setSearch('')} key={products.node.id}  href={`/productPage/${products.node.slug}`}>
                             <div
                                 className={`d-flex align-items-center gap-2 ${styles.searchContent}`}>
                                 <div className={styles.imgContainer}>

@@ -1,10 +1,9 @@
 import { useContext, useState, createContext, ReactNode, Dispatch, SetStateAction } from 'react';
 import { ProductsContext } from '../useProducts/useProducts';
 import { CartProducts } from '../../../types/CartProducts';
-import { useRouter } from 'next/router';
 import { setCookie, destroyCookie } from 'nookies';
-import { useUser } from '../../../lib/customHooks';
 import { toast } from 'react-toastify';
+import { UserContext } from '../useUser/useUser';
 
 interface CartProductsData {
     cart: CartProducts[];
@@ -25,11 +24,9 @@ export const CartContext = createContext(
 );
 
 export function CartProvider({ children }:CartProviderProps) {
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
 
     const [ cart, setCart ] = useState<CartProducts[]>([]);
-
-    const router = useRouter();
 
     const totalCart = cart.reduce((total, current) => {
         const productPrice = user?.prime ? current.product.node.price * 0.95 : current.product.node.price;

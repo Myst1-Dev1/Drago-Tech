@@ -15,13 +15,13 @@ export default function PrimePage() {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    console.log(authenticated);
+
     async function handleRedirectToCheckout() {
-        if(authenticated === false) {
-            toast.error("Você precisa estar logado para isso", {
-                position:toast.POSITION.TOP_RIGHT,
-                theme:'colored'
-            })
-        }
+        if(authenticated === false) return toast.error("Você precisa estar logado para isso", {
+            position:toast.POSITION.TOP_RIGHT,
+            theme:'colored'
+        })
         setIsLoading(true);
 
         const stripe:any = await loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_KEY}`);
