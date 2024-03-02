@@ -5,8 +5,8 @@ import { FormEvent, useState } from 'react';
 import Head from 'next/head';
 import { Input } from '../../components/Input';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { toast } from 'react-toastify';
+import { api } from '../../services/axios';
 
 export default function SignUpPage() {
     const [name, setName] = useState('');
@@ -34,13 +34,14 @@ export default function SignUpPage() {
 
             setIsLoading(true);
 
-            const response = await axios({
-                method: 'post',
-                url: 'https://drago-tech.vercel.app/api/auth/signup',
-                data: {
-                    name, email, phone, address, city, state, zipCode, password
+            const response = await api.post('/auth/signup', {
+                name, email, phone, address, city, state, zipCode, password
+            }, {
+                headers: {
+                  'Content-Type': 'application/json',
                 },
-            });
+              });
+
 
             toast.success("Cadastro feito com sucesso", {
                 position:toast.POSITION.TOP_RIGHT,
