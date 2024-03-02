@@ -12,7 +12,7 @@ export function ProductsCollection() {
                         <h5 className='fw-bold'>Coleção de Laptops</h5>
                         <Link href="/shop"><h6>Compre Agora</h6></Link>
                     </div>
-                    <Image width={150} height={150} src='/images/laptopImage.webp' alt='coleção de laptops' />
+                    <Image width={150} height={150} src='/images/laptopimage.webp' alt='coleção de laptops' />
                 </div>
                 <div className={`col-md-4 px-4 text-light d-flex gap-3 justify-content-center align-items-center 
                     ${styles.collectionBox}`}>
@@ -20,7 +20,7 @@ export function ProductsCollection() {
                         <h5 className='fw-bold'>Coleção de Periféricos</h5>
                         <Link href="/shop"><h6>Compre Agora</h6></Link>
                     </div>
-                    <Image width={150} height={150} src='/images/periphericsImage.webp' alt='coleção de perifericos'/>
+                    <Image width={150} height={150} src='/images/periphericsimage.webp' alt='coleção de perifericos'/>
                 </div>
                 <div className={`col-md-4 px-4 text-light d-flex gap-3 justify-content-center align-items-center 
                     ${styles.collectionBox}`}>
@@ -28,7 +28,7 @@ export function ProductsCollection() {
                         <h5 className='fw-bold'>Coleção de Câmeras</h5>
                         <Link href="/shop"><h6>Compre Agora</h6></Link>
                     </div>
-                    <Image width={150} height={150} src='/images/cameraImage.webp' alt='coleção de câmeras'/>
+                    <Image width={150} height={150} src='/images/cameraimage.webp' alt='coleção de câmeras'/>
                 </div>
             </div>
         </div>

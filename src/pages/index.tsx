@@ -25,7 +25,7 @@ export default function Home() {
                         <Link href="/shop"><Button>Ver loja</Button></Link>
                     </div>
                     <div>
-                        <Image width={300} height={300} src="/images/bannerImage.webp" alt="image-banner" />
+                    <Image width={300} height={300} src="/images/bannerimage.webp"alt="Banner Image" />
                     </div>
                 </div>
             </div>
