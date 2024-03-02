@@ -36,7 +36,7 @@ export default function SignUpPage() {
 
             const response = await axios({
                 method: 'post',
-                url: '/api/auth/signup',
+                url: 'https://drago-tech.vercel.app/api/auth/signup',
                 data: {
                     name, email, phone, address, city, state, zipCode, password
                 },
