@@ -94,7 +94,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
             <Head>
                 <title>Página do produto | Drago Tech</title>
             </Head>
-            {productValue.map((product:any) => (
+            {productValue?.map((product:any) => (
                 <div key={product.id}>
                     <div className={`mt-5 container ${styles.productPage}`}>
                         <h2 className='fw-bold'>{product.name}</h2>
