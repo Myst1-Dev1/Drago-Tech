@@ -24,7 +24,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
     const { handleAddToCart } = useContext(CartContext);
     const { user, authenticated } = useContext(UserContext);
 
-    const productName = productDetail.map((product:any) => product.name);
+    const productName = productDetail?.map((product:any) => product.name);
     const favoriteName = user && user.favorites.find((favorite: any) =>
     favorite.favoriteName.toLowerCase() === productName[0].toLowerCase());
 
