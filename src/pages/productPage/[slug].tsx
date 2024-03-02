@@ -30,7 +30,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
 
     const [isFavorite, setIsFavorite] = useState(!!favoriteName);
 
-    const productValue = productDetail.map((product:any) => ({
+    const productValue = productDetail?.map((product:any) => ({
         id:product.id,
         image:product.image.url,
         name:product.name,
