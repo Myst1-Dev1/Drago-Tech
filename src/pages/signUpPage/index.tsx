@@ -40,9 +40,6 @@ export default function SignUpPage() {
                 data: {
                     name, email, phone, address, city, state, zipCode, password
                 },
-                headers: {
-                    'Access-Control-Allow-Origin': 'https://drago-tech.vercel.app/signUpPage'
-                }
             });
 
             toast.success("Cadastro feito com sucesso", {

@@ -35,6 +35,11 @@ mutation createUser($userData: UserDataIdCreateInput!) {
 `;
 
 export default async function handler(req: NextApiRequest, res:NextApiResponse) {
+    // Adicione os cabeçalhos CORS aqui
+    res.setHeader('Access-Control-Allow-Origin', 'https://drago-tech.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
     const { email, password, name, address, city, state, phone, zipCode } = req.body;
     if(!email || !password || !name || !address || !city || !state || !phone || !zipCode) {
         res.status(400).end();

@@ -68,6 +68,11 @@ mutation updateUser($where:UserDataIdWhereUniqueInput!, $data: UserDataIdUpdateI
 
 export default withIronSessionApiRoute(
   async function signIn(req:any, res:NextApiResponse) {
+    // Adicione os cabeçalhos CORS aqui
+    res.setHeader('Access-Control-Allow-Origin', 'https://drago-tech.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
     const { email, password } = req.body;
     if (!email || !password) {
       res.status(400).end();
