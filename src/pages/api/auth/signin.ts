@@ -70,11 +70,14 @@ export default withIronSessionApiRoute(
   async function signIn(req:any, res:NextApiResponse) {
     if (req.method === 'OPTIONS') {
       // Respond to preflight request
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      res.setHeader('Access-Control-Allow-Methods', 'POST');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
       res.status(200).end();
       return;
   }
     // Adicione os cabeçalhos CORS aqui
-    res.setHeader('Access-Control-Allow-Origin', 'https://drago-tech.vercel.app');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
