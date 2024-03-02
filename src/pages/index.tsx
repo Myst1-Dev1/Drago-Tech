@@ -1,5 +1,6 @@
 import styles from './styles.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { ProductsCollection } from "../components/ProductsCollection";
 import { NewProducts } from "../components/NewProducts";
@@ -24,7 +25,7 @@ export default function Home() {
                         <Link href="/shop"><Button>Ver loja</Button></Link>
                     </div>
                     <div>
-                        <img src="/images/bannerImage.webp" alt="image-banner" />
+                        <Image width={300} height={300} src="/images/bannerImage.webp" alt="image-banner" />
                     </div>
                 </div>
             </div>

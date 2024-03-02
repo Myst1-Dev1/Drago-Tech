@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import styles from './styles.module.scss';
+import Image from 'next/image';
 
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -40,7 +41,7 @@ export default function PaymentPage() {
     .then((data) => {
         setClientSecret(data.client_secret), setPaymentIntent(data.id);
       });
-}, []);
+}, [amountValue]);
 
     const appearance = {
         theme: 'stripe',
@@ -112,7 +113,7 @@ export default function PaymentPage() {
                                     <div key={item.product.node.id} 
                                         className={`d-flex align-items-center gap-3 ${styles.cartBox}`}>
                                         <div className={styles.imgContainer}>
-                                            <img src={item.product.node.image.url} alt="produto do carrinho" />
+                                            <Image width={100} height={100} src={item.product.node.image.url} alt="produto do carrinho" />
                                         </div>
                                         <div>
                                             <h6 className={styles.itemName}>{item.product.node.name}</h6>

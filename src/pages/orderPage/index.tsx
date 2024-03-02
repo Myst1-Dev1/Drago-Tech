@@ -17,7 +17,8 @@ export default function OrderPage() {
     const { startIndex, endIndex } = useContext(PaginationContext);
     const { data } = useContext(UserContext);
 
-    const orderData = data?.user?.orders?.slice(startIndex, endIndex);
+    // Certifique-se de que orderData seja um array vazio caso data.user ou data.user.orders seja null ou undefined
+    const orderData = data?.user?.orders ? data.user.orders.slice(startIndex, endIndex) : [];
 
     const order = data?.user?.orders;
 
@@ -35,7 +36,7 @@ export default function OrderPage() {
                 theme:'light'
             })
 
-           router.push('/sucessDelivery');
+            router.push('/sucessDelivery');
         } catch (error) {
             console.log('Tivemos um erro', error);
         }
@@ -61,8 +62,9 @@ export default function OrderPage() {
                                 <div className='mt-3'>
                                     <h6>Items Comprados:</h6>
                                     <ol>
-                                    {order.orderProductName.map((item:any) => (
-                                        <li>{item}</li>
+                                    {order.orderProductName.map((item:any, index:number) => (
+                                        // Use o índice como chave para evitar erros quando o item não tiver um ID único
+                                        <li key={index}>{item}</li>
                                     ))}
                                     </ol>
                                 </div>
@@ -75,7 +77,6 @@ export default function OrderPage() {
                                 {order.isReceived === true ?
                                     <Button className='bg-success w-100 p-3 border-0 rounded text-light'>Recebido</Button> 
                                     :
-                                   
                                     <Button onClick={() => handleReceivedProduct(order.id)}>Recebi meu Pedido</Button>
                                 }
                             </div>

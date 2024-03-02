@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from './styles.module.scss';
 
 import { FaTrashAlt } from 'react-icons/fa';
@@ -80,7 +81,7 @@ export default function WishListPage() {
                                     <th scope="row">{index + 1}</th>
                                     <td>
                                         <div className={styles.imgContainer}>
-                                            <img src={favorite.favoriteImage} alt="wishlist-product" />
+                                            <Image width={150} height={150} src={favorite.favoriteImage} alt="wishlist-product" />
                                         </div>
                                     </td>
                                     <td><h6>{favorite.favoriteName}</h6></td>

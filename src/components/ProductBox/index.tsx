@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { Button } from '../Button';
 import styles from './styles.module.scss';
 import { formatPrice } from '../../utils/useFormatPrice';
@@ -32,7 +33,7 @@ export function ProductBox({ url, name, price, slug, id, handleAddToCart }:Produ
                     href={`/productPage/${slug}`}
                 >
                     <div className={styles.imgContainer}>
-                        <img src={url} alt="product-image" />
+                        <Image width={80} height={80} src={url} alt="product-image" />
                     </div>
                     <h6>{name}</h6>
                     <h5 className='fw-bold'>{formatPrice(primeValue)}</h5>

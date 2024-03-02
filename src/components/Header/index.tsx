@@ -32,7 +32,7 @@ export function Header() {
         if(token) {
             setCart(JSON.parse(token));
         }
-    }, []);
+    }, [setCart]);
 
     useEffect(() => {
         setIsUserBoxOpen(false);

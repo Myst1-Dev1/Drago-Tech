@@ -120,7 +120,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                     </div>
                                 </div>
                                 <div className={`m-auto ${styles.imgContainer}`}>
-                                    <img src={product.image} alt="product-image" />
+                                    <Image width={300} height={300} src={product.image} alt="product-image" />
                                 </div>
                             </div>
                             <div className={`col-md-6 ${styles.priceBox}`}>

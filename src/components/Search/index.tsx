@@ -5,12 +5,10 @@ import { useState, useContext, useEffect } from 'react';
 import { ProductsContext } from '../../services/hooks/useProducts/useProducts';
 import { Products } from '../../types/Products';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export function Search() {
     const { data } = useContext(ProductsContext);
-
-    const router = useRouter();
 
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState<Products[]>([]);
@@ -50,7 +48,7 @@ export function Search() {
                             <div
                                 className={`d-flex align-items-center gap-2 ${styles.searchContent}`}>
                                 <div className={styles.imgContainer}>
-                                    <img src={products.node.image.url} alt="search-product-image" />
+                                    <Image width={40} height={40} src={products.node.image.url} alt="search-product-image" />
                                 </div>
                                 <span>{products.node.name}</span>
                             </div> 

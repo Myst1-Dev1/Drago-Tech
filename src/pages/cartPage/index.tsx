@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import styles from './styles.module.scss';
 
 import { useState, useContext } from 'react'
@@ -62,7 +63,7 @@ export default function CartPage() {
                     <div key={item.id} 
                         className={`mt-5 d-flex wrap gap-5 align-items-center ${styles.productBox}`}>
                         <div className={styles.imgContainer}>
-                            <img src={item.image} alt="product-image" />
+                            <Image width={200} height={200} src={item.image} alt="product-image" />
                         </div>
                         <div>
                             <h5 className='fw-bold mb-0'>{item.name}</h5>
