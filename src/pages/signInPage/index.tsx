@@ -30,6 +30,7 @@ export default function SignInPage() {
             const response = await api.post('/auth/signin', {email, password}, {
                 headers: {
                   'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': 'https://drago-tech.vercel.app/signInPage'
                 },
               });
 

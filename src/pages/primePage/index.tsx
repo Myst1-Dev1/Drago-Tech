@@ -91,7 +91,7 @@ export default function PrimePage() {
                             className='img-fluid' 
                             width={800} 
                             height={500} 
-                            src="/images/primeImage.webp" 
+                            src="/images/primeimage.webp" 
                             alt="primePage-image"
                             priority 
                         />

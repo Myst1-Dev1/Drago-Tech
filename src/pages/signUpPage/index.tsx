@@ -39,6 +39,9 @@ export default function SignUpPage() {
                 url: '/api/auth/signup',
                 data: {
                     name, email, phone, address, city, state, zipCode, password
+                },
+                headers: {
+                    'Access-Control-Allow-Origin': 'https://drago-tech.vercel.app/signUpPage'
                 }
             });
 

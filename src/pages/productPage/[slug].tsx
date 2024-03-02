@@ -104,7 +104,7 @@ export default function ProductPage({ productDetail }: ProductPageProps) {
                                     <div className='d-flex align-items-center gap-2'>
                                     {product.commentsID.length === 0 ? '' :
                                         <Image width={95} height={15} 
-                                            src="/images/FiveStars.webp" alt="fivestar-image" />}
+                                            src="/images/fivestars.webp" alt="fivestar-image" />}
                                         <span>({product.commentsID.length})</span>
                                     </div>
                                     <div>
