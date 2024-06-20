@@ -36,6 +36,10 @@ mutation createUser($userData: UserDataIdCreateInput!) {
 
 export default async function handler(req: NextApiRequest, res:NextApiResponse) {
 
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
     const { email, password, name, address, city, state, phone, zipCode } = req.body;
     if(!email || !password || !name || !address || !city || !state || !phone || !zipCode) {
         return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
