@@ -41,7 +41,8 @@ export default function SignUpPage() {
                   'Content-Type': 'application/json',
                 },
               });
-
+            
+            if(response.status !== 200) return;
 
             toast.success("Cadastro feito com sucesso", {
                 position:toast.POSITION.TOP_RIGHT,
@@ -53,8 +54,11 @@ export default function SignUpPage() {
                 return;
               }
 
+            router.push('/signInPage');
+
         } catch (error) {
             console.log('Tivemos um erro');
+            setIsLoading(false);
         }
 
         setName('');
@@ -66,8 +70,6 @@ export default function SignUpPage() {
         setZipCode('');
         setPassword('');
         setConfirmPassword('');
-
-        router.push('/signInPage');
     };
 
     return (

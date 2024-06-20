@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res:NextApiResponse) 
 
     const { email, password, name, address, city, state, phone, zipCode } = req.body;
     if(!email || !password || !name || !address || !city || !state || !phone || !zipCode) {
-        res.status(400).end();
+        return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
     }
 
     const token = jwt.sign({ email }, jwtSecret, { expiresIn: JWT_EXPIRES_IN });
